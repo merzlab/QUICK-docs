@@ -3,7 +3,7 @@ Citation
 
   Please cite QUICK-20.02 as follows. 
 
-  Manathunga, M.; Miao,Y.; Mu, D.; He, X.; Ayers,K; Brothers, E.; Götz, A.; Merz,K. M. QUICK
+  Manathunga, M.; Mu, D.; Miao,Y.; He, X.; Ayers,K; Brothers, E.; Götz, A.; Merz,K. M. QUICK 2020
   University of Florida, Gainesville, FL, and Michigan State University, East Lansing, MI, 2020
 
   Publications to date:
