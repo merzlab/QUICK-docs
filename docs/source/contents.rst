@@ -10,5 +10,6 @@ Contents
    user-manual
    hands-on-tutorials
    known-issues
+   citation
    license
 

@@ -15,5 +15,6 @@ Welcome to QUICK v20.02 Documentation!
    user-manual
    hands-on-tutorials
    known-issues
+   citation
    license
 
