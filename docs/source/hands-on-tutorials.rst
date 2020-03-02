@@ -58,32 +58,32 @@ For DFT, the above job commands change as follows.
 ::
 
      DFT B3LYP BASIS=cc-pvDZ CUTOFF=1.0d-10 DENSERMS=1.0d-6 ENERGY
-     ^     ^      ^       ^             ^              ^
-     |     |      |       |             |              |
-     |     |      |       |             |            Compute energy
-     |     |      |       |             Density matrix cutoff
-     |     |      |       Integral cutoff
+     ^     ^      ^              ^             ^              ^
+     |     |      |              |             |              |
+     |     |      |              |             |            Compute energy
+     |     |      |              |             Density matrix cutoff
+     |     |      |              Integral cutoff
      |     |      Basis set
      |     Functional
      Hamiltonian
 
 Note that in the above command, we are using NATIVE B3LYP functional. If we want to use
-LIBXC B3LYP functional, the command changes as follows. 
+LIBXC B3LYP functional, the functional command should change as follows. 
 
 ::
 
      DFT LIBXC=HYB_GGA_XC_B3LYP BASIS=cc-pvDZ CUTOFF=1.0d-10 DENSERMS=1.0d-6 ENERGY
-     ^     ^      ^       ^             ^              ^
-     |     |      |       |             |              |
-     |     |      |       |             |            Compute energy
-     |     |      |       |             Density matrix cutoff
-     |     |      |       Integral cutoff
-     |     |      Basis set
+     ^     ^                          ^           ^             ^              ^
+     |     |                          |           |             |              |
+     |     |                          |           |             |            Compute energy
+     |     |                          |           |           Density matrix cutoff
+     |     |                          |         Integral cutoff
+     |     |                         Basis set
      |     Functional
      Hamiltonian
 
 It is also possible to ask for exchange and correlation LIBXC functionals seperately. 
-For instance, if we use BLYP the above command would change as follows.  
+For instance, if we use BLYP, the functional command should change as follows.  
 
 ::
 
@@ -99,6 +99,9 @@ For instance, if we use BLYP the above command would change as follows.
 
 Note that currently, QUICK cannot handle more than two functions at a time. 
 
+We now proceed with HF single point energy calculation for water molecule. Our input file, 
+*water.in* is as follows. 
+
 ::
 
      HF BASIS=cc-pvDZ CUTOFF=1.0d-10 DENSERMS=1.0d-6 ENERGY
@@ -106,6 +109,15 @@ Note that currently, QUICK cannot handle more than two functions at a time.
      O                 -0.06756756   -0.31531531    0.00000000
      H                  0.89243244   -0.31531531    0.00000000
      H                 -0.38802215    0.58962052    0.00000000
+
+Executing QUICK will give us *.out* and additionally, we save the terminal output into a 
+log file. 
+
+::
+
+     ./quick.cuda water.in > water.run.log 
+
+
 
 2. HF/DFT gradient calculation
 
