@@ -31,7 +31,8 @@ Runtime
 
 ::
 
- Error: Failed to open Unit=  15,file name=                                                                           At line 181 of file quick_molspec_module.f90
+ Error: Failed to open Unit=  15,file name=
+ At line 181 of file quick_molspec_module.f90
  Fortran runtime error: Attempt to DEALLOCATE unallocated 'xyz'
 
 You are trying to run quick without an input file. 
