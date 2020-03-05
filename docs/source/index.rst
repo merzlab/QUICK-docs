@@ -21,5 +21,5 @@ Welcome to QUICK v20.02 Documentation!
 
 **Note to Users:** QUICK is still in the experimental stage and we do not guarantee 
 it will work flawlessly in all your applications. But we are working hard to detect 
-and fix issues. If you experience any compile or runtime issues please report us 
+and fix issues. If you experience any compile or runtime issues, please report to us 
 through our github repository: `<https://github.com/merzlab/QUICK/issues>`_. 
