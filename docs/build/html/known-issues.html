@@ -1,0 +1,160 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Known Issues of Current Version &#8212; QUICK 20.02 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Citation" href="citation.html" />
+    <link rel="prev" title="Hands-on Tutorials" href="hands-on-tutorials.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="known-issues-of-current-version">
+<h1>Known Issues of Current Version<a class="headerlink" href="#known-issues-of-current-version" title="Permalink to this headline">¶</a></h1>
+<p>QUICK is under continous development and as of version 20.02, we have detected
+issues listed below. If you find anything other than these, please feel free to
+report through our git hub repository &lt;<a class="reference external" href="https://github.com/merzlab/QUICK/issues">https://github.com/merzlab/QUICK/issues</a>&gt;.</p>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="blas-object-linking-error-in-cuda-version">
+<h3>1. BLAS object linking error in cuda version<a class="headerlink" href="#blas-object-linking-error-in-cuda-version" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>./obj/scf.o: In function `electdiis_&#39;:
+scf.f90:(.text+0x3eb7): undefined reference to `dgemm_&#39;
+</pre></div>
+</div>
+<p>If you encounter this linking error in cuda compilation, you are most likeley to have
+compiled QUICK cpu or mpi version and trying to compile the cuda version without running
+<em>make clean</em> in between. Note that cuda version uses CUBLAS which is provided within src
+folder and does not use BLAS. The latter is only used in CPU and MPI versions.</p>
+<p>Solution: Run <em>make clean</em> and recompile using <em>make quick.cuda</em>.</p>
+</div>
+</div>
+<div class="section" id="runtime">
+<h2>Runtime<a class="headerlink" href="#runtime" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="input-file-open-error">
+<h3>1. Input file open error<a class="headerlink" href="#input-file-open-error" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Error</span><span class="p">:</span> <span class="n">Failed</span> <span class="n">to</span> <span class="nb">open</span> <span class="n">Unit</span><span class="o">=</span>  <span class="mi">15</span><span class="p">,</span><span class="n">file</span> <span class="n">name</span><span class="o">=</span>
+<span class="n">At</span> <span class="n">line</span> <span class="mi">181</span> <span class="n">of</span> <span class="n">file</span> <span class="n">quick_molspec_module</span><span class="o">.</span><span class="n">f90</span>
+<span class="n">Fortran</span> <span class="n">runtime</span> <span class="n">error</span><span class="p">:</span> <span class="n">Attempt</span> <span class="n">to</span> <span class="n">DEALLOCATE</span> <span class="n">unallocated</span> <span class="s1">&#39;xyz&#39;</span>
+</pre></div>
+</div>
+<p>You are trying to run quick without an input file.</p>
+<p>Solution: Run quick executable as “./quick input.in”. See hands on tutorial section for more information.</p>
+</div>
+<div class="section" id="basis-file-open-error">
+<h3>2. Basis file open error<a class="headerlink" href="#basis-file-open-error" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Error</span><span class="p">:</span> <span class="n">Failed</span> <span class="n">to</span> <span class="nb">open</span> <span class="n">Unit</span><span class="o">=</span>  <span class="mi">20</span><span class="p">,</span><span class="n">file</span> <span class="n">name</span><span class="o">=</span> <span class="o">/</span><span class="mi">6</span><span class="o">-</span><span class="mi">31</span><span class="n">GSS</span>
+<span class="n">At</span> <span class="n">line</span> <span class="mi">326</span> <span class="n">of</span> <span class="n">file</span> <span class="n">quick_calculated_module</span><span class="o">.</span><span class="n">f90</span>
+<span class="n">Fortran</span> <span class="n">runtime</span> <span class="n">error</span><span class="p">:</span> <span class="n">Attempt</span> <span class="n">to</span> <span class="n">DEALLOCATE</span> <span class="n">unallocated</span> <span class="s1">&#39;self&#39;</span>
+</pre></div>
+</div>
+<p>You havent set the basis file path.</p>
+<p>Solution: Set QUICK_BASIS variable using “export QUICK_BASIS=your_quick_home/basis”.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">QUICK</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="about.html">About QUICK QM Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation-guide.html">Installation Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-manual.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hands-on-tutorials.html">Hands-on Tutorials</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Known Issues of Current Version</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#runtime">Runtime</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="citation.html">Citation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="hands-on-tutorials.html" title="previous chapter">Hands-on Tutorials</a></li>
+      <li>Next: <a href="citation.html" title="next chapter">Citation</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Merz Lab.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.4.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/known-issues.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
