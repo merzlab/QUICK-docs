@@ -39,7 +39,8 @@ Now assume that we have successfully installed CUDA version and set the basis se
 
 1. HF/DFT single point energy calculation 
 
-The typical job commands for HF/DFT is as follows. 
+The typical job command line for HF/DFT is as follows. Note that all keywords are seperated by
+a single space.   
 
 ::
 
@@ -52,8 +53,8 @@ The typical job commands for HF/DFT is as follows.
      |     Basis set
      Hamiltonian
 
-For DFT, the above job commands change as follows.
-
+For DFT, we replace *HF* hamiltonian with *DFT* and specify the functional name immediately 
+after that. For example, we may ask for a B3LYP energy calculation with the following command line.
 
 ::
 
@@ -111,13 +112,14 @@ We now proceed with HF single point energy calculation for water molecule. Our i
      H                 -0.38802215    0.58962052    0.00000000
 
 Executing QUICK will give us *.out* and additionally, we save the terminal output into a 
-log file. 
+*.run.log* file. 
 
 ::
 
      ./quick.cuda water.in > water.run.log 
 
-
+The content in *water.run.log* is not useful for users. If debug flags are enabled, output
+useful for developers can be found here. 
 
 2. HF/DFT gradient calculation
 

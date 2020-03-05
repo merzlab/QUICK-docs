@@ -25,6 +25,8 @@ Keywords for QUICK Input
 
    See LIBXC webpage for functional names: `<https://www.tddft.org/programs/libxc/functionals/>`_.
 
+   Also see here for a `list of functionals working in current QUICK version <working_libxc_funcs.html>`_.
+
    If you are using LIBXC in your work, please make sure to cite the paper below.
   
    `Susi Lehtola, Conrad Steigemann, Micael J.T. Oliveira, and Miguel A.L. Marques, Recent developments 
