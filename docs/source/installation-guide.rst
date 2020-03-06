@@ -4,7 +4,7 @@ Installation Guide
 1. Compatible Compilers and Hardware
 ------------------------------------
 
-We have tested QUICK v20.02 with following Compilers.
+We have tested QUICK-20.03 with following Compilers.
 
 • CPU version
 
@@ -88,3 +88,4 @@ d) Then run
 
 in ./bin directory, you can find executable files. 
 
+*Last updated by Madu Manathunga on 03/05/2020.*

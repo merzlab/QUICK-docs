@@ -1,7 +1,7 @@
 Known Issues of Current Version
 ===============================
 
-QUICK is under continous development and as of version 20.02, we have detected 
+QUICK is under continous development and as of version 20.03, we have detected 
 issues listed below. If you find anything other than these, please feel free to 
 report through our git hub repository <https://github.com/merzlab/QUICK/issues>. 
 
@@ -52,3 +52,4 @@ You havent set the basis file path.
 
 Solution: Set QUICK_BASIS variable using "export QUICK_BASIS=your_quick_home/basis".
 
+*Last updated by Madu Manathunga on 03/05/2020.*

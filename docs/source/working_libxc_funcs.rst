@@ -1,7 +1,7 @@
 A List of Available DFT Functionals
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Based on our tests, following functionals are successully working in QUICK-20.02 CPU and CUDA versions. 
+Based on our tests, following functionals are successully working in QUICK-20.03 CPU and CUDA versions. 
 Note that we are reporting LIBXC keywords that will go into QUICK input. Please use LIBXC functionals page
 for more information on each keyword. 
 
@@ -208,4 +208,4 @@ for more information on each keyword.
   19. HYB_GGA_XC_REVB3LYP
   20. HYB_GGA_XC_X3LYP
 
-
+*Last updated by Madu Manathunga on 03/05/2020.*

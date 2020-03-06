@@ -16,3 +16,4 @@ Yipu Miao implemented the GPU enabled ERI engine and provided basis for GPU capa
 
 Madu Manathunga, Dawei Mu, Andy Götz and Kennie Merz currently develop and maintain the code. Contact: `quick.merzlab@gmail.com <quick.merzlab@gmail.com>`_  
 
+*Last updated by Madu Manathunga on 03/05/2020.*

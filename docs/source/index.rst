@@ -3,7 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to QUICK v20.02 Documentation!
+Welcome to QUICK-20.03 Documentation!
 ======================================
 
 .. toctree::
