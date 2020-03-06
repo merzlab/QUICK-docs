@@ -1,7 +1,7 @@
 Hands-on Tutorials
 ==================
 
-QUICK home directory contains some test runs and examples. These can be found inside *examples* directory.
+QUICK home directory contains some test runs and examples. These can be found inside the *examples* directory.
 For this tutorial we will use water as an example. The structure of a typical QUICK input is as follows. 
 
 ::
@@ -15,7 +15,7 @@ For this tutorial we will use water as an example. The structure of a typical QU
 
 Depending on the installation, you may run QUICK as folllows.  
 
-Single CPU version:
+Serial version:
 
 ::
 
@@ -54,8 +54,8 @@ a single space.
      |     Basis set
      Hamiltonian
 
-For DFT, we replace *HF* hamiltonian with *DFT* and specify the functional name immediately 
-after that. For example, we may ask for a B3LYP energy calculation with the following command line.
+For DFT, we replace *HF* hamiltonian with *DFT* and specify the functional name separated by a 
+space. For example, we may ask for a B3LYP energy calculation with the following command line.
 
 ::
 
@@ -85,7 +85,7 @@ LIBXC B3LYP functional, the functional command should change as follows.
      Hamiltonian
 
 It is also possible to ask for exchange and correlation LIBXC functionals seperately. 
-For instance, if we use BLYP, the functional command should change as follows.  
+For instance, if we use BLYP, the functional command changes as follows.  
 
 ::
 
@@ -99,7 +99,7 @@ For instance, if we use BLYP, the functional command should change as follows.
      |        Functionals (Functional_1, Functional_2 seperated by a comma)
      Hamiltonian
 
-Note that currently, QUICK cannot handle more than two functions at a time. 
+Note that currently, QUICK cannot handle more than two functionals at a time. 
 
 We now proceed with HF single point energy calculation for water molecule. Our input file, 
 *water.in* is as follows. 
@@ -119,7 +119,7 @@ Executing QUICK will give us *.out* and additionally, we save the terminal outpu
 
      ./quick.cuda water.in > water.run.log 
 
-The content in *water.run.log* is not useful for users. If debug flags are enabled, output
+The content in *water.run.log* is not useful for users. If debug flags are enabled, information
 useful for developers can be found here. 
 
 The information reported in *.out* (from now on output) file are as follows. In the beginning of output

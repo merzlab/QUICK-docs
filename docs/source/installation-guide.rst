@@ -6,7 +6,7 @@ Installation Guide
 
 We have tested QUICK-20.03 with following Compilers.
 
-• CPU version
+• Serial version
 
  1. GNU/4.8.3: No issue detected so far.
  2. GNU/4.8.5: No issue detected so far. 
@@ -23,13 +23,13 @@ We have tested QUICK-20.03 with following Compilers.
 --------------------------
 
 You can use gnu or intel compilers for this purpose. Go to QUICK main folder and run the following
-commands.  If you are using gnu compiler (version 4.6 or later)
+commands.  For GNU compiler (version 4.6 or later):
 
 ::
 
 	cp ./makein/make.in.gnu ./make.in
 	
-If you are using intel compiler (version 2011 or later)
+For intel compiler (version 2011 or later):
 
 ::
 
@@ -41,12 +41,12 @@ Then, run the following command.
 
         make quick
      
-This will compile a single CPU version of quick. 
+This will compile a serial version of QUICK. 
 
 3. MPI Installation
 -------------------
 
-If you have intel mpi (version 2011 or later) installed, you can compile the MPI version by running 
+If you have intel mpi (version 2011 or later), openmpi or MPICH installed, you can compile the MPI version by running 
 following commands from quick main folder. 
 
 ::
@@ -60,6 +60,7 @@ following commands from quick main folder.
 
 If you want to install the GPU version, NVIDIA CUDA COMPILER is required. You may check your CUDA 
 compiler version using 'nvcc --version'. 
+
 a) Run the following command.
 
 ::
@@ -88,4 +89,39 @@ d) Then run
 
 in ./bin directory, you can find executable files. 
 
-*Last updated by Madu Manathunga on 03/05/2020.*
+5. Environment Variables and Testing
+------------------------------------
+
+Once you have installed any version of QUICK following about instructions, it is necessary to set basis set path. 
+In order to so you can add following command into your .bash_profile or .bashrc. 
+
+::
+
+ export QUICK_BASIS=$(CUDA_HOME)/basis
+
+You can test QUICK by simply running *testqk.sh* from QUICK home directory. This can be done as follows. 
+
+::
+
+ ./testqk.sh 
+
+The script will ask you to select an executable. 
+
+::
+
+  Please select the QUICK executable you want to test (type the corresponding number and hit enter):
+  1 --> quick
+  2 --> quick.MPI
+  3 --> quick.cuda
+
+Once you enter the correct number and press enter, the script will automatically run several test cases and inform
+you which tests passed or failed. 
+
+6. Uninstallation
+-----------------
+
+To uninstall QUICK, simply run *make clean* from QUICK home directory. This will remove all the object files except the executables
+inside *bin* folder. You should delete the executables manually. 
+
+
+*Last updated by Madu Manathunga on 03/06/2020.*

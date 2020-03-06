@@ -21,7 +21,7 @@ Keywords for QUICK Input
    **B3LYP**: Built in B3LYP functional
 
    **LIBXC=FUNCTIONAL1,FUNCTIONAL2** : Use density functionals from LIBXC library. Where FUNCTIONAL1 
-   FUNCTIONAL2 are exchange and correlation functionals. 
+   and FUNCTIONAL2 are exchange and correlation functionals. 
 
    See LIBXC webpage for functional names: `<https://www.tddft.org/programs/libxc/functionals/>`_.
 
@@ -44,12 +44,12 @@ Keywords for QUICK Input
 
    **CHARGE=INT**     : A net charge is to be placed on system.
 
-   **MULLIKEN**       : Write Mulliken charges to charge output file of MC-run.
+   **MULLIKEN**       : Write Mulliken charges to charge output file.
 
 5. Geometry Optimization
 ************************
 
-   **OPTIMIZE=Integer** : Perform a maximum of Integer cycles of optimization. Default: 3 x Number of atoms.
+   **OPTIMIZE=Integer** : Performs a maximum of *Integer* cycles of optimization. Default: 3 x Number of atoms.
 
    **GRADIENT**         :Calculates analytical gradients.
 
