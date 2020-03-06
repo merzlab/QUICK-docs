@@ -2,7 +2,7 @@ About QUICK QM Package
 ======================
 
 QUICK is a GPU enabled linear scaling *ab initio* and density functional theory program for calculation of energies, 
-charges and geometries of molecular systems up to ~3,000 atoms. Available features include:
+charges and geometries of organic/biomolecular systems. Available features include:
 
 • Single point *ab initio* and density functional theory calculations (LGA, GGA and Hybrid-GGA functionals
   available).
