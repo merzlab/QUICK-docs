@@ -13,3 +13,4 @@ Contents
    citation
    license
 
+`Home <index>`_.

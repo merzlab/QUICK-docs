@@ -21,7 +21,7 @@ We have tested QUICK-20.03 with following Compilers.
 
 We have tested QUICK-20.03 CUDA version on GTX1080, P100, V100, TitanV and RTX2080Ti. Note that this 
 version is currently not capable of running on any Kepler type GPU or older since we are using 
-double precision CUDA atomicAdd operators in our device code.
+double precision CUDA atomicAdd operators in our device code. 
 
 2. Serial Installation 
 --------------------------
