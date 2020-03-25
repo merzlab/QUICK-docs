@@ -6,7 +6,7 @@ For this tutorial we will use water as an example. The structure of a typical QU
 
 ::
 
-     HF BASIS=cc-pvDZ CUTOFF=1.0d-10 DENSERMS=1.0d-6 ENERGY  <== Job command
+     HF BASIS=cc-pVDZ CUTOFF=1.0d-10 DENSERMS=1.0d-6 ENERGY  <== Job command
                                                              <== Empty line
      O              -0.06756756   -0.31531531    0.00000000 | 
      H               0.89243244   -0.31531531    0.00000000 |<== Coordinates
@@ -45,7 +45,7 @@ a single space.
 
 ::
 
-     HF BASIS=cc-pvDZ CUTOFF=1.0d-10 DENSERMS=1.0d-6 ENERGY
+     HF BASIS=cc-pVDZ CUTOFF=1.0d-10 DENSERMS=1.0d-6 ENERGY
      ^     ^              ^             ^              ^
      |     |              |             |              |
      |     |              |             |            Compute energy
@@ -59,7 +59,7 @@ space. For example, we may ask for a B3LYP energy calculation with the following
 
 ::
 
-     DFT B3LYP BASIS=cc-pvDZ CUTOFF=1.0d-10 DENSERMS=1.0d-6 ENERGY
+     DFT B3LYP BASIS=cc-pVDZ CUTOFF=1.0d-10 DENSERMS=1.0d-6 ENERGY
      ^     ^      ^              ^             ^              ^
      |     |      |              |             |              |
      |     |      |              |             |            Compute energy
@@ -74,7 +74,7 @@ LIBXC B3LYP functional, the functional command should change as follows.
 
 ::
 
-     DFT LIBXC=HYB_GGA_XC_B3LYP BASIS=cc-pvDZ CUTOFF=1.0d-10 DENSERMS=1.0d-6 ENERGY
+     DFT LIBXC=HYB_GGA_XC_B3LYP BASIS=cc-pVDZ CUTOFF=1.0d-10 DENSERMS=1.0d-6 ENERGY
      ^     ^                          ^           ^             ^              ^
      |     |                          |           |             |              |
      |     |                          |           |             |            Compute energy
@@ -89,7 +89,7 @@ For instance, if we use BLYP, the functional command changes as follows.
 
 ::
 
-     DFT LIBXC=GGA_X_B88,GGA_C_LYP BASIS=cc-pvDZ CUTOFF=1.0d-10 DENSERMS=1.0d-6 ENERGY
+     DFT LIBXC=GGA_X_B88,GGA_C_LYP BASIS=cc-pVDZ CUTOFF=1.0d-10 DENSERMS=1.0d-6 ENERGY
      ^        ^                          ^           ^             ^              ^
      |        |                          |           |             |              |
      |        |                          |           |             |            Compute energy
@@ -106,7 +106,7 @@ We now proceed with HF single point energy calculation for water molecule. Our i
 
 ::
 
-     HF BASIS=cc-pvDZ CUTOFF=1.0d-10 DENSERMS=1.0d-6 ENERGY
+     HF BASIS=cc-pVDZ CUTOFF=1.0d-10 DENSERMS=1.0d-6 ENERGY
 
      O                 -0.06756756   -0.31531531    0.00000000
      H                  0.89243244   -0.31531531    0.00000000
@@ -198,7 +198,7 @@ keyword is now replaced with **GRADIENT**. Our water example input is now modifi
 
 ::
 
-     HF BASIS=cc-pvDZ CUTOFF=1.0d-10 DENSERMS=1.0d-6 GRADIENT
+     HF BASIS=cc-pVDZ CUTOFF=1.0d-10 DENSERMS=1.0d-6 GRADIENT
 
      O                 -0.06756756   -0.31531531    0.00000000
      H                  0.89243244   -0.31531531    0.00000000
@@ -234,7 +234,7 @@ For HF/DFT geometry optimizations, we should specify **OPTIMIZE** keyword in QUI
 
 ::
 
-     HF BASIS=cc-pvDZ CUTOFF=1.0d-10 DENSERMS=1.0d-6 OPTIMIZE
+     HF BASIS=cc-pVDZ CUTOFF=1.0d-10 DENSERMS=1.0d-6 OPTIMIZE
 
      O                 -0.06756756   -0.31531531    0.00000000
      H                  0.89243244   -0.31531531    0.00000000
@@ -281,4 +281,4 @@ The cartesian coordinates of the molecular structures pertaining to each optimiz
 
 We can also find the energy of the minimum structure at the end of output but before the timings are printed out. 
 
-*Last updated by Madu Manathunga on 03/05/2020.*
+*Last updated by Madu Manathunga on 03/13/2020.*

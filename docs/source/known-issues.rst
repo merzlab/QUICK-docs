@@ -136,4 +136,5 @@ Solution: You should obtain basis set information for the missing atom from
 and paste this info into correct basis set file inside *basis* folder. Make sure to maintain the format. Otherwise, 
 you will end up with the same error again. 
 
+
 *Last updated by Madu Manathunga on 03/06/2020.*
