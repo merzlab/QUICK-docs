@@ -17,7 +17,7 @@ Installation
  scf.f90:(.text+0x3eb7): undefined reference to `dgemm_'
 
 If you encounter this linking error in cuda compilation, you are most likeley to have 
-compiled QUICK cpu or mpi version and trying to compile the cuda version without running  
+compiled QUICK serial or mpi version and trying to compile the cuda version without running  
 *make clean* in between. Note that cuda version uses CUBLAS which is provided within src
 folder and does not use BLAS. The latter is only used in CPU and MPI versions.
 
@@ -89,8 +89,7 @@ Solution: Run quick executable as "./quick input.in". See hands on tutorial sect
  At line 326 of file quick_calculated_module.f90
  Fortran runtime error: Attempt to DEALLOCATE unallocated 'self'
 
-You havent set the basis file path. 
-
+You havent set the basis file path.
 Solution: Set QUICK_BASIS variable using "export QUICK_BASIS=your_quick_home/basis".
 
 3. Missing basis set information 
@@ -132,9 +131,9 @@ If you are using serial or MPI version, you may also see a fortran error on the 
         at src/main.f90:28
 
 Solution: You should obtain basis set information for the missing atom from 
-`https://www.basissetexchange.org/ <https://www.basissetexchange.org/>`_ in Gaussian basis file format
+`https://www.basissetexchange.org/ <https://www.basissetexchange.org/>`_ in *Gaussian* basis file format
 and paste this info into correct basis set file inside *basis* folder. Make sure to maintain the format. Otherwise, 
 you will end up with the same error again. 
 
 
-*Last updated by Madu Manathunga on 03/06/2020.*
+*Last updated by Madu Manathunga on 03/25/2020.*

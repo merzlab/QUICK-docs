@@ -50,7 +50,7 @@ This will compile a serial version of QUICK.
 3. MPI Installation
 -------------------
 
-If you have intel mpi (version 2011 or later), openmpi or MPICH installed, you can compile the MPI version by running 
+If you have  openmpi or MPICH installed, you can compile the MPI version by running 
 following commands from quick main folder. 
 
 ::
@@ -58,6 +58,8 @@ following commands from quick main folder.
 	cp ./makein/make.in.MPI ./make.in
 	
 	make quick.MPI
+
+Note: Intel mpi (2011 or later) is also supported, however, we havent extensively tested yet. 
 
 4. CUDA Version Installation
 ----------------------------
@@ -78,8 +80,8 @@ b) Open up the make.in file and set CUDA_HOME. This is essential to link or comp
 	CUDA_HOME=(your cuda home) 
 
 c) You may have to change the "-gencode arch=compute_70,code=sm_70" options in CUDA_FLAGS 
-variable depending on the type of your GPU. The default value (70) is for a Volta gpu. Use 30, 50, 60 
-and 75 for Kepler, Maxwell, Pascal and Turing GPUs respectively. 
+variable depending on the type of your GPU. The default value (70) is for a Volta gpu. Use 60 
+and 75 for Pascal and Turing GPUs respectively. 
 
 ::
 
@@ -97,13 +99,13 @@ in ./bin directory, you can find executable files.
 ------------------------------------
 
 Once you have installed any version of QUICK following about instructions, it is necessary to set basis set path. 
-In order to so you can add following command into your .bash_profile or .bashrc. 
+In order to do so, add the following command into your .bash_profile or .bashrc. 
 
 ::
 
  export QUICK_BASIS=$(CUDA_HOME)/basis
 
-You can test QUICK by simply running *testqk.sh* from QUICK home directory. This can be done as follows. 
+You can test QUICK by simply running *testqk.sh* from QUICK home directory. 
 
 ::
 
@@ -118,7 +120,7 @@ The script will ask you to select an executable.
   2 --> quick.MPI
   3 --> quick.cuda
 
-Once you enter the correct number and press enter, the script will automatically run several test cases and inform
+Once you enter the correct number and hit return, the script will automatically run several test cases and inform
 you which tests passed or failed. 
 
 6. Uninstallation
@@ -128,4 +130,4 @@ To uninstall QUICK, simply run *make clean* from QUICK home directory. This will
 inside *bin* folder. You should delete the executables manually. 
 
 
-*Last updated by Madu Manathunga on 03/06/2020.*
+*Last updated by Madu Manathunga on 03/25/2020.*

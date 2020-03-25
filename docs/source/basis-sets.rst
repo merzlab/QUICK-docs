@@ -14,15 +14,17 @@ QUICK-20.03 is currently equipped with following basis sets.
   6-311G(d,p) 
   6-311G*     
   6-311G**    
-  cc-pVDZ    
-  cc-pVTZ   
+  cc-pVDZ       
 
-Note that we follow the same basis set names reported in `basis set exchange web page <https://www.basissetexchange.org/>`_. 
+Note 1: We follow the same basis set names reported in `basis set exchange web page <https://www.basissetexchange.org/>`_. 
+
+Note 2: Current version of QUICK ERI engine only support basis functions upto *f*. Therefore, energy calculations with *g* 
+functions and above, gradient calculations with *g* functions and above are not possible.  
 
 Adding a Basis Set into QUICK 
 *****************************
 
-In addition to above basis sets, it is also possible to add a basis set into QUICK by yourself. In order to do so, you should download a basis set from `basis set exchange web page <https://www.basissetexchange.org/>`_ in *Gaussian* software format and save it into your *basis* folder. Then, you should link this basis set to QUICK by updating the *basis_sets* file inside the *basis* folder. The *basis_sets* file contains a table in the following format.
+In addition to above basis sets, it is also possible to add a basis set into QUICK by yourself. In order to do so, you should download a basis set from `basis set exchange web page <https://www.basissetexchange.org/>`_ in *Gaussian* software format and save it into your *basis* folder. Then, link this basis set to QUICK by updating the *basis_link* file inside the *basis* folder. The *basis_link* file contains a table in the following format.
 
 ::
 

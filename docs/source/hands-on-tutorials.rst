@@ -27,7 +27,7 @@ MPI version:
 
      mpirun -np num_cores ./quick.MPI input.in
 
-where num_cores is the number of cores that you wish to use.
+where *num_cores* is the number of cores that you wish to use.
 
 CUDA version:
 
@@ -182,7 +182,7 @@ This is followed by electronic, nuclear and total energies.
  CORE_CORE REPULSION  =     9.157115983
  TOTAL ENERGY         =   -76.026199750
 
-Finally, we find timing information of the calcualtion. 
+Finally, we find timing information of the calculation. 
 
 The output of a DFT energy calculation is very similar to that of HF, however, with a couple of exceptions. 
 In the job information section, we can find information about density functional being used. If the functional
@@ -225,7 +225,7 @@ but before the timings. For above example the printed gradients will be as follo
  ---------------------------------------- 
 
 Note that current version of QUICK prints only the total gradients. Therefore, HF and DFT gradient printout remains the
-same. Finally, in the timings section we can find gradient timings for 1e, 2e and exchange correlation gradient calculation.
+same. Finally, in the timings section we can find gradient timings for 1e, 2e and exchange correlation gradient calculations.
 
 3. HF/DFT geometry optimization calculation
 *******************************************
@@ -259,7 +259,7 @@ QUICK geometry optimization output will contain information of SCF, gradient and
     3Z     0.0000001020    -0.0000000153    -0.0000000153     0.0000001238
  ---------------------------------------------------------------------------- 
 
-Next we find information essential for optimization convergence.
+Next we find information essential for the convergence of geometry optimization.
 
 ::
 
@@ -281,4 +281,4 @@ The cartesian coordinates of the molecular structures pertaining to each optimiz
 
 We can also find the energy of the minimum structure at the end of output but before the timings are printed out. 
 
-*Last updated by Madu Manathunga on 03/13/2020.*
+*Last updated by Madu Manathunga on 03/25/2020.*

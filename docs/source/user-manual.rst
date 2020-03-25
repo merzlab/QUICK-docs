@@ -22,8 +22,9 @@ Keywords for QUICK Input
 
    **B3LYP**: Built in B3LYP functional
 
-   **LIBXC=FUNCTIONAL1,FUNCTIONAL2** : Use density functionals from LIBXC library. Where FUNCTIONAL1 
-   and FUNCTIONAL2 are exchange and correlation functionals. 
+   QUICK also makes use of LIBXC density functional library. A LIBXC functional can be requested as follows.
+
+   **LIBXC=FUNCTIONAL1,FUNCTIONAL2** : Where FUNCTIONAL1 and FUNCTIONAL2 are exchange and correlation functionals. 
 
    See here for `a list of working functionals in current QUICK version <user-manual.html#a-list-of-available-dft-functionals>`_.
 
