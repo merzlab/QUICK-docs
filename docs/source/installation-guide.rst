@@ -67,19 +67,19 @@ Note: Intel mpi (2011 or later) is also supported, however, we havent extensivel
 If you want to install the GPU version, NVIDIA CUDA COMPILER is required. You may check your CUDA 
 compiler version using 'nvcc --version'. 
 
-a) Run the following command.
+Run the following command.
 
 ::
 
 	cp ./makein/make.in.gnu.cuda ./make.in
 
-b) Open up the make.in file and set CUDA_HOME. This is essential to link or compile CUBLAS and other libraries.
+Open up the make.in file and set CUDA_HOME. This is essential to link or compile CUBLAS and other libraries.
 
 ::
 
 	CUDA_HOME=(your cuda home) 
 
-c) You may have to change the "-gencode arch=compute_70,code=sm_70" options in CUDA_FLAGS 
+You may have to change the "-gencode arch=compute_70,code=sm_70" options in CUDA_FLAGS 
 variable depending on the type of your GPU. The default value (70) is for a Volta gpu. Use 60 
 and 75 for Pascal and Turing GPUs respectively. 
 
@@ -87,7 +87,7 @@ and 75 for Pascal and Turing GPUs respectively.
 
 	-gencode arch=compute_(your gpu),code=sm_(your gpu)
 
-d) Then run
+Then run
 
 ::
      
@@ -130,4 +130,4 @@ To uninstall QUICK, simply run *make clean* from QUICK home directory. This will
 inside *bin* folder. You should delete the executables manually. 
 
 
-*Last updated by Madu Manathunga on 03/25/2020.*
+*Last updated by Madu Manathunga on 04/23/2020.*
