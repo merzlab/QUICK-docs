@@ -39,6 +39,12 @@ For intel compiler (version 2011 or later):
 
 	cp ./makein/make.in.intel ./make.in
 
+If you have compiled cuda/MPI version before, wipe out all the object files by running:
+
+::
+
+	make clean
+
 Then, run the following command. 
 
 ::
@@ -52,6 +58,14 @@ This will compile a serial version of QUICK.
 
 If you have  openmpi or MPICH installed, you can compile the MPI version by running 
 following commands from quick main folder. 
+
+First, wipe out all the object files if you have compiled serial/cuda version before.
+
+::
+
+	make clean
+
+Then run:
 
 ::
 
@@ -87,13 +101,20 @@ and 75 for Pascal and Turing GPUs respectively.
 
 	-gencode arch=compute_(your gpu),code=sm_(your gpu)
 
-Then run
+If you have compiled serial/MPI version before, wipe out all the object files by running:
+
+::
+
+	make clean
+
+Then run:
 
 ::
      
 	make quick.cuda
 
-in ./bin directory, you can find executable files. 
+and in ./bin directory, you can find executable files. 
+
 
 5. Environment Variables and Testing
 ------------------------------------
