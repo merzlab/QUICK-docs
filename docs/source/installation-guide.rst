@@ -124,7 +124,7 @@ In order to do so, add the following command into your .bash_profile or .bashrc.
 
 ::
 
- export QUICK_BASIS=$(CUDA_HOME)/basis
+ export QUICK_BASIS=$(QUICK_HOME)/basis
 
 You can test QUICK by simply running *testqk.sh* from QUICK home directory. 
 
