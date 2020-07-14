@@ -1,7 +1,7 @@
 A List of Available Basis Sets
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-QUICK-20.03 is currently equipped with following basis sets. 
+QUICK-20.06 is currently equipped with following basis sets. 
 
 ::
 

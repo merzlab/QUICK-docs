@@ -52,7 +52,7 @@ Keywords for QUICK Input
 
    **CHARGE=INT**     : A net charge is to be placed on system.
 
-   **MULLIKEN**       : Write Mulliken charges to charge output file.
+   **DIPOLE**       : Write dipole moments, Mulliken and Löwdin charges to the output file.
 
 6. Geometry Optimization
 ************************
