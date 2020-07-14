@@ -4,119 +4,67 @@ Installation Guide
 1. Compatible Compilers and Hardware
 ------------------------------------
 
-We have tested QUICK-20.03 with following Compilers.
+We have tested QUICK-20.06 with following Compilers.
 
 • Serial version
 
- 1. GNU/4.8.3: No issue detected so far.
- 2. GNU/4.8.5: No issue detected so far. 
+ 1. GNU/4.8.5, 7.2.0 : No issue detected so far. 
+ 2. Intel/2018.1.163 : No issue detected so far. 
 
 • MPI version 
 
- 1. GNU/7.2.0, MPICH/3.2.1: No issue detected so far.                 
+ 1. GNU/7.2.0; MVAPICH2/2.3.2             : No issue detected so far.                 
+ 2. Intel/2018.1.163; Intelmpi/2018.1.163 : No issue detected so far.
 
 • CUDA version
 
- 1. GNU/4.8.5, CUDA/10.2  : No issue detected so far.                 
+ 1. GNU/4.8.5, GNU/7.2.0; CUDA/10.1, 10.2 : No issue detected so far.                 
+ 2. Intel/2018.1.163; CUDA/10.1           : No issue detected so far.   
 
-We have tested QUICK-20.03 CUDA version on GTX1080, P100, V100, TitanV and RTX2080Ti. Note that this 
+We have tested QUICK-20.06 CUDA version on V100, TitanV and RTX2080Ti. Note that this 
 version is currently not capable of running on any Kepler type GPU or older since we are using 
 double precision CUDA atomicAdd operators in our device code. 
 
-2. Serial Installation 
+2. Installation 
 --------------------------
 
-You can use gnu or intel compilers for this purpose. Go to QUICK main folder and run the following
-commands.  For GNU compiler (version 4.6 or later):
+Go to QUICK home folder and run configure script to generate the corresponding input file for Make. 
+
+For serial version installation:
 
 ::
 
-	cp ./makein/make.in.gnu ./make.in
-	
-For intel compiler (version 2011 or later):
+	./configure -serial --prefix <installdir> compiler
+
+possible options for compiler are *gnu* or *intel*. 
+
+For MPI parallel version installation:
 
 ::
 
-	cp ./makein/make.in.intel ./make.in
+        ./configure -mpi --prefix <installdir> compiler
 
-If you have compiled cuda/MPI version before, wipe out all the object files by running:
-
-::
-
-	make clean
-
-Then, run the following command. 
+For CUDA version installation:
 
 ::
 
-        make quick
-     
-This will compile a serial version of QUICK. 
+        ./configure -cuda -arch <micro-arch> --prefix <installdir> compiler
 
-3. MPI Installation
--------------------
+possible options for <micro-arch> are *pascal*, *volta* and *turing*. 
+Note that if you dont set the *-arch* option, QUICK will be compiled for multiple architectures based on your CUDA toolkit version.
+This will lead to a very time consuming compilation.   
 
-If you have  openmpi or MPICH installed, you can compile the MPI version by running 
-following commands from quick main folder. 
+Once the configuration script has been successfully executed, you will have a make.in file in QUICK home directory. 
+At this point simply run:
 
-First, wipe out all the object files if you have compiled serial/cuda version before.
+::	
 
-::
-
-	make clean
-
-Then run:
-
-::
-
-	cp ./makein/make.in.MPI ./make.in
-	
-	make quick.MPI
-
-Note: Intel mpi (2011 or later) is also supported, however, we havent extensively tested yet. 
-
-4. CUDA Version Installation
-----------------------------
-
-If you want to install the GPU version, NVIDIA CUDA COMPILER is required. You may check your CUDA 
-compiler version using 'nvcc --version'. 
-
-Run the following command.
-
-::
-
-	cp ./makein/make.in.gnu.cuda ./make.in
-
-Open up the make.in file and set CUDA_HOME. This is essential to link or compile CUBLAS and other libraries.
-
-::
-
-	CUDA_HOME=(your cuda home) 
-
-You may have to change the "-gencode arch=compute_70,code=sm_70" options in CUDA_FLAGS 
-variable depending on the type of your GPU. The default value (70) is for a Volta gpu. Use 60 
-and 75 for Pascal and Turing GPUs respectively. 
-
-::
-
-	-gencode arch=compute_(your gpu),code=sm_(your gpu)
-
-If you have compiled serial/MPI version before, wipe out all the object files by running:
-
-::
-
-	make clean
-
-Then run:
-
-::
-     
-	make quick.cuda
-
-and in ./bin directory, you can find executable files. 
+	make install
+ 	
+This will compile the QUICK version you requested and place an executable inside *installdir/bin*. 
 
 
-5. Environment Variables and Testing
+3. Environment Variables and Testing
 ------------------------------------
 
 Once you have installed any version of QUICK following about instructions, it is necessary to set basis set path. 
@@ -124,31 +72,21 @@ In order to do so, add the following command into your .bash_profile or .bashrc.
 
 ::
 
- export QUICK_BASIS=$(QUICK_HOME)/basis
+ export QUICK_BASIS=$(installdir)/basis
 
-You can test QUICK by simply running *testqk.sh* from QUICK home directory. 
-
-::
-
- ./testqk.sh 
-
-The script will ask you to select an executable. 
+You can test QUICK by simply running the following command from QUICK home directory. 
 
 ::
 
-  Please select the QUICK executable you want to test (type the corresponding number and hit enter):
-  1 --> quick
-  2 --> quick.MPI
-  3 --> quick.cuda
+ make test 
 
-Once you enter the correct number and hit return, the script will automatically run several test cases and inform
-you which tests passed or failed. 
+This will run a series of test cases and inform you which tests passed or failed. 
 
-6. Uninstallation
+4. Uninstallation
 -----------------
 
-To uninstall QUICK, simply run *make clean* from QUICK home directory. This will remove all the object files except the executables
-inside *bin* folder. You should delete the executables manually. 
+To uninstall QUICK, run *make uninstall* from QUICK home directory. Alternatively, you can delete all content in your
+*installdir*. 
 
 
-*Last updated by Madu Manathunga on 04/23/2020.*
+*Last updated by Madu Manathunga on 07/13/2020.*

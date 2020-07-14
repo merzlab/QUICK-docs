@@ -22,7 +22,7 @@ copyright = '2020, Merz Lab'
 author = 'Madu Manathunga'
 
 # The full version, including alpha/beta/rc tags
-release = '20.3.0'
+release = '20.6.0'
 
 
 # -- General configuration ---------------------------------------------------
