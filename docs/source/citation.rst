@@ -3,7 +3,7 @@ Citation
 
   Please cite QUICK-20.06 as follows. 
 
-  Manathunga, M.; Chi, J.; Cruzeiro, V. W.D.; Mu, D.; Keipert, C.; Miao,Y.; He, X.; Ayers,K; Brothers, E.; 
+  Manathunga, M.; Chi, J.; Cruzeiro, V.W.D.; Mu, D.; Keipert, C.; Miao,Y.; He, X.; Ayers,K; Brothers, E.; 
   Götz, A.W.; Merz,K. M. QUICK-20.06 University of California San Diego, CA and Michigan State University, East Lansing, MI, 2020.
 
   Publications to date:

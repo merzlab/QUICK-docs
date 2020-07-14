@@ -3,7 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to QUICK-20.03 Documentation!
+Welcome to QUICK-20.06 Documentation!
 ======================================
 
 .. toctree::
@@ -24,5 +24,5 @@ it will work flawlessly in all your applications. But we are working hard to det
 and fix issues. If you experience any compile or runtime issues, please report to us 
 through our github repository: `<https://github.com/merzlab/QUICK/issues>`_. 
 
-*Last updated by Madu Manathunga on 03/05/2020.*
+*Last updated by Madu Manathunga on 07/13/2020.*
 
