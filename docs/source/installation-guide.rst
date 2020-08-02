@@ -88,7 +88,7 @@ This will copy executables, libraries and .mod files into *installdir*.
 3. Environment Variables and Testing
 ------------------------------------
 
-Once you have installed any version of QUICK following about instructions, it is necessary to set the basis set path. 
+Once you have installed any version of QUICK following above instructions, it is necessary to set the basis set path. 
 In order to do so, add the following command into your .bash_profile or .bashrc. 
 
 ::
