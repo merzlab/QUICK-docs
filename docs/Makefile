@@ -4,7 +4,7 @@
 # You can set these variables from the command line, and also
 # from the environment for the first two.
 SPHINXOPTS    ?=
-SPHINXBUILD   ?= /Library/Frameworks/Python.framework/Versions/3.8/bin/sphinx-build
+SPHINXBUILD   ?= /usr/local/opt/sphinx-doc/bin/sphinx-build
 SOURCEDIR     = source
 BUILDDIR      = build
 
