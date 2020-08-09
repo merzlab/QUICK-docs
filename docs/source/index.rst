@@ -15,6 +15,7 @@ Welcome to QUICK-20.06 Documentation!
    user-manual
    hands-on-tutorials
    known-issues
+   developer-guide
    citation
    license
 
@@ -24,5 +25,5 @@ it will work flawlessly in all your applications. But we are working hard to det
 and fix issues. If you experience any compile or runtime issues, please report to us 
 through our github repository: `<https://github.com/merzlab/QUICK/issues>`_. 
 
-*Last updated by Madu Manathunga on 07/13/2020.*
+*Last updated by Madu Manathunga on 08/08/2020.*
 

@@ -1,68 +1,9 @@
 Known Issues of Current Version
 ===============================
 
-QUICK is under continous development and as of version 20.03, we have detected 
+QUICK is under continous development and as of version 20.06, we have detected 
 issues listed below. If you find anything other than these, please feel free to 
 report through our git hub repository: `https://github.com/merzlab/QUICK/issues <https://github.com/merzlab/QUICK/issues>`_. 
-
-Installation 
-^^^^^^^^^^^^
-
-1. BLAS object linking error in cuda version
-********************************************
-
-::
-
- ./obj/scf.o: In function `electdiis_':
- scf.f90:(.text+0x3eb7): undefined reference to `dgemm_'
-
-If you encounter this linking error in cuda compilation, you are most likeley to have 
-compiled QUICK serial or mpi version and trying to compile the cuda version without running  
-*make clean* in between. Note that cuda version uses CUBLAS which is provided within src
-folder and does not use BLAS. The latter is only used in CPU and MPI versions.
-
-Solution: Run *make clean* and recompile using *make quick.cuda*.
-
-
-2. Atomic add function overload error
-*************************************
-
-::
-
- gpu_getxc.cu(636): error: no instance of overloaded function "atomicAdd" matches the argument list
-            argument types are: (double *, double)
-
- gpu_getxc.cu(637): error: no instance of overloaded function "atomicAdd" matches the argument list
-            argument types are: (double *, double)
-
- gpu_getxc.cu(638): error: no instance of overloaded function "atomicAdd" matches the argument list
-            argument types are: (double *, double)
-
- gpu_getxc.cu(2563): error: no instance of overloaded function "atomicAdd" matches the argument list
-            argument types are: (double *, double)
-
- gpu_getxc.cu(2564): error: no instance of overloaded function "atomicAdd" matches the argument list
-            argument types are: (double *, double)
-
- gpu_getxc.cu(2565): error: no instance of overloaded function "atomicAdd" matches the argument list
-            argument types are: (double *, double)
-
- gpu_getxc.cu(2574): error: no instance of overloaded function "atomicAdd" matches the argument list
-            argument types are: (double *, double)
-
- gpu_getxc.cu(2575): error: no instance of overloaded function "atomicAdd" matches the argument list
-            argument types are: (double *, double)
-
- gpu_getxc.cu(2576): error: no instance of overloaded function "atomicAdd" matches the argument list
-            argument types are: (double *, double)
-
- 9 errors detected in the compilation of "/tmp/tmpxft_0004a02d_00000000-6_gpu_getxc.cpp1.ii".
-
-You are trying to compile QUICK for a GPU architecture that does not support double precision atomicAdd
-operators. 
-
-Solution: Run *make clean* and recompile code for Pascal, Volta or Turing architecture. We are still
-working on getting QUICK to work on older architectures.  
 
 Runtime 
 ^^^^^^^
@@ -136,4 +77,4 @@ and paste this info into correct basis set file inside *basis* folder. Make sure
 you will end up with the same error again. 
 
 
-*Last updated by Madu Manathunga on 03/25/2020.*
+*Last updated by Madu Manathunga on 08/08/2020.*

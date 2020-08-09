@@ -10,6 +10,7 @@ Contents
    user-manual
    hands-on-tutorials
    known-issues
+   developer-guide
    citation
    license
 
