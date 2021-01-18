@@ -52,14 +52,16 @@ Keywords for QUICK Input
 
    **CHARGE=INT**     : A net charge is to be placed on system.
 
-   **DIPOLE**       : Write dipole moments, Mulliken and Löwdin charges to the output file.
+   **EXTCHARGES**     : External charges are included in the system.
+
+   **DIPOLE**       : Write dipole moments, Mulliken and Löwdin charges into the output file.
 
 6. Geometry Optimization
 ************************
 
    **OPTIMIZE=Integer** : Performs a maximum of *Integer* cycles of optimization. Default: 3 x Number of atoms.
 
-   **GRADIENT**         :Calculates analytical gradients.
+   **GRADIENT**         : Calculates analytical gradients.
 
 .. include:: ./basis-sets.rst
 

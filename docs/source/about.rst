@@ -14,6 +14,6 @@ Hartree-Fock and density functional theory energy and gradient calculations, geo
 Mulliken charge analysis, strategy and front end of the program. Ken Ayers and Xiao He optimized the code.
 Yipu Miao implemented the GPU enabled ERI engine and laid the foundation for GPU enabled DFT calculations.
 
-Madu Manathunga, Dawei Mu, Andy Götz and Kennie Merz currently develop and maintain the code. Contact: `quick.merzlab@gmail.com <quick.merzlab@gmail.com>`_  
+Madu Manathunga, Jin Chi, Vinicius Cruzeiro, Andy Götz and Kennie Merz currently develop and maintain the code. Contact: `quick.merzlab@gmail.com <quick.merzlab@gmail.com>`_  
 
-*Last updated by Madu Manathunga on 03/05/2020.*
+*Last updated by Madu Manathunga on 01/19/2021.*
