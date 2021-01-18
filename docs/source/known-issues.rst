@@ -1,7 +1,7 @@
 Known Issues of Current Version
 ===============================
 
-QUICK is under continous development and as of version 20.06, we have detected 
+QUICK is under continous development and as of version 21.03, we have detected 
 issues listed below. If you find anything other than these, please feel free to 
 report through our git hub repository: `https://github.com/merzlab/QUICK/issues <https://github.com/merzlab/QUICK/issues>`_. 
 
@@ -77,4 +77,4 @@ and paste this info into correct basis set file inside *basis* folder. Make sure
 you will end up with the same error again. 
 
 
-*Last updated by Madu Manathunga on 08/08/2020.*
+*Last updated by Madu Manathunga on 01/19/2021.*

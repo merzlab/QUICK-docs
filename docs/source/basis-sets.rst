@@ -1,7 +1,7 @@
 A List of Available Basis Sets
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-QUICK-20.06 is currently equipped with following basis sets. 
+QUICK-21.03 is currently equipped with following basis sets. 
 
 ::
 
@@ -11,15 +11,20 @@ QUICK-20.06 is currently equipped with following basis sets.
   6-31G*      
   6-31G**     
   6-311G      
-  6-311G(d,p) 
+  6-311G(d,p)
+  6-311G(2df,2pd)
+  6-31G(2df,2pd)
+  6-311+G(2d,p) 
   6-311G*     
   6-311G**    
   cc-pVDZ       
+  def2-svp
+  def2-svpd
 
 Note 1: We follow the same basis set names reported in `basis set exchange web page <https://www.basissetexchange.org/>`_. 
 
 Note 2: Current version of QUICK ERI engine only support basis functions upto *f*. Therefore, energy calculations with *g* 
-functions and above, gradient calculations with *g* functions and above are not possible.  
+functions and above, gradient calculations with *f* functions and above are not possible.  
 
 Adding a Basis Set into QUICK 
 *****************************

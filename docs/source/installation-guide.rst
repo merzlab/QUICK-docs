@@ -4,26 +4,31 @@ Installation Guide
 1. Compatible Compilers and Hardware
 ------------------------------------
 
-We have tested QUICK-20.06 with following compilers on Linux operating system.
+We have tested QUICK-21.03 with following compilers on Linux operating system.
 
 • Serial version
 
- 1. GNU/4.8.5, 7.2.0 : No issue detected so far. 
- 2. Intel/2018.1.163 : No issue detected so far. 
+ 1. GNU/4.8.5, 7.2.0, 8.3.1, 9.3.0  : No issue detected so far. 
+ 2. Intel/2018.1.163, 2019.1.127    : No issue detected so far. 
 
 • MPI version 
 
- 1. GNU/7.2.0; MVAPICH2/2.3.2; OPENMPI/3.1.4 : No issue detected so far.                 
- 2. Intel/2018.1.163; Intelmpi/2018.1.163    : No issue detected so far.
+ 1. GNU/8.3.1; OPENMPI/4.0.4              : No issue detected so far.
+ 2. GNU/9.3.0; OPENMPI/4.0.3              : No issue detected so far.
+ 3. Intel/2018.1.163; Intelmpi/2018.1.163 : No issue detected so far.
 
 • CUDA version
 
- 1. GNU/4.8.5, GNU/7.2.0; CUDA/10.1, 10.2 : No issue detected so far.                 
- 2. Intel/2018.1.163; CUDA/10.1           : No issue detected so far.   
+ 1. GNU/4.8.5, 7.2.0, 8.3.1, 9.3.0; CUDA/10.1, 10.2 : No issue detected so far.                 
+ 2. Intel/2018.1.163, 2019.1.127; CUDA/10.2         : No issue detected so far.   
 
-We have tested QUICK-20.06 CUDA version on V100, TitanV, RTX2080Ti and GTX1080 GPUs. Note that our 
-code is currently not capable of running on any Kepler type GPU or older since we are using 
-double precision CUDA atomicAdd operators in device kernels. 
+• CUDA-MPI version
+
+ 1. GNU/8.3.1; CUDA/10.2; OPENMPI/4.0.4              : No issue detected so far.
+ 2. GNU/9.3.0; CUDA/11.0.207; OPENMPI/4.0.3          : No issue detected so far.
+ 3. Intel/2018.1.163; Intelmpi/2018.1.163; CUDA/10.2 : No issue detected so far.
+
+We have tested QUICK-21.03 CUDA version on A100, V100, TitanV, P100, RTX2080Ti, GTX1080, K80 and K40 GPUs.
 
 2. Installation
 ---------------
@@ -50,7 +55,13 @@ For CUDA version installation:
 
         ./configure --cuda --arch <micro-arch> --prefix <installdir> compiler
 
-possible options for <micro-arch> are *pascal*, *volta* and *turing*. 
+For CUDA-MPI version installation:
+
+::
+
+        ./configure --cudampi --arch <micro-arch> --prefix <installdir> compiler
+
+possible options for <micro-arch> are *kepler*, *pascal*, *volta*, *turing*, *ampere*. 
 
 You can configure the installtion for multiple CUDA architectures as follows. 
 
@@ -88,12 +99,12 @@ This will copy executables, libraries and .mod files into *installdir*.
 3. Environment Variables and Testing
 ------------------------------------
 
-Once you have installed any version of QUICK following above instructions, it is necessary to set the basis set path. 
-In order to do so, add the following command into your .bash_profile or .bashrc. 
+Once you have installed any version of QUICK following above instructions, it is necessary to set environment variables. 
+This can be easily done by sourcing quick.rc in the installation directory. 
 
 ::
 
- export QUICK_BASIS=$(installdir)/basis
+ source $(installdir)/quick.rc
 
 You can test QUICK by simply running the following command from QUICK home directory. 
 
@@ -112,4 +123,4 @@ If you want to clean a QUICK build, simply run *make clean* from QUICK home dire
 files located inside *QUICK_HOME/build*. For a complete removal of object files, executables, .mod files including  *QUICK_HOME/bin* 
 and *QUICK_HOME/build* directories, run *make distclean*.  
 
-*Last updated by Madu Manathunga on 08/02/2020.*
+*Last updated by Madu Manathunga on 01/19/2021.*
