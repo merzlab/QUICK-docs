@@ -4,20 +4,20 @@ Developer Guide
 QUICK API
 ---------
 
-Starting from version 20.06, QUICK build system compiles the source code and creates static or 
+Starting from version 20.06, QUICK build system compiles the source code and creates static or
 shared object libraries. Such libraries are then linked to the main QUICK program. If the user
-does not specify a prefix during the configure script run, libraries will be located inside 
+does not specify a prefix during the configure script run, libraries will be located inside
 *$QUICK_HOME/lib/$buildtype* where *$QUICK_HOME* is the QUICK home directory and *$buildtype*
 could be *serial*, *mpi* or *cuda*. Required .mod or header files can be found inside *$QUICK_HOME/include/$buildtype*.
 If the user specifies a prefix, above material are also located inside the installation directory.
 
 It is possible to link QUICK libraries into external programs and obtain HF/DFT energies, gradients
-and point charge gradients through the Fortran 90 QUICK API. Perhaps the best way to explain the usage of API
-is using an example. 
+and point charge gradients through the Fortran 90 QUICK API. We will explain the usage of the API
+with an example.
 
 Let us consider a simple system containing a water molecule surrounded by 3 point charges. We now create the
 following fortran module (test_module.f90) and store atomic coordinates and charges for 5 snapshots. Furthermore, we implement
-several subroutines to load test data and print data retrieved from QUICK. 
+several subroutines to load test data and print data retrieved from QUICK.
 
 ::
 
@@ -30,14 +30,14 @@ several subroutines to load test data and print data retrieved from QUICK.
 	  ! Interfaces for cuda/serial version
 	  public :: loadTestData, printQuickOutput
 
-	! Interfaces for MPI version 
+	! Interfaces for MPI version
 	#ifdef MPI
 	  public :: initializeMPI, printQuickMPIOutput
 	#endif
 
-	  
 
-	  ! Store the atomic coordinates of of water molecule for 5 snapshots. Store the same 
+
+	  ! Store the atomic coordinates of of water molecule for 5 snapshots. Store the same
 	  ! information for external point charges. Note that we follow x, y, z, charge format
 	  ! for the latter.
 	  double precision, dimension(1:45) :: all_coords
@@ -137,7 +137,7 @@ several subroutines to load test data and print data retrieved from QUICK.
 	    double precision, intent(in) :: ptchg_grad(3,nxt_charges)
 	    integer :: i, j
 
-	    ! print energy  
+	    ! print energy
 	    write(*,*) ""
 	    write(*,*) "*** TESTING QUICK API ***"
 	    write(*,*) ""
@@ -222,7 +222,7 @@ several subroutines to load test data and print data retrieved from QUICK.
 
 	end module test_module
 
-Next, we implement the following example program (example.f90) that would use above module and call QUICK through the API.
+Next, we implement the following example program (example.f90) that uses the above module and call QUICK through the API.
 
 ::
 
@@ -233,157 +233,156 @@ Next, we implement the following example program (example.f90) that would use ab
 	    use test_module, only : loadTestData, printQuickOutput
 
 	    ! Use subroutines from QUICK API
-	    use quick_api_module, only : setQuickJob, getQuickEnergy, getQuickEnergyGradients, deleteQuickJob 
+	    use quick_api_module, only : setQuickJob, getQuickEnergy, getQuickEnergyGradients, deleteQuickJob
 
 	#ifdef MPI
-	    ! Use MPI specific subroutines 
+	    ! Use MPI specific subroutines
 	    use test_module, only : initializeMPI, printQuickMPIOutput
 	    use quick_api_module, only : setQuickMPI
 	#endif
-	
+
 	    implicit none
-	
+
 	#ifdef MPI
 	    include 'mpif.h'
 	#endif
-	
+
 	    ! i, j are some integers useful for loops, frames is the number of
 	    ! test snapshots
 	    integer :: i, j, frames
-	   
+
 	    ! Number of atoms, number of atom types, number of external point charges
 	    integer :: natoms, nxt_charges
 
 	    ! Atom type ids, atomic numbers, atomic coordinates, point charges and
 	    ! coordinates
-	    integer, allocatable, dimension(:)            :: atomic_numbers 
-	    double precision, allocatable, dimension(:,:) :: coord          
-	    double precision, allocatable, dimension(:,:) :: xc_coord       
-	
+	    integer, allocatable, dimension(:)            :: atomic_numbers
+	    double precision, allocatable, dimension(:,:) :: coord
+	    double precision, allocatable, dimension(:,:) :: xc_coord
+
 	    ! Name of the quick output file
 	    character(len=80) :: fname
-	
+
 	    ! QUICK job card (a string of keywords).
 	    character(len=200) :: keywd
-	
+
 	    ! Total QM energy, gradients and point charge gradients
 	    double precision :: totEne
-	    double precision, allocatable, dimension(:,:) :: gradients         
-	    double precision, allocatable, dimension(:,:) :: ptchgGrad      
-	
+	    double precision, allocatable, dimension(:,:) :: gradients
+	    double precision, allocatable, dimension(:,:) :: ptchgGrad
+
 	#ifdef MPI
-	    ! MPI specific variables  
+	    ! MPI specific variables
 	    integer :: mpierror = 0
 	    integer :: mpirank  = 0
 	    integer :: mpisize  = 1
 	    logical :: master   = .true.
 	#endif
-	
-	
+
+
 	#ifdef MPI
 	    ! Initialize MPI library and get mpirank, mpisize
 	    call initializeMPI(mpisize, mpirank, master, mpierror)
-	
+
 	    ! Setup QUICK MPI, called only once
 	    call setQuickMPI(mpirank,mpisize)
 	#endif
-	
+
 	    ! Set molecule size. Recall that we consider a water molecule surounded by 3 point
-	    ! charges. 
+	    ! charges.
 	    natoms      = 3
-	    nxt_charges = 3    
-	
+	    nxt_charges = 3
+
 	    ! We also consider 5 snapshots of this test system.
 	    frames = 5
-	
+
 	    ! Allocate memory for input and output arrays. Recall that in xc_coord array,
 	    ! the first 3 columns are the xyz coordinates of the point charges. The
-	    ! fourth column is the charge. 
-	    if ( .not. allocated(atomic_numbers)) allocate(atomic_numbers(natoms)) 
+	    ! fourth column is the charge.
+	    if ( .not. allocated(atomic_numbers)) allocate(atomic_numbers(natoms))
 	    if ( .not. allocated(coord))          allocate(coord(3,natoms))
 	    if ( .not. allocated(xc_coord))       allocate(xc_coord(4,nxt_charges))
 	    if ( .not. allocated(gradients))         allocate(gradients(3,natoms))
 	    if ( .not. allocated(ptchgGrad))      allocate(ptchgGrad(3,nxt_charges))
-	
+
 	    fname           = 'water'
 	    keywd           = 'HF BASIS=6-31G CUTOFF=1.0D-10 DENSERMS=1.0D-6 GRADIENT EXTCHARGES'
-	
+
 	    atomic_numbers(1)  = 8
 	    atomic_numbers(2)  = 1
 	    atomic_numbers(3)  = 1
-	
+
 	    ! Set result vectors and matrices to zero.
 	    gradients = 0.0d0
 	    ptchgGrad = 0.0d0
-	
+
 	    ! Initialize QUICK, required only once.
 	    call setQuickJob(fname, keywd, natoms, atomic_numbers, nxt_charges)
-	
+
 	    do i=1, frames
-	
+
 	      ! Load coordinates and external point charges for ith snapshot
 	      call loadTestData(i, natoms, nxt_charges, coord, xc_coord)
-	
-	      ! Compute required quantities, call only a or b. 
+
+	      ! Compute required quantities, call only a or b.
 	      ! a. Compute energy.
 	      ! call getQuickEnergy(coord, xc_coord, totEne)
-	
+
 	      ! b. Compute energies, gradients and point charge gradients.
-	      call getQuickEnergyGradients(coord, xc_coord, totEne, gradients, ptchgGrad)    
-	
+	      call getQuickEnergyGradients(coord, xc_coord, totEne, gradients, ptchgGrad)
+
 	      ! print values obtained from quick library
 	#ifdef MPI
 	      ! A naive trick to print output from each core sequentially.
 	      call MPI_BARRIER(MPI_COMM_WORLD,mpierror)
-	
+
 	      do j=0, mpisize-1
 	        if(j .eq. mpirank) then
 	          call printQuickMPIOutput(natoms, nxt_charges, atomic_numbers, totEne, gradients, ptchgGrad, mpirank)
 	        endif
 	        call MPI_BARRIER(MPI_COMM_WORLD,mpierror)
-	      enddo 
+	      enddo
 	#else
 	      call printQuickOutput(natoms, nxt_charges, atomic_numbers, totEne, gradients, ptchgGrad)
 	#endif
-	
+
 	    enddo
-	
+
 	    ! Finalize QUICK, required only once
 	    call deleteQuickJob()
-	
+
 	    ! Deallocate memory
 	    if ( allocated(atomic_numbers)) deallocate(atomic_numbers)
 	    if ( allocated(coord))          deallocate(coord)
 	    if ( allocated(xc_coord))       deallocate(xc_coord)
 	    if ( allocated(gradients))      deallocate(gradients)
 	    if ( allocated(ptchgGrad))      deallocate(ptchgGrad)
-	
+
 	  end program example_program
 
-Assuming we configured QUICK serial version without a prefix and compiled using intel compiler toolchain, 
+Assuming we configured QUICK serial version without a prefix and compiled using intel compiler toolchain,
 we can compile above source files and link QUICK libraries as follows.
 
 ::
 
-	ifort -cpp test_module.f90 example_program.f90 -o example_program -I$QUICK_HOME/build/include/serial/ 
-	-L$QUICK_HOME/build/lib/serial/ -lquick -lblas -lxc -lstdc++	
+	ifort -cpp test_module.f90 example_program.f90 -o example_program -I$QUICK_HOME/build/include/serial/
+	-L$QUICK_HOME/build/lib/serial/ -lquick -lblas -lxc -lstdc++
 
 MPI version of the libraries can be linked as follows.
 
 ::
 
-	mpiifort -cpp -DMPI test_module.f90 example_program.f90 -o example_program -I$QUICK_HOME/build/include/mpi/ 
+	mpiifort -cpp -DMPI test_module.f90 example_program.f90 -o example_program -I$QUICK_HOME/build/include/mpi/
 	-L$QUICK_HOME/build/lib/mpi/ -lquick -lblas -lxc -lstdc++
 
 CUDA version of the libraries can be linked as follows.
 
 ::
 
-	ifort -cpp test_module.f90 example_program.f90 -o example_program -I$PWD/build/include/cuda/ 
+	ifort -cpp test_module.f90 example_program.f90 -o example_program -I$PWD/build/include/cuda/
 	-L$PWD/build/lib/cuda/ -L$CUDA_HOME/lib64 -lcuda -lm -lcudart -lcublas -lcusolver -lquick -lxc -lstdc++
 
-Running serial or CUDA executable should produce `this output <https://raw.githubusercontent.com/merzlab/QUICK-docs/master/resources/api-serial.txt>`_. 
-A `similar output <https://raw.githubusercontent.com/merzlab/QUICK-docs/master/resources/api-mpi.txt>`_ may be obtained by running MPI version with 2 cores. 
+Running serial or CUDA executable should produce `this output <https://raw.githubusercontent.com/merzlab/QUICK-docs/master/resources/api-serial.txt>`_.
+A `similar output <https://raw.githubusercontent.com/merzlab/QUICK-docs/master/resources/api-mpi.txt>`_ may be obtained by running MPI version with 2 cores.
 
-*Last updated by Madu Manathunga on 08/08/2020.*
-
+*Last updated by Madu Manathunga on 02/05/2021.*
