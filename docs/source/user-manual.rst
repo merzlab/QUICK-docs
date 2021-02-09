@@ -12,8 +12,8 @@ Keywords for QUICK Input
    **DFT**  : Density Functional Theory to be used.
 
    NOTE 1 : One Hamiltonian must be selected. There is no default.
-   
-   NOTE 2 : UHF or UDFT calculations are currently not available. We are working hard to enable them ASAP.
+
+   NOTE 2 : UHF or UDFT calculations are under development and currently not available.
 
 2. Density Functional Theory
 ****************************
@@ -24,13 +24,13 @@ Keywords for QUICK Input
 
    QUICK also makes use of LIBXC density functional library. A LIBXC functional can be requested as follows.
 
-   **LIBXC=FUNCTIONAL1,FUNCTIONAL2** : Where FUNCTIONAL1 and FUNCTIONAL2 are exchange and correlation functionals. 
+   **LIBXC=FUNCTIONAL1,FUNCTIONAL2** : Where FUNCTIONAL1 and FUNCTIONAL2 are exchange and correlation functionals.
 
    See here for `a list of working functionals in current QUICK version <user-manual.html#a-list-of-available-dft-functionals>`_.
 
    If you are using LIBXC in your work, please make sure to cite the paper below.
-  
-   `Susi Lehtola, Conrad Steigemann, Micael J.T. Oliveira, and Miguel A.L. Marques, Recent developments 
+
+   `Susi Lehtola, Conrad Steigemann, Micael J.T. Oliveira, and Miguel A.L. Marques, Recent developments
    in Libxc - A comprehensive library of functionals for density functional theory, Software X 7, 1 (2018) <https://www.sciencedirect.com/science/article/pii/S2352711017300602?via%3Dihub>`_.
 
 3. Basis sets
@@ -45,7 +45,7 @@ Keywords for QUICK Input
 
    **SCF=Integer**    : user defined maximum self-consistent field cycles = Integer. Default: 200
 
-   **DENSERMS=FLOAT** : user defined density matrix maximum RMS for convergence. Default : 1.0D-8.
+   **DENSERMS=FLOAT** : user defined density matrix maximum RMS for convergence. Default : 1.0E-4.
 
 5. Atomic Charges
 *****************

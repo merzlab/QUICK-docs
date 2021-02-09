@@ -1,19 +1,26 @@
 Hands-on Tutorials
 ==================
 
-QUICK home directory contains some test runs and examples. These can be found inside the *examples* directory.
-For this tutorial we will use water as an example. The structure of a typical QUICK input is as follows. 
+Examples of QUICK input files can be found at QUICK_HOME/test and at  this `link <https://github.com/merzlab/QUICK-tests>`_.
+
+For this tutorial we will use one water molecule as an example. The structure of a typical QUICK input is as follows.
 
 ::
 
      HF BASIS=cc-pVDZ CUTOFF=1.0d-10 DENSERMS=1.0d-6 ENERGY  <== Job command
                                                              <== Empty line
-     O              -0.06756756   -0.31531531    0.00000000 | 
+     O              -0.06756756   -0.31531531    0.00000000 |
      H               0.89243244   -0.31531531    0.00000000 |<== Coordinates
-     H              -0.38802215    0.58962052    0.00000000 |                                                                
+     H              -0.38802215    0.58962052    0.00000000 |
 
 
-Depending on the installation, you may run QUICK as folllows.  
+Before running QUICK, make sure to set the necessary environmental variables as follows:
+
+::
+
+ source $(installdir)/quick.rc
+
+Where *installdir* is the folder where QUICK was installed. Depending on the installation, you may run QUICK as follows:
 
 Serial version:
 
@@ -35,13 +42,13 @@ CUDA version:
 
      ./quick.cuda input.in
 
-Now assume that we have successfully installed CUDA version and set the basis set path. 
+Now assume that we have successfully installed CUDA version and set the basis set path.
 
-1. HF/DFT single point energy calculation 
+1. HF/DFT single point energy calculation
 *****************************************
 
-The typical job command line for HF/DFT is as follows. Note that all keywords are seperated by
-a single space.   
+The typical keyword line in the input file for a HF/DFT calculation looks like this.
+Note that all keywords are separated by a single space.
 
 ::
 
@@ -54,8 +61,8 @@ a single space.
      |     Basis set
      Hamiltonian
 
-For DFT, we replace *HF* hamiltonian with *DFT* and specify the functional name separated by a 
-space. For example, we may ask for a B3LYP energy calculation with the following command line.
+For DFT, we replace *HF* hamiltonian with *DFT* and specify the functional name separated by a
+space. For example, we may ask for a B3LYP energy calculation with the following keyword line.
 
 ::
 
@@ -69,8 +76,8 @@ space. For example, we may ask for a B3LYP energy calculation with the following
      |     Functional
      Hamiltonian
 
-Note that in the above command, we are using NATIVE B3LYP functional. If we want to use
-LIBXC B3LYP functional, the functional command should change as follows. 
+Note that in the above line, we are using NATIVE B3LYP functional. If we want to use
+the B3LYP functional through LIBXC, the keyword line should be specified as follows.
 
 ::
 
@@ -84,8 +91,8 @@ LIBXC B3LYP functional, the functional command should change as follows.
      |     Functional
      Hamiltonian
 
-It is also possible to ask for exchange and correlation LIBXC functionals seperately. 
-For instance, if we use BLYP, the functional command changes as follows.  
+It is also possible to ask for exchange and correlation LIBXC functionals separately.
+For instance, if we use BLYP, the keyword line is specified as follows.
 
 ::
 
@@ -96,13 +103,13 @@ For instance, if we use BLYP, the functional command changes as follows.
      |        |                          |           |             Density matrix cutoff
      |        |                          |       Integral cutoff
      |        |                       Basis set
-     |        Functionals (Functional_1, Functional_2 seperated by a comma)
+     |        Functionals (Functional_1, Functional_2 separated by a comma)
      Hamiltonian
 
-Note that currently, QUICK cannot handle more than two functionals at a time. 
+**Note:** Currently, QUICK cannot handle more than two functionals at a time.
 
-We now proceed with HF single point energy calculation for water molecule. Our input file, 
-*water.in* is as follows. 
+We now proceed with HF single point energy calculation for a water molecule. Here is the input file,
+called *water.in*.
 
 ::
 
@@ -112,20 +119,16 @@ We now proceed with HF single point energy calculation for water molecule. Our i
      H                  0.89243244   -0.31531531    0.00000000
      H                 -0.38802215    0.58962052    0.00000000
 
-Executing QUICK will give us *.out* and additionally, we save the terminal output into a 
-*.run.log* file. 
+Executing QUICK will give us an *water.out* file. Here is how to run using the CUDA version of QUICK.
 
 ::
 
-     ./quick.cuda water.in > water.run.log 
+     ./quick.cuda water.in
 
-The content in *water.run.log* is not useful for users. If debug flags are enabled, information
-useful for developers can be found here. 
-
-The information reported in *.out* (from now on output) file are as follows. In the beginning of output
-file, we can find information about job card and the GPU used for the calculation. The next section 
-reports information from SAD initial guess. This will be followed by some information about our molecule 
-such as input geometry, basis function information and etc.     
+The information reported in the *water.out* file are as follows. In the beginning of the output
+file, we can find information about job card and the GPU used for the calculation. The next section
+reports information from SAD initial guess. This will be followed by some information about the molecule
+such as input geometry, basis function information, etc.
 
 ::
 
@@ -152,10 +155,10 @@ such as input geometry, basis function information and etc.
   | JSHELL =   12 JBASIS =   32
 
 
-Next we find information on SCF iterations. 
+Next we find information about the SCF iterations.
 
 ::
- 
+
  ------------------------------------------------------------------------------------------------------------------------
  NCYC       ENERGY         DELTA_E      SCF_TIME  DII_CYC   DII_TIME   O_TIME  DIAG_TIME    MAX_ERR    RMS_CHG    MAX_CHG
  ------------------------------------------------------------------------------------------------------------------------
@@ -174,7 +177,7 @@ Next we find information on SCF iterations.
  MAX ERROR = 0.202570E-05   RMS CHANGE = 0.487164E-06   MAX CHANGE = 0.420193E-05
  -----------------------------------------------
 
-This is followed by electronic, nuclear and total energies. 
+This is followed by electronic, nuclear and total energies.
 
 ::
 
@@ -182,19 +185,13 @@ This is followed by electronic, nuclear and total energies.
  CORE_CORE REPULSION  =     9.157115983
  TOTAL ENERGY         =   -76.026199750
 
-Finally, we find timing information of the calculation. 
-
-The output of a DFT energy calculation is very similar to that of HF, however, with a couple of exceptions. 
-In the job information section, we can find information about density functional being used. If the functional
-is from LIBXC library, related information will show up. Furthermore, timing section at the very end of output
-will contain time for performing grid operations (i.e. grid generation, octree run and etc.) and time for
-computing exchange correlation energy and matrix elements of potential.  
+Finally, we find timing information about the calculation.
 
 2. HF/DFT gradient calculation
 ******************************
 
-The HF/DFT gradient calculation input is the same that we used for single point energy, except the **ENERGY**
-keyword is now replaced with **GRADIENT**. Our water example input is now modified as follows.  
+For a HF/DFT gradient calculation input the **ENERGY** flag is replaced by **GRADIENT**.
+Our water example input is now modified as follows.
 
 ::
 
@@ -202,10 +199,10 @@ keyword is now replaced with **GRADIENT**. Our water example input is now modifi
 
      O                 -0.06756756   -0.31531531    0.00000000
      H                  0.89243244   -0.31531531    0.00000000
-     H                 -0.38802215    0.58962052    0.00000000    
+     H                 -0.38802215    0.58962052    0.00000000
 
-In the calculation output, we can find the nuclear gradients immediately after the SCF cycles and energy information 
-but before the timings. For above example the printed gradients will be as follows. 
+In the calculation output, we can find the gradient immediately after the SCF cycles and energy information,
+and before the timings. The above example will print the following gradient.
 
 ::
 
@@ -222,15 +219,15 @@ but before the timings. For above example the printed gradients will be as follo
     3X    -0.3880221796    -0.0076370422
     3Y     0.5896205650    -0.0080873988
     3Z     0.0000000000    -0.0000000115
- ---------------------------------------- 
+ ----------------------------------------
 
-Note that current version of QUICK prints only the total gradients. Therefore, HF and DFT gradient printout remains the
-same. Finally, in the timings section we can find gradient timings for 1e, 2e and exchange correlation gradient calculations.
+Finally, the timings section also shows gradient timings for 1e, 2e and exchange correlation calculations.
 
 3. HF/DFT geometry optimization calculation
 *******************************************
 
-For HF/DFT geometry optimizations, we should specify **OPTIMIZE** keyword in QUICK input. For instance, the geometry optimization input for our water molecule would be: 
+For HF/DFT geometry optimizations, we should specify the **OPTIMIZE** flag in the QUICK input.
+For instance, the geometry optimization input for our water molecule would be:
 
 ::
 
@@ -240,7 +237,9 @@ For HF/DFT geometry optimizations, we should specify **OPTIMIZE** keyword in QUI
      H                  0.89243244   -0.31531531    0.00000000
      H                 -0.38802215    0.58962052    0.00000000
 
-QUICK geometry optimization output will contain information of SCF, gradient and cartesian coordinates for each optimization step. As in the gradient calculation, the analytical gradients will be printed out immediately after the SCF information.
+QUICK geometry optimization output will contain information of SCF, gradient and cartesian coordinates for
+each optimization step. As in the gradient calculation, the analytical gradients will be printed out immediately
+after the SCF information.
 
 ::
 
@@ -257,7 +256,7 @@ QUICK geometry optimization output will contain information of SCF, gradient and
     3X    -0.3550174280     0.0000168026    -0.0000012871    -0.3550285769
     3Y     0.5874160803    -0.0000028098     0.0000193489     0.5873964801
     3Z     0.0000001020    -0.0000000153    -0.0000000153     0.0000001238
- ---------------------------------------------------------------------------- 
+ ----------------------------------------------------------------------------
 
 Next we find information essential for the convergence of geometry optimization.
 
@@ -269,7 +268,7 @@ Next we find information essential for the convergence of geometry optimization.
   GEOMETRY CHANGE RMS     =    0.1958922994E-04 (REQUEST= 0.12000E-02)
   GRADIENT NORM           =    0.1292934393E-04 (REQUEST= 0.30000E-03)
 
-The cartesian coordinates of the molecular structures pertaining to each optimization step are printed next. 
+The cartesian coordinates of the molecular geometry on each optimization step are printed next.
 
 ::
 
@@ -277,8 +276,8 @@ The cartesian coordinates of the molecular structures pertaining to each optimiz
  ELEMENT      X         Y         Z
   O       -0.0876   -0.3439    0.0000
   H        0.8794   -0.2850   -0.0000
-  H       -0.3550    0.5874    0.0000 
+  H       -0.3550    0.5874    0.0000
 
-We can also find the energy of the minimum structure at the end of output but before the timings are printed out. 
+We can also find the energy of the minimum structure at the end of output, right before the timings are printed out.
 
-*Last updated by Madu Manathunga on 03/25/2020.*
+*Last updated by Madu Manathunga on 02/05/2021.*
