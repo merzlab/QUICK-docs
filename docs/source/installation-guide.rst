@@ -31,7 +31,7 @@ We have tested QUICK-21.03 with following compilers on Linux operating system.
 QUICK-21.03 CUDA version has been tested on the following GPU cards: A100, V100, TitanV, P100, RTX2080Ti, GTX1080, K80 and K40.
 
 **Note:** we recommend that the CUDA and CUDA-MPI versions be executed only on dedicated GPU cards where no other tasks are being run.
-For the CUDA-MPI version we also recommend that only one CPU per GPU is used; this can be done by setting the number of threads (*e.g.*,
+For the CUDA-MPI version we also recommend that only one CPU per GPU is used; this can be done by setting the number of processes (*e.g.*,
 in the *mpirun* command) equal to the number of CPUs.
 
 2. Installation
