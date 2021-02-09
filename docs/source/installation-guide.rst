@@ -66,7 +66,7 @@ For CUDA-MPI version installation:
 
         ./configure --cudampi --arch <micro-arch> --prefix <installdir> compiler
 
-possible options for <micro-arch> are *kepler*, *pascal*, *volta*, *turing*, *ampere*.
+possible options for <micro-arch> are *kepler*, *maxwell*, *pascal*, *volta*, *turing*, *ampere*.
 
 You can configure the installtion for multiple CUDA architectures as follows.
 
