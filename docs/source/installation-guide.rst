@@ -112,7 +112,7 @@ This can be done by sourcing quick.rc in the installation directory.
 
  source $(installdir)/quick.rc
 
-The QUICK tests can be executable as follows, from the QUICK home directory.
+The QUICK tests can be executed as follows, from the QUICK home directory.
 
 ::
 
