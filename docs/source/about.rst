@@ -4,7 +4,7 @@ About QUICK QM Package
 QUICK is a GPU enabled *ab initio* and density functional theory software capable of performing electronic
 structure calculations on general organic/biomolecular systems. Available features include:
 
-• Single point *ab initio* Hartree-Fock or density functional theory calculations (LGA, GGA and Hybrid-GGA functionals
+• Single point *ab initio* Hartree-Fock or density functional theory calculations (LDA, GGA and Hybrid-GGA functionals
   available).
 • Gradient and geometry optimization calculations (LBFGS solver available)
 • Mulliken charge analysis
