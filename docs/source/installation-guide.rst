@@ -133,7 +133,7 @@ In order to clean a QUICK build, the following must be run from the QUICK home d
 
 ::
 
-make clean
+ make clean
 
 This will remove all the object files located inside *QUICK_HOME/build*.
 
@@ -142,6 +142,6 @@ and *QUICK_HOME/build* directories:
 
 ::
 
-make distclean
+ make distclean
 
 *Last updated by Madu Manathunga on 02/05/2021.*
