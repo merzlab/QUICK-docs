@@ -111,12 +111,13 @@ This will copy executables, libraries and .mod files into *installdir*. In case 
 CMake installation requires you to have at least CMake/3.9.0 installed in the target machine. To install QUICK using CMake, one must first create build and install directories. Assuming you have created directories named *builddir* and *installdir* in *QUICK_HOME* directory, GNU compiler tool chain, and volta microarchitecture, all QUICK versions can be configured and build as follows.
 
 ::
+
 	cd ${QUICK_HOME}/builddir
 	cmake .. -DMPI=TRUE -DCUDA=TRUE -DCMAKE_INSTALL_PREFIX=${QUICK_HOME}/installdir -DCOMPILER=GNU -DQUICK_USER_ARCH=volta  
 	make
 	make install
 
-Where *-DMPI* and *-DCUDA* flags enable compiling MPI parallel and CUDA serial versions. Specifying both of them will compile CUDA parallel version. Serial version is compiled by default. A full list of available flags and their defintions writte by Jamie Smith can be found `here<cmake-options.html>`_. 
+Where *-DMPI* and *-DCUDA* flags enable compiling MPI parallel and CUDA serial versions. Specifying both of them will compile CUDA parallel version. Serial version is compiled by default. A full list of available flags and their defintions written by Jamie Smith can be found `here <cmake-options.html>`_. 
 
 
 3. Environment Variables and Testing
@@ -142,6 +143,7 @@ This will run a series of short test cases and inform you which tests passed or 
 test as follows. 
 
 ::
+
 	make fulltest
 
 3.2 CMake build system
@@ -151,12 +153,14 @@ If QUICK is built using CMake build system, short tests can be run using the *ru
 inside install directory. 
 
 ::
+
 	cd $(installdir)
 	./runtest
 
 Similarly, robust testing can be performed as follows. 
 
 ::
+
 	cd $(installdir)
 	./runtest --full
 
