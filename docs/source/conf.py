@@ -18,7 +18,7 @@
 # -- Project information -----------------------------------------------------
 
 project = 'QUICK'
-copyright = '2021, Merz Lab'
+copyright = '2021 Götz Lab & Merz Lab'
 author = 'Madu Manathunga'
 
 # The full version, including alpha/beta/rc tags
