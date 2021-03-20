@@ -3,35 +3,40 @@ A List of Available Basis Sets
 
 QUICK-21.03 is currently equipped with following basis sets. 
 
-::
+.. code-block:: none
 
   STO-3G      
   3-21G       
   6-31G       
-  6-31G*      
-  6-31G**     
-  6-311G      
-  6-311G(d,p)
-  6-311G(2df,2pd)
-  6-31G(2df,2pd)
-  6-311+G(2d,p) 
-  6-311G*     
-  6-311G**    
-  cc-pVDZ       
+  6-31G* or 6-31G(d)      
+  6-31G** or 6-31G(d,p)    
+  6-311G 
+  6-311G* or 6-311G(d)
+  6-311G** or 6-311G(d,p)
+  6-31+G* or 6-31+G(d)
+  6-31+G** or 6-31+G(d,p)
+  6-31++G** or 6-31++G(d,p)
+  6-311+G(2d,p)
+  6-311++G(2d,2p)
+  cc-pVDZ
   def2-svp
+  def2-sv(p)
   def2-svpd
+  PC-0
+  PC-1
 
 Note 1: We follow the same basis set names reported in `basis set exchange web page <https://www.basissetexchange.org/>`_. 
 
-Note 2: Current version of QUICK ERI engine only support basis functions upto *f*. Therefore, energy calculations with *g* 
-functions and above, gradient calculations with *f* functions and above are not possible.  
+Note 2: Current version of QUICK ERI engine only support basis functions up to *d*. Therefore, energy and gradient calculations with functions up to *d* are possible.
+
+Note 3: ECPs are currently not supported by QUICK. Due to this reason, we have excluded elements that require ECPs from the above basis sets.
 
 Adding a Basis Set into QUICK 
 *****************************
 
 In addition to above basis sets, it is also possible to add a basis set into QUICK by yourself. In order to do so, you should download a basis set from `basis set exchange web page <https://www.basissetexchange.org/>`_ in *Gaussian* software format and save it into your *basis* folder. Then, link this basis set to QUICK by updating the *basis_link* file inside the *basis* folder. The *basis_link* file contains a table in the following format.
 
-::
+.. code-block:: none
 
  _________________________________________________________________________ 
  | Keyword                           | Filename                            |
@@ -59,3 +64,6 @@ You should update this table by adhering to the rules below.
 
  4. DO NOT CHANGE THE TABLE/COLUMN WIDTH! VERTICAL BORDERS MUST REMAIN THE SAME.  
 
+Note 1: Current version of QUICK ERI engine only support basis functions up to *d*. Therefore, do not add high angular momentum basis sets and attempt to use f/g functions.
+
+Note 2: ECPs are currently not supported by QUICK. Therefore care must be taken not to add elements that require ECPs and use.
