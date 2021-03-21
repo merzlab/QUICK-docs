@@ -5,7 +5,7 @@ Examples of QUICK input files can be found at QUICK_HOME/test and at  this `link
 
 For this tutorial we will use one water molecule as an example. The structure of a typical QUICK input is as follows.
 
-::
+.. code-block:: none
 
      HF BASIS=cc-pVDZ CUTOFF=1.0d-10 DENSERMS=1.0d-6 ENERGY  <== Job command
                                                              <== Empty line
@@ -16,7 +16,7 @@ For this tutorial we will use one water molecule as an example. The structure of
 
 Before running QUICK, make sure to set the necessary environmental variables as follows:
 
-::
+.. code-block:: none
 
  source $(installdir)/quick.rc
 
@@ -24,13 +24,13 @@ Where *installdir* is the folder where QUICK was installed. Depending on the ins
 
 Serial version:
 
-::
+.. code-block:: none
 
      ./quick input.in
 
 MPI version:
 
-::
+.. code-block:: none
 
      mpirun -np num_cores ./quick.MPI input.in
 
@@ -38,7 +38,7 @@ where *num_cores* is the number of cores that you wish to use.
 
 CUDA version:
 
-::
+.. code-block:: none
 
      ./quick.cuda input.in
 
@@ -50,7 +50,7 @@ Now assume that we have successfully installed CUDA version and set the basis se
 The typical keyword line in the input file for a HF/DFT calculation looks like this.
 Note that all keywords are separated by a single space.
 
-::
+.. code-block:: none
 
      HF BASIS=cc-pVDZ CUTOFF=1.0d-10 DENSERMS=1.0d-6 ENERGY
      ^     ^              ^             ^              ^
@@ -64,7 +64,7 @@ Note that all keywords are separated by a single space.
 For DFT, we replace *HF* hamiltonian with *DFT* and specify the functional name separated by a
 space. For example, we may ask for a B3LYP energy calculation with the following keyword line.
 
-::
+.. code-block:: none
 
      DFT B3LYP BASIS=cc-pVDZ CUTOFF=1.0d-10 DENSERMS=1.0d-6 ENERGY
      ^     ^      ^              ^             ^              ^
@@ -79,7 +79,7 @@ space. For example, we may ask for a B3LYP energy calculation with the following
 Note that in the above line, we are using NATIVE B3LYP functional. If we want to use
 the B3LYP functional through LIBXC, the keyword line should be specified as follows.
 
-::
+.. code-block:: none
 
      DFT LIBXC=HYB_GGA_XC_B3LYP BASIS=cc-pVDZ CUTOFF=1.0d-10 DENSERMS=1.0d-6 ENERGY
      ^     ^                          ^           ^             ^              ^
@@ -94,7 +94,7 @@ the B3LYP functional through LIBXC, the keyword line should be specified as foll
 It is also possible to ask for exchange and correlation LIBXC functionals separately.
 For instance, if we use BLYP, the keyword line is specified as follows.
 
-::
+.. code-block:: none
 
      DFT LIBXC=GGA_X_B88,GGA_C_LYP BASIS=cc-pVDZ CUTOFF=1.0d-10 DENSERMS=1.0d-6 ENERGY
      ^        ^                          ^           ^             ^              ^
@@ -111,7 +111,7 @@ For instance, if we use BLYP, the keyword line is specified as follows.
 We now proceed with HF single point energy calculation for a water molecule. Here is the input file,
 called *water.in*.
 
-::
+.. code-block:: none
 
      HF BASIS=cc-pVDZ CUTOFF=1.0d-10 DENSERMS=1.0d-6 ENERGY
 
@@ -121,7 +121,7 @@ called *water.in*.
 
 Executing QUICK will give us an *water.out* file. Here is how to run using the CUDA version of QUICK.
 
-::
+.. code-block:: none
 
      ./quick.cuda water.in
 
@@ -130,7 +130,7 @@ file, we can find information about job card and the GPU used for the calculatio
 reports information from SAD initial guess. This will be followed by some information about the molecule
 such as input geometry, basis function information, etc.
 
-::
+.. code-block:: none
 
   =========== Molecule Input ==========
   | TOTAL MOLECULAR CHARGE  =    0    MULTIPLICITY                =    1
@@ -157,7 +157,7 @@ such as input geometry, basis function information, etc.
 
 Next we find information about the SCF iterations.
 
-::
+.. code-block:: none
 
  ------------------------------------------------------------------------------------------------------------------------
  NCYC       ENERGY         DELTA_E      SCF_TIME  DII_CYC   DII_TIME   O_TIME  DIAG_TIME    MAX_ERR    RMS_CHG    MAX_CHG
@@ -179,7 +179,7 @@ Next we find information about the SCF iterations.
 
 This is followed by electronic, nuclear and total energies.
 
-::
+.. code-block:: none
 
  ELECTRONIC ENERGY    =   -85.183315734
  CORE_CORE REPULSION  =     9.157115983
@@ -193,7 +193,7 @@ Finally, we find timing information about the calculation.
 For a HF/DFT gradient calculation input the **ENERGY** flag is replaced by **GRADIENT**.
 Our water example input is now modified as follows.
 
-::
+.. code-block:: none
 
      HF BASIS=cc-pVDZ CUTOFF=1.0d-10 DENSERMS=1.0d-6 GRADIENT
 
@@ -204,7 +204,7 @@ Our water example input is now modified as follows.
 In the calculation output, we can find the gradient immediately after the SCF cycles and energy information,
 and before the timings. The above example will print the following gradient.
 
-::
+.. code-block:: none
 
  ANALYTICAL GRADIENT:
  ----------------------------------------
@@ -229,7 +229,7 @@ Finally, the timings section also shows gradient timings for 1e, 2e and exchange
 For HF/DFT geometry optimizations, we should specify the **OPTIMIZE** flag in the QUICK input.
 For instance, the geometry optimization input for our water molecule would be:
 
-::
+.. code-block:: none
 
      HF BASIS=cc-pVDZ CUTOFF=1.0d-10 DENSERMS=1.0d-6 OPTIMIZE
 
@@ -241,7 +241,7 @@ QUICK geometry optimization output will contain information of SCF, gradient and
 each optimization step. As in the gradient calculation, the analytical gradients will be printed out immediately
 after the SCF information.
 
-::
+.. code-block:: none
 
  ANALYTICAL GRADIENT:
  ----------------------------------------------------------------------------
@@ -260,7 +260,7 @@ after the SCF information.
 
 Next we find information essential for the convergence of geometry optimization.
 
-::
+.. code-block:: none
 
   OPTIMIZATION STATISTICS:
   ENERGY CHANGE           =   -0.9827189729E-08 (REQUEST= 0.10000E-05)
@@ -270,7 +270,7 @@ Next we find information essential for the convergence of geometry optimization.
 
 The cartesian coordinates of the molecular geometry on each optimization step are printed next.
 
-::
+.. code-block:: none
 
  OPTIMIZED GEOMETRY IN CARTESIAN
  ELEMENT      X         Y         Z
