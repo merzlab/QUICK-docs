@@ -11,6 +11,8 @@ Welcome to QUICK-21.03 Documentation!
    :caption: Contents:
 
    about
+   features-limitations
+   performance
    installation-guide
    user-manual
    hands-on-tutorials
@@ -25,5 +27,5 @@ it will work flawlessly in all your applications. But we are working hard to det
 and fix issues. If you experience any compile or runtime issues, please report to us 
 through our github repository: `<https://github.com/merzlab/QUICK/issues>`_. 
 
-*Last updated by Madu Manathunga on 01/19/2021.*
+*Last updated by Madu Manathunga on 03/20/2021.*
 
