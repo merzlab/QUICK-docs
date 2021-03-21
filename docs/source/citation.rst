@@ -3,7 +3,7 @@ Citation
 
   Please cite QUICK-21.03 as follows. 
 
-  Manathunga, M.; Chi, J.; Cruzeiro, V.W.D.; Keipert, K.; Pekurovsky, D.; Mu, D.; Miao, Y.;He, X.; Ayers,K;
+  Manathunga, M.; Jin, C.; Cruzeiro, V.W.D.; Smith, J.; Keipert, K.; Pekurovsky, D.; Mu, D.; Miao, Y.;He, X.; Ayers,K;
   Brothers, E.; Götz, A.; Merz,K. M. QUICK-21.03 University of California San Diego, CA and Michigan State University, East Lansing, MI, 2021.
 
   Publications to date:
@@ -14,4 +14,4 @@ Citation
 
   `Miao, Y.; Merz, K. M. Acceleration of Electron Repulsion Integral Evaluation on Graphics Processing Units via Use of Recurrence Relations. J. Chem. Theory Comput. 2013, 9, 965–976 <https://pubs.acs.org/doi/abs/10.1021/ct300754n>`_.
 
-*Last updated by Madu Manathunga on 01/19/2021.*
+*Last updated by Madu Manathunga on 03/20/2021.*
