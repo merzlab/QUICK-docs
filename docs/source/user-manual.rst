@@ -18,13 +18,31 @@ Keywords for QUICK Input
 2. Density Functional Theory
 ****************************
 
-   **BLYP** : Built in BLYP functional
+   **BLYP** : Built in BLYP functional (A. D. Becke, Phys. Rev. A 38, 3098 (1988), C. Lee, W. Yang, and R. G. Parr, Phys. Rev. B 37, 785 (1988), B. Miehlich, A. Savin, H. Stoll, and H. Preuss, Chem. Phys. Lett. 157, 200 (1989))
 
-   **B3LYP**: Built in B3LYP functional
+   **B3LYP**: Built in B3LYP functional (P. J. Stephens, F. J. Devlin, C. F. Chabalowski, and M. J. Frisch, J. Phys. Chem. 98, 11623 (1994) )
 
-   QUICK also makes use of LIBXC density functional library. A LIBXC functional can be requested as follows.
+   **BP86**: BP86 functional (A. D. Becke, Phys. Rev. A 38, 3098 (1988), J. P. Perdew, Phys. Rev. B 33, 8822 (1986))
 
-   **LIBXC=FUNCTIONAL1,FUNCTIONAL2** : Where FUNCTIONAL1 and FUNCTIONAL2 are exchange and correlation functionals.
+   **B97**: B97 functional (A. D. Becke, J. Chem. Phys. 107, 8554 (1997))
+
+   **B97-GGA1**: B97-GGA1 functional (A. J. Cohen and N. C. Handy, Chem. Phys. Lett. 316, 160 (2000))
+
+   **PW91**: PW91 functional (J. P. Perdew, J. A. Chevary, S. H. Vosko, K. A. Jackson, M. R. Pederson, D. J. Singh, and C. Fiolhais, Phys. Rev. B 46, 6671 (1992))
+
+   **OLYP**: OLYP functional (N. C. Handy and A. J. Cohen, Mol. Phys. 99, 403 (2001), C. Lee, W. Yang, and R. G. Parr, Phys. Rev. B 37, 785 (1988))
+
+   **O3LYP**: O3LYP functional (A. J. Cohen and N. C. Handy, Mol. Phys. 99, 607 (2001))
+   
+   **PBE**: PBE functional (J. P. Perdew, K. Burke, and M. Ernzerhof, Phys. Rev. Lett. 77, 3865 (1996), J. P. Perdew, K. Burke, and M. Ernzerhof, Phys. Rev. Lett. 78, 1396 (1997))
+
+   **REVPBE**: Revised PBE functional (Y. Zhang and W. Yang, Phys. Rev. Lett. 80, 890 (1998), J. P. Perdew, K. Burke, and M. Ernzerhof, Phys. Rev. Lett. 77, 3865 (1996), J. P. Perdew, K. Burke, and M. Ernzerhof, Phys. Rev. Lett. 78, 1396 (1997))
+
+   **PBE0**: PBE0/PBEH functional (C. Adamo and V. Barone, J. Chem. Phys. 110, 6158 (1999), M. Ernzerhof and G. E. Scuseria, J. Chem. Phys. 110, 5029 (1999))
+
+   QUICK also makes use of LIBXC density functional library (version 4.0.4). A LIBXC functional can be requested as follows.
+
+   **LIBXC=FUNCTIONAL1,FUNCTIONAL2** : Where FUNCTIONAL1 and FUNCTIONAL2 are exchange and correlation functionals. *Note: Spaces near '=' or ',' are not allowed.*
 
    See here for `a list of working functionals in current QUICK version <user-manual.html#a-list-of-available-dft-functionals>`_.
 
@@ -45,7 +63,7 @@ Keywords for QUICK Input
 
    **SCF=Integer**    : user defined maximum self-consistent field cycles = Integer. Default: 200
 
-   **DENSERMS=FLOAT** : user defined density matrix maximum RMS for convergence. Default : 1.0E-4.
+   **DENSERMS=FLOAT** : user defined density matrix maximum RMS for convergence. Default : 1.0E-6.
 
 5. Atomic Charges
 *****************

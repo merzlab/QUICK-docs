@@ -1,14 +1,14 @@
 A List of Available DFT Functionals
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Based on our tests, following functionals are successully working in QUICK-21.03 serial, MPI and CUDA versions. 
-Note that here we are reporting LIBXC keywords that will be specified in QUICK input. Please use LIBXC functionals page
-for more information on each keyword: `https://www.tddft.org/programs/libxc/functionals/ <https://www.tddft.org/programs/libxc/functionals/>`_. 
+Based on our tests, following functionals are successully working in QUICK-21.03 serial, MPI, CUDA and CUDAMPI versions. 
+Note that here we are reporting LIBXC keywords that will be specified in QUICK input. `Please use LIBXC functionals page
+for more information on each keyword. <https://www.tddft.org/programs/libxc/functionals/previous/libxc-4.0.4/>`_. 
 
 1) LDA exchange functionals
 ***************************
 
-::
+.. code-block:: none
 
   1. LDA_X
   2. LDA_X_2D
@@ -19,7 +19,7 @@ for more information on each keyword: `https://www.tddft.org/programs/libxc/func
 2) LDA correlation funcationals
 *******************************
 
-::
+.. code-block:: none
 
   1.  LDA_C_1D_LOOS
   2.  LDA_C_2D_AMGB
@@ -60,7 +60,7 @@ for more information on each keyword: `https://www.tddft.org/programs/libxc/func
 3) LDA exchange correlation functionals
 ***************************************
 
-::
+.. code-block:: none
 
   1.  LDA_XC_KSDT
   2.  LDA_XC_LP_A
@@ -72,7 +72,7 @@ for more information on each keyword: `https://www.tddft.org/programs/libxc/func
 4) GGA exchange functionals
 ***************************
 
-::
+.. code-block:: none
 
   1.  GGA_X_2D_B86
   2.  GGA_X_2D_B86_MGC
@@ -130,7 +130,7 @@ for more information on each keyword: `https://www.tddft.org/programs/libxc/func
 5) GGA correlation functionals
 ******************************
 
-::
+.. code-block:: none
 
   1.  GGA_C_AM05
   2.  GGA_C_APBE
@@ -185,7 +185,7 @@ for more information on each keyword: `https://www.tddft.org/programs/libxc/func
 6) Hybrid-GGA functionals
 *************************
 
-::
+.. code-block:: none
 
   1.  HYB_GGA_XC_B1LYP
   2.  HYB_GGA_XC_B1PW91
@@ -208,4 +208,4 @@ for more information on each keyword: `https://www.tddft.org/programs/libxc/func
   19. HYB_GGA_XC_REVB3LYP
   20. HYB_GGA_XC_X3LYP
 
-*Last updated by Madu Manathunga on 01/19/2021.*
+*Last updated by Madu Manathunga on 03/20/2021.*
