@@ -1,8 +1,8 @@
 Developer Guide
 ===============
 
-Adding a Basis Set into QUICK 
-_____________________________
+Adding new basis sets
+---------------------
 
 In order to add a basis set into QUICK, one should download a basis set from `basis set exchange web page <https://www.basissetexchange.org/>`_ in *Gaussian* software format and save it into *basis* folder. Then, link this basis set to QUICK by updating the *basis_link* file inside the *basis* folder. The *basis_link* file contains a table in the following format.
 
@@ -38,9 +38,20 @@ Note 1: Current version of QUICK (v21.03) ERI engine only support basis function
 
 Note 2: ECPs are not supported by QUICK-21.03. Therefore care must be taken not to add elements that require ECPs and use.
 
+Adding new test cases into test suite
+-------------------------------------
+
+
+
 
 QUICK API
 ---------
+
+.. image:: api.png
+    :width: 680px
+    :align: center
+    :height: 294px
+    :alt: api
 
 Starting from version 20.06, QUICK build system compiles the source code and creates static or
 shared object libraries. Such libraries are then linked to the main QUICK program. If the user
