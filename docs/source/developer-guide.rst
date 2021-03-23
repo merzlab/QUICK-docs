@@ -458,7 +458,7 @@ CUDAMPI version of the libraries can be linked as follows.
 	-I$installdir/include/cuda/ -L$installdir/lib/cuda/ -L$CUDA_HOME/lib64 -lcuda -lm -lcudart 
 	-lcublas -lcusolver -lquick-cudampi -lxc-cuda -lstdc++
 
-Running serial or CUDA executable should produce `this output <https://raw.githubusercontent.com/merzlab/QUICK-docs/master/resources/api-serial.txt>`_.
-A `similar output <https://raw.githubusercontent.com/merzlab/QUICK-docs/master/resources/api-mpi.txt>`_ may be obtained by running MPI or CUDAMPI version with 2 processes.
+Running serial or CUDA executable should produce `this output <https://raw.githubusercontent.com/merzlab/QUICK-docs/master/resources/v21.03/api-serial.txt>`_.
+A `similar output <https://raw.githubusercontent.com/merzlab/QUICK-docs/master/resources/v21.03/api-mpi.txt>`_ may be obtained by running MPI or CUDAMPI version with 2 processes.
 
 *Last updated by Madu Manathunga on 03/23/2021.*
