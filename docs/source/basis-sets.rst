@@ -1,8 +1,3 @@
-A List of Available Basis Sets
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-QUICK-21.03 is currently equipped with following basis sets. 
-
 .. code-block:: none
 
   STO-3G      
