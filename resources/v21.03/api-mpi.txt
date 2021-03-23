@@ -1,0 +1,244 @@
+ 
+--- MPIRANK   0 ---
+ 
+ 
+ *** TESTING QUICK API ***
+ 
+ PRINTING ENERGY
+ ---------------
+ 
+TOTAL ENERGY =   -75.9740827874 A.U.
+ 
+ PRINTING GRADIENTS
+ ------------------
+ 
+ ATOMIC NUMBER   GRAD-X          GRAD-Y          GRAD-Z
+          8    0.0023637392   -0.0000004693   -0.0308767766
+          1   -0.0001293752    0.0004145104    0.0146325414
+          1   -0.0001294141   -0.0004140421    0.0146322511
+ 
+ PRINTING POINT CHARGE GRADIENTS
+ -------------------------------
+ 
+ CHARGE NUMBER   GRAD-X          GRAD-Y          GRAD-Z
+          1   -0.0021049498    0.0000000011    0.0016119840
+ 
+ 
+--- MPIRANK   1 ---
+ 
+ 
+ *** TESTING QUICK API ***
+ 
+ PRINTING ENERGY
+ ---------------
+ 
+TOTAL ENERGY =   -75.9740827874 A.U.
+ 
+ PRINTING GRADIENTS
+ ------------------
+ 
+ ATOMIC NUMBER   GRAD-X          GRAD-Y          GRAD-Z
+          8    0.0023637392   -0.0000004693   -0.0308767766
+          1   -0.0001293752    0.0004145104    0.0146325414
+          1   -0.0001294141   -0.0004140421    0.0146322511
+ 
+ PRINTING POINT CHARGE GRADIENTS
+ -------------------------------
+ 
+ CHARGE NUMBER   GRAD-X          GRAD-Y          GRAD-Z
+          1   -0.0021049498    0.0000000011    0.0016119840
+ 
+ 
+--- MPIRANK   0 ---
+ 
+ 
+ *** TESTING QUICK API ***
+ 
+ PRINTING ENERGY
+ ---------------
+ 
+TOTAL ENERGY =   -75.9472732639 A.U.
+ 
+ PRINTING GRADIENTS
+ ------------------
+ 
+ ATOMIC NUMBER   GRAD-X          GRAD-Y          GRAD-Z
+          8   -0.0143088470    0.0000407107    0.1643072979
+          1    0.0079528386   -0.1364578250   -0.0827858523
+          1    0.0079497085    0.1364170936   -0.0827630794
+ 
+ PRINTING POINT CHARGE GRADIENTS
+ -------------------------------
+ 
+ CHARGE NUMBER   GRAD-X          GRAD-Y          GRAD-Z
+          1   -0.0018130621    0.0000000286    0.0019914831
+          2    0.0002193619   -0.0000000078   -0.0007498493
+ 
+ 
+--- MPIRANK   1 ---
+ 
+ 
+ *** TESTING QUICK API ***
+ 
+ PRINTING ENERGY
+ ---------------
+ 
+TOTAL ENERGY =   -75.9472732639 A.U.
+ 
+ PRINTING GRADIENTS
+ ------------------
+ 
+ ATOMIC NUMBER   GRAD-X          GRAD-Y          GRAD-Z
+          8   -0.0143088470    0.0000407107    0.1643072979
+          1    0.0079528386   -0.1364578250   -0.0827858523
+          1    0.0079497085    0.1364170936   -0.0827630794
+ 
+ PRINTING POINT CHARGE GRADIENTS
+ -------------------------------
+ 
+ CHARGE NUMBER   GRAD-X          GRAD-Y          GRAD-Z
+          1   -0.0018130621    0.0000000286    0.0019914831
+          2    0.0002193619   -0.0000000078   -0.0007498493
+ 
+ 
+--- MPIRANK   0 ---
+ 
+ 
+ *** TESTING QUICK API ***
+ 
+ PRINTING ENERGY
+ ---------------
+ 
+TOTAL ENERGY =   -75.9599617906 A.U.
+ 
+ PRINTING GRADIENTS
+ ------------------
+ 
+ ATOMIC NUMBER   GRAD-X          GRAD-Y          GRAD-Z
+          8    0.0083798709    0.0000203320    0.1811120290
+          1   -0.0056086341   -0.1430253480   -0.0883836809
+          1   -0.0056080794    0.1430050316   -0.0883737914
+ 
+ PRINTING POINT CHARGE GRADIENTS
+ -------------------------------
+ 
+ CHARGE NUMBER   GRAD-X          GRAD-Y          GRAD-Z
+          1   -0.0018602689    0.0000000084    0.0017484205
+          2    0.0002674368   -0.0000000023   -0.0007157583
+          3    0.0044296747   -0.0000000216   -0.0053872188
+ 
+ 
+--- MPIRANK   1 ---
+ 
+ 
+ *** TESTING QUICK API ***
+ 
+ PRINTING ENERGY
+ ---------------
+ 
+TOTAL ENERGY =   -75.9599617906 A.U.
+ 
+ PRINTING GRADIENTS
+ ------------------
+ 
+ ATOMIC NUMBER   GRAD-X          GRAD-Y          GRAD-Z
+          8    0.0083798709    0.0000203320    0.1811120290
+          1   -0.0056086341   -0.1430253480   -0.0883836809
+          1   -0.0056080794    0.1430050316   -0.0883737914
+ 
+ PRINTING POINT CHARGE GRADIENTS
+ -------------------------------
+ 
+ CHARGE NUMBER   GRAD-X          GRAD-Y          GRAD-Z
+          1   -0.0018602689    0.0000000084    0.0017484205
+          2    0.0002674368   -0.0000000023   -0.0007157583
+          3    0.0044296747   -0.0000000216   -0.0053872188
+ 
+ 
+--- MPIRANK   0 ---
+ 
+ 
+ *** TESTING QUICK API ***
+ 
+ PRINTING ENERGY
+ ---------------
+ 
+TOTAL ENERGY =   -75.9847103139 A.U.
+ 
+ PRINTING GRADIENTS
+ ------------------
+ 
+ ATOMIC NUMBER   GRAD-X          GRAD-Y          GRAD-Z
+          8    0.0025500250    0.0000000083    0.0131813406
+          1   -0.0012750155   -0.0178446795   -0.0065906854
+          1   -0.0012750096    0.0178446712   -0.0065906552
+ 
+ 
+--- MPIRANK   1 ---
+ 
+ 
+ *** TESTING QUICK API ***
+ 
+ PRINTING ENERGY
+ ---------------
+ 
+TOTAL ENERGY =   -75.9847103139 A.U.
+ 
+ PRINTING GRADIENTS
+ ------------------
+ 
+ ATOMIC NUMBER   GRAD-X          GRAD-Y          GRAD-Z
+          8    0.0025500250    0.0000000083    0.0131813406
+          1   -0.0012750155   -0.0178446795   -0.0065906854
+          1   -0.0012750096    0.0178446712   -0.0065906552
+ 
+ 
+--- MPIRANK   0 ---
+ 
+ 
+ *** TESTING QUICK API ***
+ 
+ PRINTING ENERGY
+ ---------------
+ 
+TOTAL ENERGY =   -75.9750684808 A.U.
+ 
+ PRINTING GRADIENTS
+ ------------------
+ 
+ ATOMIC NUMBER   GRAD-X          GRAD-Y          GRAD-Z
+          8    0.0085854591   -0.0000005333   -0.0007526982
+          1   -0.0032534648   -0.0115125134   -0.0004318369
+          1   -0.0032535184    0.0115130457   -0.0004321431
+ 
+ PRINTING POINT CHARGE GRADIENTS
+ -------------------------------
+ 
+ CHARGE NUMBER   GRAD-X          GRAD-Y          GRAD-Z
+          1   -0.0020784760    0.0000000010    0.0016166782
+ 
+ 
+--- MPIRANK   1 ---
+ 
+ 
+ *** TESTING QUICK API ***
+ 
+ PRINTING ENERGY
+ ---------------
+ 
+TOTAL ENERGY =   -75.9750684808 A.U.
+ 
+ PRINTING GRADIENTS
+ ------------------
+ 
+ ATOMIC NUMBER   GRAD-X          GRAD-Y          GRAD-Z
+          8    0.0085854591   -0.0000005333   -0.0007526982
+          1   -0.0032534648   -0.0115125134   -0.0004318369
+          1   -0.0032535184    0.0115130457   -0.0004321431
+ 
+ PRINTING POINT CHARGE GRADIENTS
+ -------------------------------
+ 
+ CHARGE NUMBER   GRAD-X          GRAD-Y          GRAD-Z
+          1   -0.0020784760    0.0000000010    0.0016166782
+ 
