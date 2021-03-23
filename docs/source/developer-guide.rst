@@ -54,14 +54,13 @@ QUICK API
     :alt: api
 
 Starting from version 20.06, QUICK build system compiles the source code and creates static or
-shared object libraries. Such libraries are then linked to the main QUICK program. If the user
-does not specify a prefix during the configure script run, libraries will be located inside
-*$QUICK_HOME/lib/$buildtype* where *$QUICK_HOME* is the QUICK home directory and *$buildtype*
-could be *serial*, *mpi* or *cuda*. Required .mod or header files can be found inside *$QUICK_HOME/include/$buildtype*.
-If the user specifies a prefix, above material are also located inside the installation directory.
+shared object libraries. Such libraries are then linked to the main QUICK program. Assuming that
+user specifies a prefix (*$installdir*) during the configuration of legacy or CMake builds, libraries will be located inside
+*$installdir/lib/$buildtype* where *$buildtype* could be *serial*, *mpi* or *cuda*. Required .mod or 
+header files can be found inside *$QUICK_HOME/include/$buildtype*.
 
-It is possible to link QUICK libraries into external programs and obtain HF/DFT energies, gradients
-and point charge gradients through the Fortran 90 QUICK API. We will explain the usage of the API
+It is possible to link QUICK libraries into external MM programs and obtain HF/DFT energies, gradients
+and point charge gradients through the Fortran 90 QUICK API and perform QM/MM calculations. We will explain the usage of the API
 with an example.
 
 Let us consider a simple system containing a water molecule surrounded by 3 point charges. We now create the
@@ -70,28 +69,24 @@ several subroutines to load test data and print data retrieved from QUICK.
 
 ::
 
-	! Test module for QUICK library API
-	module test_module
-
+	! Test module for QUICK API
+	module test_quick_api_module
+	
 	  implicit none
 	  private
-
-	  ! Interfaces for cuda/serial version
+	
 	  public :: loadTestData, printQuickOutput
-
-	! Interfaces for MPI version
-	#ifdef MPI
-	  public :: initializeMPI, printQuickMPIOutput
+	
+	#ifdef MPIV
+	  public :: mpi_initialize, printQuickMPIOutput, mpi_exit
 	#endif
-
-
-
-	  ! Store the atomic coordinates of of water molecule for 5 snapshots. Store the same
-	  ! information for external point charges. Note that we follow x, y, z, charge format
-	  ! for the latter.
+	
+	  ! A test system with one water molecule and 3 point charges.
+	  ! Atomic coordinates, external point charges and their coordinates
+	  ! for five snapshots. 
 	  double precision, dimension(1:45) :: all_coords
 	  double precision, dimension(1:60) :: all_extchg
-
+	
 	  data all_coords &
 	  /-0.778803, 0.000000, 1.132683, &
 	   -0.666682, 0.764099, 1.706291, &
@@ -108,8 +103,8 @@ several subroutines to load test data and print data retrieved from QUICK.
 	   -0.771372, 0.000000, 1.162784, &
 	   -0.668845, 0.767538, 1.698983, &
 	   -0.668845,-0.767538, 1.698982/
-
-	  data all_extchg &
+	
+	    data all_extchg &
 	  /1.6492, 0.0000,-2.3560, -0.8340, &
 	   0.5448, 0.0000,-3.8000,  0.4170, &
 	   0.5448, 0.0000,-0.9121,  0.4170, &
@@ -125,36 +120,25 @@ several subroutines to load test data and print data retrieved from QUICK.
 	   1.6492, 0.0000,-2.3560, -0.8420, &
 	   0.5448, 0.0000,-3.8000,  0.4130, &
 	   0.5448, 0.0000,-0.9121,  0.4130/
-
+	
+	   ! number of point charges per frame
+	   integer :: nptg_pframe = 3
+	
 	  interface loadTestData
 	    module procedure load_test_data
 	  end interface loadTestData
-
-	  interface printQuickOutput
-	    module procedure print_quick_output
-	  end interface printQuickOutput
-
-	#ifdef MPI
-	  interface initializeMPI
-	    module procedure mpi_initialize
-	  end interface initializeMPI
-
-	  interface printQuickMPIOutput
-	    module procedure print_quick_mpi_output
-	  end interface printQuickMPIOutput
-	#endif
-
+	
 	contains
-
+	
 	  subroutine load_test_data(frame, natoms, nxt_charges, coord, xc_coord)
-
+	
 	    implicit none
-
+	
 	    integer, intent(in)             :: frame, natoms, nxt_charges
 	    double precision, intent(inout) :: coord(3, natoms)
 	    double precision, intent(out)   :: xc_coord(4, nxt_charges)
 	    integer :: i, j, k
-
+	
 	    k=natoms*3*(frame-1) + 1
 	    do i=1,natoms
 	      do j=1,3
@@ -162,9 +146,9 @@ several subroutines to load test data and print data retrieved from QUICK.
 	        k=k+1
 	      enddo
 	    enddo
-
+	
 	    if(nxt_charges>0) then
-	      k=nxt_charges*4*(frame-1) + 1
+	      k=nptg_pframe*4*(frame-1) + 1
 	      do i=1,nxt_charges
 	        do j=1,4
 	          xc_coord(j,i) = all_extchg(k)
@@ -172,21 +156,82 @@ several subroutines to load test data and print data retrieved from QUICK.
 	        enddo
 	      enddo
 	    endif
-
+	
 	  end subroutine load_test_data
-
-	  subroutine print_quick_output(natoms, nxt_charges, atomic_numbers, totEne, gradients, ptchg_grad)
-
+	
+	#ifdef MPIV
+	  ! Initialize mpi library and save mpirank and mpisize.
+	  subroutine mpi_initialize(mpisize, mpirank, master, mpierror)
+	
 	    implicit none
-
+	
+	    integer, intent(inout) :: mpisize, mpirank, mpierror
+	    logical, intent(inout) :: master
+	
+	    include 'mpif.h'
+	
+	    call MPI_INIT(mpierror)
+	    call MPI_COMM_RANK(MPI_COMM_WORLD,mpirank,mpierror)
+	    call MPI_COMM_SIZE(MPI_COMM_WORLD,mpisize,mpierror)
+	    call MPI_BARRIER(MPI_COMM_WORLD,mpierror)
+	
+	    if(mpirank .eq. 0) then
+	      master = .true.
+	    else
+	      master = .false.
+	    endif
+	
+	  end subroutine mpi_initialize
+	
+	  ! Prints mpi output sequentially.
+	  subroutine printQuickMPIOutput(natoms, nxt_charges, atomic_numbers, &
+	    totEne, gradients, ptchg_grad, mpirank)
+	
+	    implicit none
+	
+	    integer, intent(in)          :: natoms, nxt_charges, mpirank
+	    integer, intent(in)          :: atomic_numbers(natoms)
+	    double precision, intent(in) :: totEne
+	    double precision, intent(in) :: gradients(3,natoms)
+	    double precision, intent(in) :: ptchg_grad(3,nxt_charges)
+	
+	    write(*,*) ""
+	    write(*,'(A11, 1X, I3, 1x, A3)') "--- MPIRANK", mpirank, "---"
+	    write(*,*) ""
+	
+	    call printQuickOutput(natoms, nxt_charges, atomic_numbers, totEne, &
+	    gradients, ptchg_grad)
+	
+	  end subroutine printQuickMPIOutput
+	
+	  subroutine mpi_exit
+	
+	    implicit none
+	    integer :: mpierror
+	
+	    include 'mpif.h'
+	
+	    call MPI_FINALIZE(mpierror)
+	    call exit(0)
+	
+	  end subroutine mpi_exit
+	
+	#endif
+	
+	
+	  subroutine printQuickOutput(natoms, nxt_charges, atomic_numbers, totEne, &
+	    gradients, ptchg_grad)
+	
+	    implicit none
+	
 	    integer, intent(in)          :: natoms, nxt_charges
 	    integer, intent(in)          :: atomic_numbers(natoms)
 	    double precision, intent(in) :: totEne
 	    double precision, intent(in) :: gradients(3,natoms)
 	    double precision, intent(in) :: ptchg_grad(3,nxt_charges)
 	    integer :: i, j
-
-	    ! print energy
+	
+	    ! Print energy  
 	    write(*,*) ""
 	    write(*,*) "*** TESTING QUICK API ***"
 	    write(*,*) ""
@@ -194,244 +239,226 @@ several subroutines to load test data and print data retrieved from QUICK.
 	    write(*,*) "---------------"
 	    write(*,*) ""
 	    write(*, '(A14, 3x, F14.10, 1x, A4)') "TOTAL ENERGY =",totEne,"A.U."
-
-	    ! print gradients
+	
+	    ! Print gradients
 	    write(*,*) ""
 	    write(*,*) "PRINTING GRADIENTS"
 	    write(*,*) "------------------"
 	    write(*,*) ""
 	    write(*, '(A14, 3x, A6, 10x, A6, 10x, A6)') "ATOMIC NUMBER","GRAD-X","GRAD-Y","GRAD-Z"
-
+	
 	    do i=1,natoms
-	      write(*,'(6x, I5, 2x, F14.10, 2x, F14.10, 2x, F14.10)') atomic_numbers(i), gradients(1,i), gradients(2,i), gradients(3,i)
+	      write(*,'(6x, I5, 2x, F14.10, 2x, F14.10, 2x, F14.10)') atomic_numbers(i), &
+	      gradients(1,i), gradients(2,i), gradients(3,i)
 	    enddo
-
-	    ! print point charge gradients
+	
+	    ! Print point charge gradients
 	    if(nxt_charges>0) then
 	      write(*,*) ""
 	      write(*,*) "PRINTING POINT CHARGE GRADIENTS"
 	      write(*,*) "-------------------------------"
 	      write(*,*) ""
 	      write(*, '(A14, 3x, A6, 10x, A6, 10x, A6)') "CHARGE NUMBER","GRAD-X","GRAD-Y","GRAD-Z"
-
+	
 	      do i=1,nxt_charges
-	        write(*,'(6x, I5, 2x, F14.10, 2x, F14.10, 2x, F14.10)') i, ptchg_grad(1,i), ptchg_grad(2,i), ptchg_grad(3,i)
+	        write(*,'(6x, I5, 2x, F14.10, 2x, F14.10, 2x, F14.10)') i, ptchg_grad(1,i), &
+	        ptchg_grad(2,i), ptchg_grad(3,i)
 	      enddo
 	    endif
-
+	
 	    write(*,*) ""
+	
+	  end subroutine printQuickOutput
+	
+	end module
 
-	  end subroutine print_quick_output
 
-
-	#ifdef MPI
-	  ! initialize mpi library and save mpirank and mpisize
-	  subroutine mpi_initialize(mpisize, mpirank, master, mpierror)
-
-	    implicit none
-
-	    integer, intent(inout) :: mpisize, mpirank, mpierror
-	    logical, intent(inout) :: master
-
-	    include 'mpif.h'
-
-	    call MPI_INIT(mpierror)
-	    call MPI_COMM_RANK(MPI_COMM_WORLD,mpirank,mpierror)
-	    call MPI_COMM_SIZE(MPI_COMM_WORLD,mpisize,mpierror)
-	    call MPI_BARRIER(MPI_COMM_WORLD,mpierror)
-
-	    if(mpirank .eq. 0) then
-	      master = .true.
-	    else
-	      master = .false.
-	    endif
-
-	  end subroutine mpi_initialize
-
-	  ! prints mpi output sequentially
-	  subroutine print_quick_mpi_output(natoms, nxt_charges, atomic_numbers, totEne, gradients, ptchg_grad, mpirank)
-
-	    implicit none
-
-	    integer, intent(in)          :: natoms, nxt_charges, mpirank
-	    integer, intent(in)          :: atomic_numbers(natoms)
-	    double precision, intent(in) :: totEne
-	    double precision, intent(in) :: gradients(3,natoms)
-	    double precision, intent(in) :: ptchg_grad(3,nxt_charges)
-
-	    write(*,*) ""
-	    write(*,'(A11, 1X, I3, 1x, A3)') "--- MPIRANK", mpirank, "---"
-	    write(*,*) ""
-
-	    call printQuickOutput(natoms, nxt_charges, atomic_numbers, totEne, gradients, ptchg_grad)
-
-	  end subroutine print_quick_mpi_output
-
-	#endif
-
-	end module test_module
 
 Next, we implement the following example program (example.f90) that uses the above module and call QUICK through the API.
 
 ::
 
-	! Example program for demonstrating QUICK API usage
-	  program example_program
-
-	    ! Use subroutines from test_module
-	    use test_module, only : loadTestData, printQuickOutput
-
-	    ! Use subroutines from QUICK API
-	    use quick_api_module, only : setQuickJob, getQuickEnergy, getQuickEnergyGradients, deleteQuickJob
-
-	#ifdef MPI
-	    ! Use MPI specific subroutines
-	    use test_module, only : initializeMPI, printQuickMPIOutput
+	! Program for testing QUICK API
+	program test_quick_api
+	
+	    use test_quick_api_module, only : loadTestData, printQuickOutput
+	    use quick_api_module, only : setQuickJob, getQuickEnergy, &
+	    getQuickEnergyGradients, deleteQuickJob 
+	    use quick_exception_module
+	#ifdef MPIV
+	    use test_quick_api_module, only : mpi_initialize, printQuickMPIOutput, mpi_exit
 	    use quick_api_module, only : setQuickMPI
 	#endif
-
+	
 	    implicit none
-
-	#ifdef MPI
+	
+	#ifdef MPIV
 	    include 'mpif.h'
 	#endif
-
+	
 	    ! i, j are some integers useful for loops, frames is the number of
-	    ! test snapshots
-	    integer :: i, j, frames
-
-	    ! Number of atoms, number of atom types, number of external point charges
+	    ! test snapshots (md steps), ierr is for error handling
+	    integer :: i, j, frames, ierr
+	   
+	    ! number of atoms, number of atom types, number of external point charges
 	    integer :: natoms, nxt_charges
-
-	    ! Atom type ids, atomic numbers, atomic coordinates, point charges and
-	    ! coordinates
-	    integer, allocatable, dimension(:)            :: atomic_numbers
-	    double precision, allocatable, dimension(:,:) :: coord
-	    double precision, allocatable, dimension(:,:) :: xc_coord
-
-	    ! Name of the quick output file
+	
+	    ! atom type ids, atomic numbers, atomic coordinates, point charges and
+	    !  coordinates
+	    integer, allocatable, dimension(:)            :: atomic_numbers 
+	    double precision, allocatable, dimension(:,:) :: coord          
+	    double precision, allocatable, dimension(:,:) :: xc_coord       
+	
+	    ! name of the quick template input file
 	    character(len=80) :: fname
-
-	    ! QUICK job card (a string of keywords).
+	
+	    ! job card
 	    character(len=200) :: keywd
-
-	    ! Total QM energy, gradients and point charge gradients
+	
+	    ! total qm energy, mulliken charges, gradients and point charge gradients
 	    double precision :: totEne
-	    double precision, allocatable, dimension(:,:) :: gradients
-	    double precision, allocatable, dimension(:,:) :: ptchgGrad
-
-	#ifdef MPI
-	    ! MPI specific variables
+	    double precision, allocatable, dimension(:,:) :: gradients         
+	    double precision, allocatable, dimension(:,:) :: ptchgGrad      
+	
+	#ifdef MPIV
+	    ! essential mpi information 
 	    integer :: mpierror = 0
 	    integer :: mpirank  = 0
 	    integer :: mpisize  = 1
 	    logical :: master   = .true.
+
+	    ! Initialize mpi library and get mpirank, mpisize
+	    call mpi_initialize(mpisize, mpirank, master, mpierror)
+	
+	    ! Setup quick mpi using api, called only once
+	    call setQuickMPI(mpirank,mpisize,ierr)
 	#endif
-
-
-	#ifdef MPI
-	    ! Initialize MPI library and get mpirank, mpisize
-	    call initializeMPI(mpisize, mpirank, master, mpierror)
-
-	    ! Setup QUICK MPI, called only once
-	    call setQuickMPI(mpirank,mpisize)
-	#endif
-
-	    ! Set molecule size. Recall that we consider a water molecule surounded by 3 point
-	    ! charges.
+	
+	    ! Set molecule size. We consider a water molecule surounded by 3 point
+	    ! charges in this test case. 
 	    natoms      = 3
-	    nxt_charges = 3
-
-	    ! We also consider 5 snapshots of this test system.
+	    nxt_charges = 3    
+	
+	    ! We consider 5 snapshots of this test system (mimics 5 md steps). 
 	    frames = 5
-
-	    ! Allocate memory for input and output arrays. Recall that in xc_coord array,
-	    ! the first 3 columns are the xyz coordinates of the point charges. The
-	    ! fourth column is the charge.
-	    if ( .not. allocated(atomic_numbers)) allocate(atomic_numbers(natoms))
-	    if ( .not. allocated(coord))          allocate(coord(3,natoms))
-	    if ( .not. allocated(xc_coord))       allocate(xc_coord(4,nxt_charges))
-	    if ( .not. allocated(gradients))         allocate(gradients(3,natoms))
-	    if ( .not. allocated(ptchgGrad))      allocate(ptchgGrad(3,nxt_charges))
-
-	    fname           = 'water'
+	
+	    ! Alocate memory for some input and output arrays. 
+	    if ( .not. allocated(atomic_numbers)) allocate(atomic_numbers(natoms), stat=ierr) 
+	    if ( .not. allocated(coord))          allocate(coord(3,natoms), stat=ierr)
+	    if ( .not. allocated(gradients))         allocate(gradients(3,natoms), stat=ierr)
+	
+	    ! Fill up memory with test values, coordinates and external charges will be loded inside 
+	    ! the loop below.
+	    fname           = 'api_water_rhf_631g'
 	    keywd           = 'HF BASIS=6-31G CUTOFF=1.0D-10 DENSERMS=1.0D-6 GRADIENT EXTCHARGES'
-
+	    !keywd =''
+	
 	    atomic_numbers(1)  = 8
 	    atomic_numbers(2)  = 1
 	    atomic_numbers(3)  = 1
-
-	    ! Set result vectors and matrices to zero.
-	    gradients = 0.0d0
-	    ptchgGrad = 0.0d0
-
-	    ! Initialize QUICK, required only once.
-	    call setQuickJob(fname, keywd, natoms, atomic_numbers, nxt_charges)
-
+	
+	    ! Set the gradient vector to zero.
+	    gradients    = 0.0d0
+	
+	    ! initialize QUICK, required only once. Assumes keywords for
+	    ! the QUICK job are provided through a template file.  
+	    call setQuickJob(fname, keywd, natoms, atomic_numbers, ierr)
+	
 	    do i=1, frames
+	      ! Actual QM/MM simulations may have different number of point charges during MD.
+	      ! Use this trick to mimic this & load coordinates and external point charges for ith step.
+	      nxt_charges = mod(i,4)
+	
+	      ! Allocate memory for xyz coordinates of the point charges and gradients. 
+	      ! Note that in xc_coord array, the first 3 columns are the xyz coordinates 
+	      ! of the point charges and fourth column is the charge.
 
-	      ! Load coordinates and external point charges for ith snapshot
-	      call loadTestData(i, natoms, nxt_charges, coord, xc_coord)
+	      if ( .not. allocated(xc_coord)) allocate(xc_coord(4,nxt_charges), stat=ierr)      
+	      if ( .not. allocated(ptchgGrad)) allocate(ptchgGrad(3,nxt_charges), stat=ierr)
 
-	      ! Compute required quantities, call only a or b.
-	      ! a. Compute energy.
-	      ! call getQuickEnergy(coord, xc_coord, totEne)
+	      ! Set the point charge gradient vector to zero.
+	      ptchgGrad = 0.0d0	
 
-	      ! b. Compute energies, gradients and point charge gradients.
-	      call getQuickEnergyGradients(coord, xc_coord, totEne, gradients, ptchgGrad)
-
-	      ! print values obtained from quick library
-	#ifdef MPI
-	      ! A naive trick to print output from each core sequentially.
+	      ! Load test data.
+	      call loadTestData(i, natoms, nxt_charges, coord, xc_coord) 
+	
+	      ! Compute required quantities, call only a or b. 
+	      ! a. compute energy
+	      ! call getQuickEnergy(coord, nxt_charges, xc_coord, totEne)
+	
+	      ! b. Compute energies, gradients and point charge gradients
+	      call getQuickEnergyGradients(coord, nxt_charges, xc_coord, &
+	         totEne, gradients, ptchgGrad, ierr)    
+	
+	      ! Print values obtained from quick library.
+	#ifdef MPIV
+	      ! Dumb way to sequantially print from all cores.
 	      call MPI_BARRIER(MPI_COMM_WORLD,mpierror)
-
+	
 	      do j=0, mpisize-1
 	        if(j .eq. mpirank) then
-	          call printQuickMPIOutput(natoms, nxt_charges, atomic_numbers, totEne, gradients, ptchgGrad, mpirank)
+	          call printQuickMPIOutput(natoms, nxt_charges, atomic_numbers, totEne, &
+		  gradients, ptchgGrad, mpirank)
 	        endif
 	        call MPI_BARRIER(MPI_COMM_WORLD,mpierror)
-	      enddo
+	      enddo 
 	#else
 	      call printQuickOutput(natoms, nxt_charges, atomic_numbers, totEne, gradients, ptchgGrad)
 	#endif
-
+	
+	      ! Deallocate memory of point charge stuff.
+	      if ( allocated(xc_coord))       deallocate(xc_coord, stat=ierr)
+	      if ( allocated(ptchgGrad))      deallocate(ptchgGrad, stat=ierr)
 	    enddo
+	
+	    ! Finalize QUICK, required only once.
+	    call deleteQuickJob(ierr)
+	
+	    ! Deallocate memory.
+	    if ( allocated(atomic_numbers)) deallocate(atomic_numbers, stat=ierr)
+	    if ( allocated(coord))          deallocate(coord, stat=ierr)
+	    if ( allocated(gradients))         deallocate(gradients, stat=ierr)
+	
+	#ifdef MPIV
+	   call mpi_exit
+	#endif
+	
+	end program test_quick_api
 
-	    ! Finalize QUICK, required only once
-	    call deleteQuickJob()
-
-	    ! Deallocate memory
-	    if ( allocated(atomic_numbers)) deallocate(atomic_numbers)
-	    if ( allocated(coord))          deallocate(coord)
-	    if ( allocated(xc_coord))       deallocate(xc_coord)
-	    if ( allocated(gradients))      deallocate(gradients)
-	    if ( allocated(ptchgGrad))      deallocate(ptchgGrad)
-
-	  end program example_program
-
-Assuming we configured QUICK serial version without a prefix and compiled using intel compiler toolchain,
-we can compile above source files and link QUICK libraries as follows.
+Note that in our test program, errors are propagated from QUICK using *ierr* integer variable. 
+The errors must be properly handled although we have not shown error handling here. 
+Assuming we configured QUICK serial version with a prefix and compiled using intel compiler toolchain,we can 
+compile above source files and link QUICK libraries as follows.
 
 ::
 
-	ifort -cpp test_module.f90 example_program.f90 -o example_program -I$QUICK_HOME/build/include/serial/
-	-L$QUICK_HOME/build/lib/serial/ -lquick -lblas -lxc -lstdc++
+	ifort -cpp test_module.f90 example_program.f90 -o example_program -I$installdir/include/serial/
+	-L$installdir/lib/serial/ -lquick -lblas-quick -lxc -lstdc++
 
 MPI version of the libraries can be linked as follows.
 
 ::
 
-	mpiifort -cpp -DMPI test_module.f90 example_program.f90 -o example_program -I$QUICK_HOME/build/include/mpi/
-	-L$QUICK_HOME/build/lib/mpi/ -lquick -lblas -lxc -lstdc++
+	mpiifort -cpp -DMPIV test_module.f90 example_program.f90 -o example_program 
+	-I$installdir/include/mpi/ -L$installdir/lib/mpi/ -lquick-mpi -lblas-quick -lxc -lstdc++
 
 CUDA version of the libraries can be linked as follows.
 
 ::
 
-	ifort -cpp test_module.f90 example_program.f90 -o example_program -I$PWD/build/include/cuda/
-	-L$PWD/build/lib/cuda/ -L$CUDA_HOME/lib64 -lcuda -lm -lcudart -lcublas -lcusolver -lquick -lxc -lstdc++
+	ifort -cpp test_module.f90 example_program.f90 -o example_program -I$installdir/include/cuda/
+	-L$installdir/lib/cuda/ -L$CUDA_HOME/lib64 -lcuda -lm -lcudart -lcublas -lcusolver 
+	-lquick-cuda -lxc-cuda -lstdc++
+
+CUDAMPI version of the libraries can be linked as follows.
+
+::
+
+	mpiifort -cpp -DMPIV test_module.f90 example_program.f90 -o example_program 
+	-I$installdir/include/cuda/ -L$installdir/lib/cuda/ -L$CUDA_HOME/lib64 -lcuda -lm -lcudart 
+	-lcublas -lcusolver -lquick-cudampi -lxc-cuda -lstdc++
 
 Running serial or CUDA executable should produce `this output <https://raw.githubusercontent.com/merzlab/QUICK-docs/master/resources/api-serial.txt>`_.
-A `similar output <https://raw.githubusercontent.com/merzlab/QUICK-docs/master/resources/api-mpi.txt>`_ may be obtained by running MPI version with 2 cores.
+A `similar output <https://raw.githubusercontent.com/merzlab/QUICK-docs/master/resources/api-mpi.txt>`_ may be obtained by running MPI or CUDAMPI version with 2 processes.
 
-*Last updated by Madu Manathunga on 02/05/2021.*
+*Last updated by Madu Manathunga on 03/23/2021.*
