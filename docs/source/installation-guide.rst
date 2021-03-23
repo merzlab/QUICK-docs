@@ -80,11 +80,7 @@ You can configure the installtion for multiple CUDA architectures as follows.
 Note that if you dont set the *--arch* option, QUICK will be compiled for multiple architectures based on your CUDA toolkit version.
 This will lead to a very time consuming compilation.
 
-More information on configure script options can be obtained by running:
-
-.. code-block:: none
-
-	./configure --help
+More information on configure script options can be found `here <configure-options.html>`_.
 
 Once the configuration script has been successfully executed, you will have a make.in file in QUICK home directory.
 At this point simply run:
@@ -124,21 +120,23 @@ Where *-DMPI* and *-DCUDA* flags enable compiling MPI parallel and CUDA serial v
 3. Environment Variables and Testing
 ------------------------------------
 
+Both build systems make use of a shell script (*runtest*, located in $QUICK_HOME/tools) for testing QUICK. Below we describe the standard procedure to carry out tests; but if you are interested, see `here <runtest-options.html>`_ for more information on *runtest* script.
+ 
 3.1 Legacy build system
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-Once you have installed any version of QUICK following above instructions, it is necessary to set environment variables.
+Once you have installed any version of QUICK following section 2.1, it is necessary to set environment variables.
 This can be done by sourcing quick.rc in the installation directory.
 
 .. code-block:: none
 
- source $(installdir)/quick.rc
+	source $(installdir)/quick.rc
 
 If QUICK is built using legacy build system, tests can be executed as follows from the QUICK home directory.
 
 .. code-block:: none
 
- make test
+	make test
 
 This will run a series of short test cases and inform you which tests passed or failed. It is also possible to run a robust
 test as follows. 
@@ -155,6 +153,7 @@ inside install directory.
 
 .. code-block:: none
 
+	source $(installdir)/quick.rc
 	cd $(installdir)
 	./runtest
 
@@ -175,13 +174,13 @@ If QUICK was built using legacy build system, uninstallation can be performed by
 
 .. code-block:: none
 
- make uninstall
+	make uninstall
 
 In order to clean a QUICK build, the following must be run from the QUICK home directory:
 
 .. code-block:: none
 
- make clean
+	make clean
 
 This will remove all the object files located inside *QUICK_HOME/build*.
 
@@ -190,7 +189,7 @@ and *QUICK_HOME/build* directories:
 
 .. code-block:: none
 
- make distclean
+	make distclean
 
 4.2 CMake build system
 ^^^^^^^^^^^^^^^^^^^^^^

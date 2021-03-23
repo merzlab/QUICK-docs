@@ -44,7 +44,7 @@ Keywords for QUICK Input
 
    **LIBXC=FUNCTIONAL1,FUNCTIONAL2** : Where FUNCTIONAL1 and FUNCTIONAL2 are exchange and correlation functionals. *Note: Spaces near '=' or ',' are not allowed.*
 
-   See here for `a list of working functionals in current QUICK version <user-manual.html#a-list-of-available-dft-functionals>`_.
+   See here for `a list of working functionals in current QUICK version <working_libxc_funcs.html>`_.
 
    If you are using LIBXC in your work, please make sure to cite the paper below.
 
@@ -55,8 +55,9 @@ Keywords for QUICK Input
 *************
 
 **BASIS=BASIS_SET_NAME** : Selects *BASIS_SET_NAME* basis set for the calculation. *BASIS_SET_NAME* could be
-`any of these available basis sets <basis-sets.html#a-list-of-available-basis-sets>`_ or a basis set added to
-*basis* folder by yourself (`see here for more information <basis-sets.html#adding-a-basis-set-into-quick>`_ ).
+any of the following.
+
+.. include:: ./basis-sets.rst
 
 4. SCF Convergence
 ******************
@@ -81,6 +82,4 @@ Keywords for QUICK Input
 
    **GRADIENT**         : Calculates analytical gradients.
 
-.. include:: ./basis-sets.rst
-
-.. include:: ./working_libxc_funcs.rst
+*Last updated by Madu Manathunga on 03/22/2021.*
