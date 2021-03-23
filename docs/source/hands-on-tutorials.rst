@@ -26,21 +26,29 @@ Serial version:
 
 .. code-block:: none
 
-     ./quick input.in
+     quick input.in
 
 MPI version:
 
 .. code-block:: none
 
-     mpirun -np num_cores ./quick.MPI input.in
+     mpirun -np N quick.MPI input.in
 
-where *num_cores* is the number of cores that you wish to use.
+where N is the number of processes that you wish to launch.
 
 CUDA version:
 
 .. code-block:: none
 
-     ./quick.cuda input.in
+     quick.cuda input.in
+
+CUDA MPI version:
+
+.. code-block:: none
+
+     mpirun -np M quick.cuda.MPI input.in
+
+where M (M <= number of GPUs) is the number of processes that you wish to launch.
 
 Now assume that we have successfully installed CUDA version and set the basis set path.
 
