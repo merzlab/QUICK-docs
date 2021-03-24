@@ -458,10 +458,92 @@ Note 2: ECPs are not supported by QUICK-21.03. Therefore care must be taken not 
 Adding new test cases into test suite
 -------------------------------------
 
+In order to add new test cases into QUICK test suite, one must follow 3 steps. First, the test input and reference output file
+should be added into $QUICK_HOME/test and $QUICK_HOME/test/saved directories respectively. Make sure to adhere to following naming
+convention. 
 
+.. code-block:: none
+
+ <calculation_type>_<molecule_name>_<QM_method>_<basis_set>.<in|out>
+
+Some example test case names that follow this convention are shown below.
+
+.. code-block:: none
+
+ ene_NH4_rhf_631g.in, ene_NH4_rhf_631g.out
+ grad_CH4_b3lyp_def2svp.in, grad_CH4_b3lyp_def2svp.out
+ opt_wat_rhf_631g.in, opt_wat_rhf_631g.out
+
+Second, test list files located inside $QUICK_HOME/test should be updated. These are just .txt files that record names of test cases. 
+As of QUICK-21.03, there are 4 testlist files: testlist_short.txt, testlist_short_cuda.txt, testlist_full.txt, testlist_full_cuda.txt.
+The first and second contain short test lists that would be used for standard testing (i.e. by executing *make test* or *./runtest* commands) 
+of quick/quick.MPI and quick.cuda/quick.cuda.MPI executables. The third and fourth are used for robust testing (i.e. by executing *make fulltest* 
+or *./runtest --full* commands) which usually happens during CI. 
+They have the following format:
+
+.. code-block:: none
+
+ ene_wat2_mp2_631g                 #MP2 test with s and p basis functions
+ ene_wat2_mp2_631gss               #MP2 test with s, p and d basis functions
+ grad_psb3_b3lyp_631g              #B3LYP gradient test with s and p basis functions
+ grad_NaCl_b3lyp_def2svp           #B3LYP gradient test with s, p and d basis functions
+ grad_wat_b3lyp_ccpvdz             #B3LYP point charge gradient test
+ opt_wat_rhf_631g                  #RHF geometry optimization test with s and p basis functions
+
+Third, the runtest script located in $QUICK_HOME/tools should be updated with test information. Specifically, *print_test_info()* function of the 
+script contains a case statement that sets a string variable value which will be printed during the test runs. 
+
+.. code-block:: none
+
+ print_test_info(){
+      .
+      .
+      .
+  case "$t" in
+    ene_AlH3_rhf_sto3g)                   testinfo="ALH3: RHF energy test: STO-3G basis set";;
+    ene_BeH2_rhf_sto3g)                   testinfo="BeH2: RHF energy test: STO-3G basis set";;
+    ene_BH3_rhf_sto3g)                    testinfo="BH3: RHF energy test: STO-3G basis set";;
+
+You should add the new test name as a case and store test information in *testinfo* variable. Finally, when you add changes using git, make sure to
+use *git add -f* command for adding the reference output files. This is due to the fact that files with .out extension are ignored by git according
+to .gitignore rules.
 
 Maintaining the documentation
 -----------------------------
 
+This section provides some guidence to keep this documentation alive and up to date when the current doc keeper is gone. The documentation is written
+in rst language and you must be familiar with the syntax before starting. A short and sweet rst lesson can be found `here <https://thomas-cokelaer.info/tutorials/sphinx/rest_syntax.html>`_. When you are ready, clone the documentation from `GitHub repository <https://github.com/merzlab/QUICK-docs>`_.    
+In the root QUICK-docs directory (from now on $QUICK_DOCS), you should find two directories called *docs* and *resources*. Inside the *docs* directory, a Makefile and 
+*source* directory should exist. The latter contains all the documentation source and images that would go in. If you have large text files to be included, these should be saved
+in $QUICK_DOCS/resources inside an appropriate directory and linked properly.
+Once you have made changes, make sure to set the QUICK version (i.e. set *version* variable, semantic versioning must be used) in $QUICK_DOCS/docs/source/conf.py and compile the documentation using Make. In order to do so, you must have installed *sphinx* and *python* in your system. If the *sphix-build* executable is not accessible through your path variable, make sure to set the *SPHINXBUILD* variable in $QUICK_DOCS/docs/Makefile. Then from $QUICK_DOCS/docs folder, execute the following command.
+
+.. code-block:: none
+
+ make html
+
+This should compile the documentation. Once the compilation is done, open up the documentation and check your changes. This may be done as follows.
+
+.. code-block:: none
+
+ open docs/html/index.html 
+
+If you are happy with the changes, push/merge the new content into `GitHub repository <https://github.com/merzlab/QUICK-docs>`_. 
+QUICK-docs GitHub repository is linked to readthedocs.org web portal where the documentation is compiled and hosted. Log into merzlab account of the readthedocs.org web portal
+using appropriate username and password. You should find the following QUICK-docs project page once landed inside the account. 
+
+.. image:: readthedocs1.png
+    :width: 650px
+    :align: center
+    :height: 498px
+    :alt: support
+
+Note that we have different documentation versions in versions panel. The *latest* version is a compilation of the most recent source from QUICK-docs repository. The other versions correspond to different QUICK release versions. To create such a version, you must create a GitHub tag tag that points to a specific commit of the QUICK-docs repository. More details on creating a GitHub tag can be found in GitHub documentation. Once the tag is created, you can selecte this tag and create a new documentation version from *versions* page of the readthedocs web portal. Note that when creating the GitHub tag, you must name it following semantic versioning. Otherwise, the tag wont appear in the readthedocs web portal. Next, build the documentation by simply hitting *Build Version* button of the *build* page. Once the documentation is built, this will appear online. You can link the html pagesfrom a particular documentation version anywhere you want. For example, we can link the installation guide of the documentation into README.md file of QUICK repository. 
+
+.. code-block:: none
+
+ * [Installation Guide](https://quick-docs.readthedocs.io/en/21.3.0/installation-guide.html#installation-guide)
+
+Note that above we link a page from documentation version *21.3.0* into QUICK-21.03 README.md file. Similarly, a status badge from a particular version can be included in README.md file. Note that you should never link anything from the documentation version named *latest*. This version will change whenever you make changes to the QUICK-docs repository and thus must be used for testing purposes only.        
 
 *Last updated by Madu Manathunga on 03/23/2021.*
