@@ -1,6 +1,8 @@
 Accuracy and Performance
 ========================
 
+The data reported in this section is solely intended for informative purpose. Readers shall not use them for comparison with other quantum chemical codes as they are. If you are interested in the latter, we highly encourage you to download QUICK, compile and perform your own benchmarks.    
+
 Accuracy of energies and gradients
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -28,5 +30,7 @@ Performance of QUICK CUDA MPI version
     :align: center
     :height: 450px
     :alt: bench2
+
+See the following preprint for more benchmarks of QUICK multi-GPU version: `Manathunga, M.; Chi, J.; Cruzeiro, V. W. D.; Miao, Y.; Mu, D.; Arumugam, K.; Keipert, K.; Aktulga, H. M.; Merz, K. M.; Götz, A. W. Harnessing the Power of Multi-GPU-Acceleration into the Quantum Interaction Computational Kernel Program. ChemRxiv Preprint, 2021. <https://doi.org/10.26434/chemrxiv.13769209.v1>`_.
 
 *Last updated by Madu Manathunga on 03/23/2021.*
