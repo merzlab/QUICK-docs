@@ -288,4 +288,32 @@ The cartesian coordinates of the molecular geometry on each optimization step ar
 
 We can also find the energy of the minimum structure at the end of output, right before the timings are printed out.
 
+HF/DFT energies and gradients in the presence of external point charges
+***********************************************************************
+
+In order to compute energies and gradients of molecular systems containing external point charges, 
+we must include cartesian coordinates (in Angstroms), charges (in au.) and *EXTCHARGES* keyword in the input file.
+Below is an example input of a point charge gradient calculation for a system containing a single water molecule
+and 3 point charges.
+
+.. code-block:: none
+
+ DFT B3LYP BASIS=cc-pvDZ cutoff=1.0e-9 denserms=1.0e-6 GRADIENT EXTCHARGES
+
+  O         -0.741530        1.752130        2.896280
+  H         -1.111151        0.979769        3.352290
+  H         -0.920500        2.036450        1.984040
+                                                           
+  1.6492 0.0000 -2.3560 -0.8340
+  0.5448 0.0000 -3.8000  0.4170
+  0.5448 0.0000 -0.9121  0.4170
+  \___________________/     ^
+            ^               |
+            |             Charge
+   Cartesian coordinates
+
+Note that in the above input, cartesian coordinates and point charges are specified in a new block separated by a single line.
+The total energy and nuclear gradients reported in the output of this calculation include the effect of point charges. In addition,
+QUICK will report point charge gradients next to nuclear gradients section in the output.   
+
 *Last updated by Madu Manathunga on 03/23/2021.*
