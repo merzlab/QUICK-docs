@@ -458,7 +458,55 @@ Note 2: ECPs are not supported by QUICK-21.03. Therefore care must be taken not 
 Adding new test cases into test suite
 -------------------------------------
 
+In order to add new test cases into QUICK test suite, one must follow 3 steps. First, the test input and reference output file
+should be added into $QUICK_HOME/test and $QUICK_HOME/test/saved directories respectively. Make sure to adhere to following naming
+convention. 
 
+.. code-block:: none
+
+ <calculation_type>_<molecule_name>_<QM_method>_<basis_set>.<in|out>
+
+Some example test case names that follow this convention are shown below.
+
+.. code-block:: none
+
+ ene_NH4_rhf_631g.in, ene_NH4_rhf_631g.out
+ grad_CH4_b3lyp_def2svp.in, grad_CH4_b3lyp_def2svp.out
+ opt_wat_rhf_631g.in, opt_wat_rhf_631g.out
+
+Second, test list files located inside $QUICK_HOME/test should be updated. These are just .txt files that record names of test cases. 
+As of QUICK-21.03, there are 4 testlist files: testlist_short.txt, testlist_short_cuda.txt, testlist_full.txt, testlist_full_cuda.txt.
+The first and second contain short test lists that would be used for standard testing (i.e. by executing *make test* or *./runtest* commands) 
+of quick/quick.MPI and quick.cuda/quick.cuda.MPI executables. The third and fourth are used for robust testing (i.e. by executing *make fulltest* 
+or *./runtest --full* commands) which usually happens during CI. 
+They have the following format:
+
+.. code-block:: none
+
+ ene_wat2_mp2_631g                 #MP2 test with s and p basis functions
+ ene_wat2_mp2_631gss               #MP2 test with s, p and d basis functions
+ grad_psb3_b3lyp_631g              #B3LYP gradient test with s and p basis functions
+ grad_NaCl_b3lyp_def2svp           #B3LYP gradient test with s, p and d basis functions
+ grad_wat_b3lyp_ccpvdz             #B3LYP point charge gradient test
+ opt_wat_rhf_631g                  #RHF geometry optimization test with s and p basis functions
+
+Third, the runtest script located in $QUICK_HOME/tools should be updated with test information. Specifically, *print_test_info()* function of the 
+script contains a case statement that sets a string variable value which will be printed during the test runs. 
+
+.. code-block:: none
+
+ print_test_info(){
+      .
+      .
+      .
+  case "$t" in
+    ene_AlH3_rhf_sto3g)                   testinfo="ALH3: RHF energy test: STO-3G basis set";;
+    ene_BeH2_rhf_sto3g)                   testinfo="BeH2: RHF energy test: STO-3G basis set";;
+    ene_BH3_rhf_sto3g)                    testinfo="BH3: RHF energy test: STO-3G basis set";;
+
+You should add the new test name as a case and store test information in *testinfo* variable. Finally, when you add changes using git, make sure to
+use *git add -f* command for adding the reference output files. This is due to the fact that files with .out extension are ignored by git according
+to .gitignore rules.
 
 Maintaining the documentation
 -----------------------------
