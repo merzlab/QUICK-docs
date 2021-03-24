@@ -50,7 +50,7 @@ CUDA MPI version:
 
 where M (M <= number of GPUs) is the number of processes that you wish to launch.
 
-Now assume that we have successfully installed CUDA version and set the basis set path.
+Now assume that we have successfully installed CUDA version and set environment variables.
 
 HF/DFT single point energy calculation
 **************************************
@@ -131,7 +131,7 @@ Executing QUICK will give us an *water.out* file. Here is how to run using the C
 
 .. code-block:: none
 
-     ./quick.cuda water.in
+     quick.cuda water.in
 
 The information reported in the *water.out* file are as follows. In the beginning of the output
 file, we can find information about job card and the GPU used for the calculation. The next section
