@@ -9,4 +9,10 @@ Madu Manathunga, Chi Jin, Vinícius Wilian D. Cruzeiro, Andy Götz and Kennie Me
 
 Contact: `quick.merzlab@gmail.com <quick.merzlab@gmail.com>`_
 
+.. image:: support.png
+    :width: 651px
+    :align: center
+    :height: 159px
+    :alt: support
+
 *Last updated by Madu Manathunga on 03/20/2021.*
