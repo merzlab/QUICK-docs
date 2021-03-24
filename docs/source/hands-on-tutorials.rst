@@ -303,7 +303,7 @@ and 3 point charges.
   O         -0.741530        1.752130        2.896280
   H         -1.111151        0.979769        3.352290
   H         -0.920500        2.036450        1.984040
-                                                           
+                                <== Empty line            
   1.6492 0.0000 -2.3560 -0.8340
   0.5448 0.0000 -3.8000  0.4170
   0.5448 0.0000 -0.9121  0.4170
@@ -312,7 +312,6 @@ and 3 point charges.
             |             Charge
    Cartesian coordinates
 
-Note that in the above input, cartesian coordinates and point charges are specified in a new block separated by a single line.
 The total energy and nuclear gradients reported in the output of this calculation include the effect of point charges. In addition,
 QUICK will report point charge gradients next to nuclear gradients section in the output.   
 
