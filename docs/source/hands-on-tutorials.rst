@@ -52,8 +52,8 @@ where M (M <= number of GPUs) is the number of processes that you wish to launch
 
 Now assume that we have successfully installed CUDA version and set the basis set path.
 
-1. HF/DFT single point energy calculation
-*****************************************
+HF/DFT single point energy calculation
+**************************************
 
 The typical keyword line in the input file for a HF/DFT calculation looks like this.
 Note that all keywords are separated by a single space.
@@ -195,8 +195,8 @@ This is followed by electronic, nuclear and total energies.
 
 Finally, we find timing information about the calculation.
 
-2. HF/DFT gradient calculation
-******************************
+HF/DFT gradient calculation
+***************************
 
 For a HF/DFT gradient calculation input the **ENERGY** flag is replaced by **GRADIENT**.
 Our water example input is now modified as follows.
@@ -231,8 +231,8 @@ and before the timings. The above example will print the following gradient.
 
 Finally, the timings section also shows gradient timings for 1e, 2e and exchange correlation calculations.
 
-3. HF/DFT geometry optimization calculation
-*******************************************
+HF/DFT geometry optimization calculation
+****************************************
 
 For HF/DFT geometry optimizations, we should specify the **OPTIMIZE** flag in the QUICK input.
 For instance, the geometry optimization input for our water molecule would be:
@@ -288,4 +288,4 @@ The cartesian coordinates of the molecular geometry on each optimization step ar
 
 We can also find the energy of the minimum structure at the end of output, right before the timings are printed out.
 
-*Last updated by Madu Manathunga on 02/05/2021.*
+*Last updated by Madu Manathunga on 03/23/2021.*
