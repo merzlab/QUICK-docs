@@ -50,10 +50,10 @@ CUDA MPI version:
 
 where M (M <= number of GPUs) is the number of processes that you wish to launch.
 
-Now assume that we have successfully installed CUDA version and set the basis set path.
+Now assume that we have successfully installed CUDA version and set environment variables.
 
-1. HF/DFT single point energy calculation
-*****************************************
+HF/DFT single point energy calculation
+**************************************
 
 The typical keyword line in the input file for a HF/DFT calculation looks like this.
 Note that all keywords are separated by a single space.
@@ -131,7 +131,7 @@ Executing QUICK will give us an *water.out* file. Here is how to run using the C
 
 .. code-block:: none
 
-     ./quick.cuda water.in
+     quick.cuda water.in
 
 The information reported in the *water.out* file are as follows. In the beginning of the output
 file, we can find information about job card and the GPU used for the calculation. The next section
@@ -195,8 +195,8 @@ This is followed by electronic, nuclear and total energies.
 
 Finally, we find timing information about the calculation.
 
-2. HF/DFT gradient calculation
-******************************
+HF/DFT gradient calculation
+***************************
 
 For a HF/DFT gradient calculation input the **ENERGY** flag is replaced by **GRADIENT**.
 Our water example input is now modified as follows.
@@ -231,8 +231,8 @@ and before the timings. The above example will print the following gradient.
 
 Finally, the timings section also shows gradient timings for 1e, 2e and exchange correlation calculations.
 
-3. HF/DFT geometry optimization calculation
-*******************************************
+HF/DFT geometry optimization calculation
+****************************************
 
 For HF/DFT geometry optimizations, we should specify the **OPTIMIZE** flag in the QUICK input.
 For instance, the geometry optimization input for our water molecule would be:
@@ -288,4 +288,31 @@ The cartesian coordinates of the molecular geometry on each optimization step ar
 
 We can also find the energy of the minimum structure at the end of output, right before the timings are printed out.
 
-*Last updated by Madu Manathunga on 02/05/2021.*
+HF/DFT energies and gradients in the presence of external point charges
+***********************************************************************
+
+In order to compute energies and gradients of molecular systems containing external point charges, 
+we must include cartesian coordinates (in Angstroms), charges (in au.) and *EXTCHARGES* keyword in the input file.
+Below is an example input of a point charge gradient calculation for a system containing a single water molecule
+and 3 point charges.
+
+.. code-block:: none
+
+ DFT B3LYP BASIS=cc-pvDZ cutoff=1.0e-9 denserms=1.0e-6 GRADIENT EXTCHARGES
+
+  O         -0.741530        1.752130        2.896280
+  H         -1.111151        0.979769        3.352290
+  H         -0.920500        2.036450        1.984040
+                                <== Empty line            
+  1.6492 0.0000 -2.3560 -0.8340
+  0.5448 0.0000 -3.8000  0.4170
+  0.5448 0.0000 -0.9121  0.4170
+  \___________________/     ^
+            ^               |
+            |             Charge
+   Cartesian coordinates
+
+The total energy and nuclear gradients reported in the output of this calculation include the effect of point charges. In addition,
+QUICK will report point charge gradients next to nuclear gradients section in the output.   
+
+*Last updated by Madu Manathunga on 03/23/2021.*

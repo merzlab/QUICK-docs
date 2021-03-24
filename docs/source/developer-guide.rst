@@ -1,49 +1,6 @@
 Developer Guide
 ===============
 
-Adding new basis sets
----------------------
-
-In order to add a basis set into QUICK, one should download a basis set from `basis set exchange web page <https://www.basissetexchange.org/>`_ in *Gaussian* software format and save it into *basis* folder. Then, link this basis set to QUICK by updating the *basis_link* file inside the *basis* folder. The *basis_link* file contains a table in the following format.
-
-.. code-block:: none
-
- ___________________________________________________________________________ 
- | Keyword                           | Filename                            |
- |-------------------------------------------------------------------------|
- | #STO-3G                           | STO-3G.BAS                          |
- | #3-21G                            | 3-21G.BAS                           |
- | #6-31G                            | 6-31G.BAS                           |
- | #6-31G*                           | 6-31GS.BAS                          |
- | #6-31G**                          | 6-31GSS.BAS                         |
- | #6-311G                           | 6-311G.BAS                          |
- | #6-311G(d,p)                      | 6-311GDP.BAS                        |
- | #6-311G*                          | 6-311GS.BAS                         |
- | #6-311G**                         | 6-311GSS.BAS                        |
- | #cc-pVDZ                          | CC-PVDZ.BAS                         |
- | #cc-pVTZ                          | CC-PVTZ.BAS                         |
- |_________________________________________________________________________|    
-         
-You should update this table by adhering to the rules below.
-
- 1. Add a keyword for your basis set. This must be followed by a single space and '#' character.
-
- 2. Keyword size must be less than 32 characters.
-
- 3. Filename must start at 24th position of the line and must not be longer than 36 characters.
-
- 4. DO NOT CHANGE THE TABLE/COLUMN WIDTH! VERTICAL BORDERS MUST REMAIN THE SAME.
-
-Note 1: Current version of QUICK (v21.03) ERI engine only support basis functions up to *d*. Therefore, do not add high angular momentum basis sets and attempt to use f/g functions.
-
-Note 2: ECPs are not supported by QUICK-21.03. Therefore care must be taken not to add elements that require ECPs and use.
-
-Adding new test cases into test suite
--------------------------------------
-
-
-
-
 QUICK API
 ---------
 
@@ -460,5 +417,51 @@ CUDAMPI version of the libraries can be linked as follows.
 
 Running serial or CUDA executable should produce `this output <https://raw.githubusercontent.com/merzlab/QUICK-docs/master/resources/v21.03/api-serial.txt>`_.
 A `similar output <https://raw.githubusercontent.com/merzlab/QUICK-docs/master/resources/v21.03/api-mpi.txt>`_ may be obtained by running MPI or CUDAMPI version with 2 processes.
+
+Adding new basis sets
+---------------------
+
+In order to add a basis set into QUICK, one should download a basis set from `basis set exchange web page <https://www.basissetexchange.org/>`_ in *Gaussian* software format and save it into *basis* folder. Then, link this basis set to QUICK by updating the *basis_link* file inside the *basis* folder. The *basis_link* file contains a table in the following format.
+
+.. code-block:: none
+
+ ___________________________________________________________________________ 
+ | Keyword                           | Filename                            |
+ |-------------------------------------------------------------------------|
+ | #STO-3G                           | STO-3G.BAS                          |
+ | #3-21G                            | 3-21G.BAS                           |
+ | #6-31G                            | 6-31G.BAS                           |
+ | #6-31G*                           | 6-31GS.BAS                          |
+ | #6-31G**                          | 6-31GSS.BAS                         |
+ | #6-311G                           | 6-311G.BAS                          |
+ | #6-311G(d,p)                      | 6-311GDP.BAS                        |
+ | #6-311G*                          | 6-311GS.BAS                         |
+ | #6-311G**                         | 6-311GSS.BAS                        |
+ | #cc-pVDZ                          | CC-PVDZ.BAS                         |
+ | #cc-pVTZ                          | CC-PVTZ.BAS                         |
+ |_________________________________________________________________________|    
+         
+You should update this table by adhering to the rules below.
+
+ 1. Add a keyword for your basis set. This must be followed by a single space and '#' character.
+
+ 2. Keyword size must be less than 32 characters.
+
+ 3. Filename must start at 24th position of the line and must not be longer than 36 characters.
+
+ 4. DO NOT CHANGE THE TABLE/COLUMN WIDTH! VERTICAL BORDERS MUST REMAIN THE SAME.
+
+Note 1: Current version of QUICK (v21.03) ERI engine only support basis functions up to *d*. Therefore, do not add high angular momentum basis sets and attempt to use f/g functions.
+
+Note 2: ECPs are not supported by QUICK-21.03. Therefore care must be taken not to add elements that require ECPs and use.
+
+Adding new test cases into test suite
+-------------------------------------
+
+
+
+Maintaining the documentation
+-----------------------------
+
 
 *Last updated by Madu Manathunga on 03/23/2021.*

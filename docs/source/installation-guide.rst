@@ -1,8 +1,8 @@
 Installation Guide
 ========================
 
-1. Compatible Compilers and Hardware
-------------------------------------
+Compatible Compilers and Hardware
+---------------------------------
 
 We have tested QUICK-21.03 with following compilers on Linux operating system.
 
@@ -34,11 +34,11 @@ QUICK-21.03 CUDA version has been tested on the following GPU cards: A100, RTX20
 For the CUDA-MPI version we also recommend that only one CPU per GPU is used; this can be done by setting the number of processes (*e.g.*,
 in the *mpirun* command) equal to the number of CPUs.
 
-2. Installation
----------------
+Installation
+------------
 
-2.1 Using legacy build system
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Using legacy build system
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The initial step is to setup the installation for the desired QUICK version. For this, go to QUICK home folder and run configure script
 as follows.
@@ -101,8 +101,8 @@ Next, install QUICK using:
 This will copy executables, libraries and .mod files into *installdir*. In case the *--prefix* variable is not specified,
 *installdir* will be set to the QUICK_HOME folder.
 
-2.2 Using CMake build system
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Using CMake build system
+^^^^^^^^^^^^^^^^^^^^^^^^
 
 CMake installation requires you to have at least CMake/3.9.0 installed in the target machine. To install QUICK using CMake, one must first create build and install directories. Assuming you have created directories named *builddir* and *installdir* in *QUICK_HOME* directory, GNU compiler tool chain, and volta microarchitecture, all QUICK versions can be configured and build as follows.
 
@@ -117,22 +117,22 @@ CMake installation requires you to have at least CMake/3.9.0 installed in the ta
 Where *-DMPI* and *-DCUDA* flags enable compiling MPI parallel and CUDA serial versions. Specifying both of them will compile CUDA parallel version. Serial version is compiled by default. A full list of available flags and their defintions written by Jamie Smith can be found `here <cmake-options.html>`_. 
 
 
-3. Environment Variables and Testing
-------------------------------------
+Environment Variables and Testing
+---------------------------------
 
 Both build systems make use of a shell script (*runtest*, located in $QUICK_HOME/tools) for testing QUICK. Below we describe the standard procedure to carry out tests; but if you are interested, see `here <runtest-options.html>`_ for more information on *runtest* script.
  
-3.1 Legacy build system
-^^^^^^^^^^^^^^^^^^^^^^^
+Legacy build system
+^^^^^^^^^^^^^^^^^^^
 
-Once you have installed any version of QUICK following section 2.1, it is necessary to set environment variables.
+Once you have installed any version of QUICK, it is necessary to set environment variables.
 This can be done by sourcing quick.rc in the installation directory.
 
 .. code-block:: none
 
 	source $(installdir)/quick.rc
 
-If QUICK is built using legacy build system, tests can be executed as follows from the QUICK home directory.
+If QUICK is built using legacy build system, tests can be executed as follows from the $QUICK_HOME directory.
 
 .. code-block:: none
 
@@ -145,8 +145,8 @@ test as follows.
 
 	make fulltest
 
-3.2 CMake build system
-^^^^^^^^^^^^^^^^^^^^^^
+CMake build system
+^^^^^^^^^^^^^^^^^^
 
 If QUICK is built using CMake build system, short tests can be run using the *runtest* shell script that you would find
 inside install directory. 
@@ -164,11 +164,11 @@ Similarly, robust testing can be performed as follows.
 	cd $(installdir)
 	./runtest --full
 
-4. Uninstallation and Cleaning
-------------------------------
+Uninstallation and Cleaning
+---------------------------
 
-4.1 Legacy build system
-^^^^^^^^^^^^^^^^^^^^^^^
+Legacy build system
+^^^^^^^^^^^^^^^^^^^
 
 If QUICK was built using legacy build system, uninstallation can be performed by executing the following from the QUICK home directory:
 
@@ -191,8 +191,8 @@ and *QUICK_HOME/build* directories:
 
 	make distclean
 
-4.2 CMake build system
-^^^^^^^^^^^^^^^^^^^^^^
+CMake build system
+^^^^^^^^^^^^^^^^^^
 
 Simply delete contents inside build and install directories.
 
