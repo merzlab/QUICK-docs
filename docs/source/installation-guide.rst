@@ -1,7 +1,7 @@
 Installation Guide
 ========================
 
-QUICK has been compiled and tested on x86 CPU and Intel Nvidia GPU hardware.
+QUICK has been compiled and tested on x86 and ARM CPU and Intel Nvidia GPU hardware.
 The compilation of the GPU enabled ERI code can take a significant amount of time (several minutes) - be patient, the compiler is working hard to generate lightning fast code for you.
 
 Compatible Compilers and Hardware

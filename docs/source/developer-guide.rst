@@ -10,14 +10,18 @@ QUICK API
     :height: 294px
     :alt: api
 
-Starting from version 20.06, QUICK build system compiles the source code and creates static or
-shared object libraries. Such libraries are then linked to the main QUICK program. Assuming that
+Starting from version 20.06, the QUICK build system compiles the source code and creates static or
+shared object libraries. Such libraries are then linked to the main QUICK program. Assuming that a
 user specifies a prefix (*$installdir*) during the configuration of legacy or CMake builds, libraries will be located inside
-*$installdir/lib/$buildtype* where *$buildtype* could be *serial*, *mpi* or *cuda*. Required .mod or 
+*$installdir/lib*.
+
+In the case of the **legacy build system**, there will be subdirectories *$installdir/lib/$buildtype* where *buildtype* could be *serial*, *mpi* or *cuda*. Required .mod or 
 header files can be found inside *$QUICK_HOME/include/$buildtype*.
 
-It is possible to link QUICK libraries into external MM programs and obtain HF/DFT energies, gradients
-and point charge gradients through the Fortran 90 QUICK API and perform QM/MM calculations. We will explain the usage of the API
+In the case of the **CMake build system** the libraries will be in directory *$installdir/lib*. Depending on the type of build, there will be the serial library *libquick.so* and any of CUDA and MPI enabled libraries *libquick_cuda.so*, *libquick_mpi.so*, and *libquick_mpi_cuda.so*. The corresponding module files are located in build type specific subdirectories of *$installdir/include/libxc* and *$installdir/include/quick*. 
+
+It is possible to link QUICK libraries into external programs to obtain HF/DFT energies, gradients
+and point charge gradients through the Fortran 90 QUICK API. This is useful for example for MM programs to perform QM/MM calculations. We will explain the usage of the API
 with an example.
 
 Let us consider a simple system containing a water molecule surrounded by 3 point charges. We now create the
@@ -231,7 +235,7 @@ several subroutines to load test data and print data retrieved from QUICK.
 
 
 
-Next, we implement the following example program (example.f90) that uses the above module and call QUICK through the API.
+Next, we implement the following example program (example.f90) that uses the above module and calls QUICK through the API.
 
 ::
 
@@ -421,7 +425,7 @@ A `similar output <https://raw.githubusercontent.com/merzlab/QUICK-docs/master/r
 Adding new basis sets
 ---------------------
 
-In order to add a basis set into QUICK, one should download a basis set from `basis set exchange web page <https://www.basissetexchange.org/>`_ in *Gaussian* software format and save it into *basis* folder. Then, link this basis set to QUICK by updating the *basis_link* file inside the *basis* folder. The *basis_link* file contains a table in the following format.
+QUICK follows the basis set format established by the *Gaussian* software. You have to follow this format if you want to construct your own basis set. Established basis sets can be obtained from the `basis set exchange web page <https://www.basissetexchange.org/>`_. In order to add a basis set into QUICK, one should download the basis set in the *Gaussian* software format and save it in the *basis* folder. Then, link this basis set to QUICK by updating the *basis_link* file inside the *basis* folder. The *basis_link* file contains a table in the following format.
 
 .. code-block:: none
 
@@ -453,12 +457,12 @@ You should update this table by adhering to the rules below.
 
 Note 1: Current version of QUICK (v21.03) ERI engine only support basis functions up to *d*. Therefore, do not add high angular momentum basis sets and attempt to use f/g functions.
 
-Note 2: ECPs are not supported by QUICK-21.03. Therefore care must be taken not to add elements that require ECPs and use.
+Note 2: ECPs are not supported by QUICK-21.03. Therefore care must be taken not to add elements that require ECPs as this would lead to wrong results.
 
 Adding new test cases into test suite
 -------------------------------------
 
-In order to add new test cases into QUICK test suite, one must follow 3 steps. First, the test input and reference output file
+In order to add new test cases into the QUICK test suite, one must follow 3 steps. First, the test input and reference output file
 should be added into $QUICK_HOME/test and $QUICK_HOME/test/saved directories respectively. Make sure to adhere to following naming
 convention. 
 
@@ -478,7 +482,7 @@ Second, test list files located inside $QUICK_HOME/test should be updated. These
 As of QUICK-21.03, there are 4 testlist files: testlist_short.txt, testlist_short_cuda.txt, testlist_full.txt, testlist_full_cuda.txt.
 The first and second contain short test lists that would be used for standard testing (i.e. by executing *make test* or *./runtest* commands) 
 of quick/quick.MPI and quick.cuda/quick.cuda.MPI executables. The third and fourth are used for robust testing (i.e. by executing *make fulltest* 
-or *./runtest --full* commands) which usually happens during CI. 
+or *./runtest - -full* commands) which usually happens during CI. 
 They have the following format:
 
 .. code-block:: none
