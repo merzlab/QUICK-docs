@@ -20,9 +20,9 @@
   PC-0
   PC-1
 
-Note 1: We follow the same basis set names reported in `basis set exchange web page <https://www.basissetexchange.org/>`_. 
+Note 1: We follow the same basis set names reported at the `basis set exchange web page <https://www.basissetexchange.org/>`_. 
 
-Note 2: Current version of QUICK ERI engine only support basis functions up to *d*. Therefore, energy and gradient calculations with functions up to *d* are possible.
+Note 2: The current version of the QUICK ERI engine only support basis functions up to *d*. Therefore, energy and gradient calculations with functions up to *d* are possible.
 
-Note 3: ECPs are currently not supported by QUICK. Due to this reason, we have excluded elements that require ECPs from the above basis sets.
+Note 3: ECPs are currently not supported by QUICK. Due to this reason, we have excluded elements that require ECPs from the above basis sets that are included with QUICK.
 

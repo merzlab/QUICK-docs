@@ -1,6 +1,16 @@
 User Manual
 =================
 
+QUICK uses a simple text based input file that consists of a line with keywords followed by an empty line, the molecular coordinates in xyz format, and potentially point charge information after another empty line. 
+Please see the Hands-on Tutorials for details on the input file format. 
+
+Units
+^^^^^
+
+The QUICK input file requires atomic coordinates in Angstrom and charges (molecular charge and point charges) in atomic units.
+
+The QUICK output reports coordinates in Angstrom and charges, energies and gradients in atomic units. This means that energies are reported in Hartree and gradients in Hartree/Bohr.
+
 Keywords for QUICK Input
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -40,11 +50,11 @@ Keywords for QUICK Input
 
    **PBE0**: PBE0/PBEH functional (C. Adamo and V. Barone, J. Chem. Phys. 110, 6158 (1999), M. Ernzerhof and G. E. Scuseria, J. Chem. Phys. 110, 5029 (1999))
 
-   QUICK also makes use of LIBXC density functional library (version 4.0.4). A LIBXC functional can be requested as follows.
+   Except for the built-in BLYP and B3LYP functionals QUICK makes use of the LIBXC density functional library (version 4.0.4). A LIBXC functional can be requested as follows.
 
    **LIBXC=FUNCTIONAL1,FUNCTIONAL2** : Where FUNCTIONAL1 and FUNCTIONAL2 are exchange and correlation functionals. *Note: Spaces near '=' or ',' are not allowed.*
 
-   See here for `a list of working functionals in current QUICK version <working_libxc_funcs.html>`_.
+   See here for a `list of available functionals in the current QUICK version <working_libxc_funcs.html>`_.
 
    If you are using LIBXC in your work, please make sure to cite the paper below.
 
@@ -71,14 +81,14 @@ any of the following.
 
    **CHARGE=INT**     : A net charge is to be placed on system.
 
-   **EXTCHARGES**     : External charges are included in the system.
+   **EXTCHARGES**     : External charges are included in the system. The point charges must be listed after the molecular Cartesian coordinates in the input file. See the corresponding section in the Hands-on Tutorials of this manual.
 
    **DIPOLE**       : Write dipole moments, Mulliken and Löwdin charges into the output file.
 
 6. Geometry Optimization
 ************************
 
-   **OPTIMIZE=Integer** : Performs a maximum of *Integer* cycles of optimization. Default: 3 x Number of atoms.
+   **OPTIMIZE=Integer** : Performs a geometry optimization with a maximum of *Integer* steps. Default: 3 x Number of atoms.
 
    **GRADIENT**         : Calculates analytical gradients.
 

@@ -20,7 +20,7 @@ Before running QUICK, make sure to set the necessary environmental variables as 
 
  source $(installdir)/quick.rc
 
-Where *installdir* is the folder where QUICK was installed. Depending on the installation, you may run QUICK as follows:
+Where *installdir* is the folder where QUICK was installed. This will add the directory that contains the QUICK executables to your path and also set an environment variable that points to the basis set directory. Depending on the installation, you may run QUICK as follows:
 
 Serial version:
 
@@ -48,15 +48,15 @@ CUDA MPI version:
 
      mpirun -np M quick.cuda.MPI input.in
 
-where M (M <= number of GPUs) is the number of processes that you wish to launch.
+where M (M <= number of GPUs) is the number of processes that you wish to launch. Each process will use one GPU. The GPUs can be distributed across multiple nodes, in which case you have to make sure that the correct number of processes are started on each node.
 
-Now assume that we have successfully installed CUDA version and set environment variables.
+Now assume that we have successfully installed the CUDA version and set the environment variables.
 
 HF/DFT single point energy calculation
 **************************************
 
 The typical keyword line in the input file for a HF/DFT calculation looks like this.
-Note that all keywords are separated by a single space.
+Note that all keywords are separated by a single space. The order of the keywords is not relevant.
 
 .. code-block:: none
 
@@ -69,7 +69,7 @@ Note that all keywords are separated by a single space.
      |     Basis set
      Hamiltonian
 
-For DFT, we replace *HF* hamiltonian with *DFT* and specify the functional name separated by a
+For DFT, we replace the *HF* hamiltonian with *DFT* and specify the functional name separated by a
 space. For example, we may ask for a B3LYP energy calculation with the following keyword line.
 
 .. code-block:: none
@@ -84,7 +84,7 @@ space. For example, we may ask for a B3LYP energy calculation with the following
      |     Functional
      Hamiltonian
 
-Note that in the above line, we are using NATIVE B3LYP functional. If we want to use
+Note that in the above line, we are using the NATIVE B3LYP functional. If we want to use
 the B3LYP functional through LIBXC, the keyword line should be specified as follows.
 
 .. code-block:: none
@@ -116,7 +116,7 @@ For instance, if we use BLYP, the keyword line is specified as follows.
 
 **Note:** Currently, QUICK cannot handle more than two functionals at a time.
 
-We now proceed with HF single point energy calculation for a water molecule. Here is the input file,
+We now proceed with a HF single point energy calculation for a water molecule. Here is the input file,
 called *water.in*.
 
 .. code-block:: none
@@ -127,7 +127,7 @@ called *water.in*.
      H                  0.89243244   -0.31531531    0.00000000
      H                 -0.38802215    0.58962052    0.00000000
 
-Executing QUICK will give us an *water.out* file. Here is how to run using the CUDA version of QUICK.
+Executing QUICK will give us a *water.out* file. Here is how to run using the CUDA version of QUICK.
 
 .. code-block:: none
 
@@ -231,8 +231,8 @@ and before the timings. The above example will print the following gradient.
 
 Finally, the timings section also shows gradient timings for 1e, 2e and exchange correlation calculations.
 
-HF/DFT geometry optimization calculation
-****************************************
+HF/DFT geometry optimization
+****************************
 
 For HF/DFT geometry optimizations, we should specify the **OPTIMIZE** flag in the QUICK input.
 For instance, the geometry optimization input for our water molecule would be:
@@ -313,6 +313,6 @@ and 3 point charges.
    Cartesian coordinates
 
 The total energy and nuclear gradients reported in the output of this calculation include the effect of point charges. In addition,
-QUICK will report point charge gradients next to nuclear gradients section in the output.   
+QUICK will report point charge gradients next to nuclear gradients section in the output. The point charge gradient is the force exerted on the point charges due to the electric field of the molecular charge density (electron density plus nuclear charges).
 
 *Last updated by Madu Manathunga on 03/23/2021.*

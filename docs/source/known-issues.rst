@@ -38,7 +38,7 @@ or
 
 The above memory allocation errors are observed in CUDA version when the available global memory of the device is insufficient.  
 
-Solution: Use a device with more global memory.
+Solution: Use a device with more global memory. Also make sure not to execute other codes on the GPU while running QUICK.
 
 2. Accuracy of gradients on old gaming cards
 ********************************************
