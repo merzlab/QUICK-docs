@@ -39,12 +39,59 @@ QUICK-21.03 CUDA version has been tested on the following GPU cards: A100, RTX20
 For the CUDA-MPI version we also recommend that only one CPU per GPU is used; this can be done by setting the number of processes (*e.g.*,
 in the *mpirun* command) equal to the number of CPUs.
 
-Installation
-------------
+Installation and Testing
+------------------------
 
-Using legacy build system
-^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Using the CMake build system
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+CMake installation requires at least CMake/3.9.0 installed in the target machine. To install QUICK using CMake, one must first create a build  directory. Assuming you have created a directory named *builddir* in the ``QUICK_HOME`` directory and you want to install QUICK into directory ``QUICK_INSTALL``, use GNU compiler tool chain, and want to compile for Nvidia Volta microarchitecture, all QUICK versions can be configured and built as follows.
+
+.. code-block:: none
+
+	cd ${QUICK_HOME}/builddir
+	cmake .. -DCOMPILER=GNU -DMPI=TRUE -DCUDA=TRUE -DQUICK_USER_ARCH=volta \
+          -DCMAKE_INSTALL_PREFIX=${QUICK_INSTALL}
+	make
+	make install
+
+Where ``-DMPI`` and ``-DCUDA`` flags enable compiling MPI parallel and CUDA serial versions. Specifying both flags simultaneously will trigger compilation of the MPI-CUDA multi-GPU version. The serial version is compiled by default.
+
+If you want to compile CUDA code for different microarchitectures, you can specify these as a string with space separation, e.g. ``-DQUICK_USER_ARCH='volta turing'`` to compile for Volta and Turing architectures.
+
+If the microarchitecture is not specified, then QUICK will be compiled for multiple architectures based on your CUDA toolkit version. This will lead to a very time consuming compilation but to maximum compatibility of the ``quick.cuda`` and ``quick.cuda.MPI`` executables with different types of GPUs.
+
+A full list of available flags and their defintions written by Jamie Smith can be found `here <cmake-options.html>`_. 
+
+
+Once you have installed QUICK, you can add the location of the executables to your path and set relevant environment variables by sourcing (source executes the commands in a file) the ``quick.rc`` script. This must be done again every time a new terminal session is opened:
+
+.. code-block:: none
+
+		source ${QUICK_INSTALL}/quick.rc
+
+Both build systems make use of a shell script (``runtest``, located in ``${QUICK_HOME}/tools`` but will be copied to the installation directory ``QUICK_INSTALL``) for testing QUICK. Below we describe the standard procedure to carry out tests; but if you are interested, see `here <runtest-options.html>`_ for more information on the ``runtest`` script.
+
+Short tests can be run using the ``runtest`` shell script found inside the install directory. 
+
+.. code-block:: none
+
+	source $(QUICK_INSTALL)/quick.rc
+	cd ${QUICK_INSTALL}
+	./runtest
+
+Similarly, robust testing can be performed as follows. 
+
+.. code-block:: none
+
+	cd ${QUICK_INSTALL}
+	./runtest --full
+
+You may now try some hands-on tutorials to learn how to use QUICK `here <hands-on-tutorials.html>`_.
+
+Legacy build system
+^^^^^^^^^^^^^^^^^^^
 The initial step is to configure the installation for the desired QUICK version. For this, go to the QUICK home folder and run the ``configure`` script
 as explained below. Running the configure script without options or with the ``--help`` flag will print available options.
 
@@ -108,43 +155,6 @@ Next, install QUICK using:
 This will copy executables, libraries and .mod files into *installdir*. In case the ``--prefix`` variable is not specified,
 *installdir* will be set to the ``QUICK_HOME`` folder.
 
-Using the CMake build system
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-CMake installation requires at least CMake/3.9.0 installed in the target machine. To install QUICK using CMake, one must first create a build  directory. Assuming you have created a directory named *builddir* in the ``QUICK_HOME`` directory and you want to install QUICK into directory ``QUICK_INSTALL``, use GNU compiler tool chain, and want to compile for Nvidia Volta microarchitecture, all QUICK versions can be configured and built as follows.
-
-.. code-block:: none
-
-	cd ${QUICK_HOME}/builddir
-	cmake .. -DCOMPILER=GNU -DMPI=TRUE -DCUDA=TRUE -DQUICK_USER_ARCH=volta \
-	-DCMAKE_INSTALL_PREFIX=${QUICK_INSTALL}
-	make
-	make install
-
-Where ``-DMPI`` and ``-DCUDA`` flags enable compiling MPI parallel and CUDA serial versions. Specifying both flags simultaneously will trigger compilation of the MPI-CUDA multi-GPU version. The serial version is compiled by default.
-
-If you want to compile CUDA code for different microarchitectures, you can specify these as a string with space separation, e.g. ``-DQUICK_USER_ARCH='volta turing'`` to compile for Volta and Turing architectures.
-
-If the microarchitecture is not specified, then QUICK will be compiled for multiple architectures based on your CUDA toolkit version. This will lead to a very time consuming compilation but to maximum compatibility of the ``quick.cuda`` and ``quick.cuda.MPI`` executables with different types of GPUs.
-
-A full list of available flags and their defintions written by Jamie Smith can be found `here <cmake-options.html>`_. 
-
-
-Environment Variables and Testing
----------------------------------
-
-Once you have installed QUICK, you can add the location of the executables to your path and set relevant environment variables by sourcing the ``quick.rc`` script:
-
-.. code-block:: none
-
-		source ${QUICK_INSTALL}/quick.rc
-
-Both build systems make use of a shell script (``runtest``, located in ``${QUICK_HOME}/tools`` but will be copied to the installation directory ``QUICK_INSTALL``) for testing QUICK. Below we describe the standard procedure to carry out tests; but if you are interested, see `here <runtest-options.html>`_ for more information on the ``runtest`` script.
-
-
-Legacy build system
-^^^^^^^^^^^^^^^^^^^
-
 Once you have installed any version of QUICK, it is necessary to set environment variables.
 This can be done by sourcing ``quick.rc`` in the installation directory.
 
@@ -152,7 +162,7 @@ This can be done by sourcing ``quick.rc`` in the installation directory.
 
 	source $(installdir)/quick.rc
 
-If QUICK is built using the legacy build system, tests can be executed as follows from the ``$QUICK_HOME`` directory.
+Tests can be executed as follows from the ``$QUICK_HOME`` directory.
 
 .. code-block:: none
 
@@ -165,24 +175,9 @@ test as follows.
 
 	make fulltest
 
-CMake build system
-^^^^^^^^^^^^^^^^^^
 
-If QUICK is built using the CMake build system, short tests can be run using the ``runtest`` shell script that you would find
-inside install directory. 
+You may now try some hands-on tutorials to learn how to use QUICK `here <hands-on-tutorials.html>`_.
 
-.. code-block:: none
-
-	source $(QUICK_INSTALL)/quick.rc
-	cd ${QUICK_INSTALL}
-	./runtest
-
-Similarly, robust testing can be performed as follows. 
-
-.. code-block:: none
-
-	cd ${QUICK_INSTALL}
-	./runtest --full
 
 Uninstallation and Cleaning
 ---------------------------
@@ -216,4 +211,4 @@ CMake build system
 
 Simply delete contents inside build and install directories and / or delete the build and install directories.
 
-*Last updated by Madu Manathunga on 03/20/2021.*
+*Last updated by Saatvik Aggarwal on 07/07/2021.*
