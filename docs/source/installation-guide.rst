@@ -46,7 +46,14 @@ Installation and Testing
 Using the CMake build system
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-CMake installation requires at least CMake/3.9.0 installed in the target machine. To install QUICK using CMake, one must first create a build  directory. Assuming you have created a directory named *builddir* in the ``QUICK_HOME`` directory and you want to install QUICK into directory ``QUICK_INSTALL``, use GNU compiler tool chain, and want to compile for Nvidia Volta microarchitecture, all QUICK versions can be configured and built as follows.
+CMake installation requires at least CMake/3.9.0 installed in the target machine. To install QUICK using CMake, one must first create a build  directory. First you have to create a build directory. After installation you can safely delete this build directory if you want to save disk space. Assuming the root folder of the repository is ``QUICK_HOME``, you can make the build directory like this:
+
+.. code-block:: none
+
+	cd ${QUICK_HOME}
+	mkdir builddir
+
+Assuming you have created a directory named *builddir* in the ``QUICK_HOME`` directory and you want to install QUICK into directory ``QUICK_INSTALL``, use GNU compiler tool chain, and want to compile for Nvidia Volta microarchitecture, all QUICK versions can be configured and built as follows.
 
 .. code-block:: none
 
