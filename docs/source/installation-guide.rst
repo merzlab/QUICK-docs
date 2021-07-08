@@ -46,7 +46,7 @@ Installation and Testing
 Using the CMake build system
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-CMake installation requires at least CMake/3.9.0 installed in the target machine. To install QUICK using CMake, one must first create a build  directory. First you have to create a build directory. After installation you can safely delete this build directory if you want to save disk space. Assuming the root folder of the repository is ``QUICK_HOME``, you can make the build directory like this:
+CMake installation requires at least CMake/3.9.0 installed in the target machine. To install QUICK using CMake, one must first create a build  directory. After installation you can safely delete this build directory if you want to save disk space. Assuming the root folder of the repository is ``QUICK_HOME``, you can make the build directory like this:
 
 .. code-block:: none
 
