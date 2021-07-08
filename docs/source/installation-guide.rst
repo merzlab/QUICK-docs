@@ -182,6 +182,11 @@ You may now try some hands-on tutorials to learn how to use QUICK `here <hands-o
 Uninstallation and Cleaning
 ---------------------------
 
+CMake build system
+^^^^^^^^^^^^^^^^^^
+
+Simply delete contents inside build and install directories and / or delete the build and install directories.
+
 Legacy build system
 ^^^^^^^^^^^^^^^^^^^
 
@@ -206,9 +211,5 @@ and ``QUICK_HOME/build`` directories:
 
 	make distclean
 
-CMake build system
-^^^^^^^^^^^^^^^^^^
-
-Simply delete contents inside build and install directories and / or delete the build and install directories.
 
 *Last updated by Saatvik Aggarwal on 07/07/2021.*
