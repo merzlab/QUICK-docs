@@ -18,11 +18,11 @@
 # -- Project information -----------------------------------------------------
 
 project = 'QUICK'
-copyright = '2021 Götz Lab & Merz Lab'
+copyright = '2022 Götz Lab & Merz Lab'
 author = 'Madu Manathunga'
 
 # The full version, including alpha/beta/rc tags
-release = '21.3.0'
+release = '22.3.0'
 
 
 # -- General configuration ---------------------------------------------------
