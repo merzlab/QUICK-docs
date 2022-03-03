@@ -1,7 +1,7 @@
 Known Issues of Current Version
 ===============================
 
-QUICK is under continous development and as of version 21.03, we have detected
+QUICK is under continous development and as of version 22.03, we have detected
 the issues listed below. If you find anything other than these, please feel free to
 report any bugs or issues through our Git Hub page: `https://github.com/merzlab/QUICK/issues <https://github.com/merzlab/QUICK/issues>`_.
 
@@ -55,4 +55,4 @@ If one launches CUDAMPI version with a number of processes greater than the avai
 Solution: Always launch CUDAMPI version with a number of processes less than or equal to the available number of GPUs (i.e. mpirun -np N ;where N <= # of GPUs)  
   
 
-*Last updated by Madu Manathunga on 03/18/2021.*
+*Last updated by Madu Manathunga on 03/03/2022.*

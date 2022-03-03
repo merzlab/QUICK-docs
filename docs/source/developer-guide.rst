@@ -455,9 +455,9 @@ You should update this table by adhering to the rules below.
 
  4. DO NOT CHANGE THE TABLE/COLUMN WIDTH! VERTICAL BORDERS MUST REMAIN THE SAME.
 
-Note 1: Current version of QUICK (v21.03) ERI engine only support basis functions up to *d*. Therefore, do not add high angular momentum basis sets and attempt to use f/g functions.
+Note 1: Current version of QUICK (v22.03) ERI engine only support basis functions up to *d*. Therefore, do not add high angular momentum basis sets and attempt to use f/g functions.
 
-Note 2: ECPs are not supported by QUICK-21.03. Therefore care must be taken not to add elements that require ECPs as this would lead to wrong results.
+Note 2: ECPs are not supported by QUICK-22.03. Therefore care must be taken not to add elements that require ECPs as this would lead to wrong results.
 
 Adding new test cases into test suite
 -------------------------------------
@@ -479,7 +479,7 @@ Some example test case names that follow this convention are shown below.
  opt_wat_rhf_631g.in, opt_wat_rhf_631g.out
 
 Second, test list files located inside $QUICK_HOME/test should be updated. These are just .txt files that record names of test cases. 
-As of QUICK-21.03, there are 4 testlist files: testlist_short.txt, testlist_short_cuda.txt, testlist_full.txt, testlist_full_cuda.txt.
+As of QUICK-22.03, there are 4 testlist files: testlist_short.txt, testlist_short_cuda.txt, testlist_full.txt, testlist_full_cuda.txt.
 The first and second contain short test lists that would be used for standard testing (i.e. by executing *make test* or *./runtest* commands) 
 of quick/quick.MPI and quick.cuda/quick.cuda.MPI executables. The third and fourth are used for robust testing (i.e. by executing *make fulltest* 
 or *./runtest - -full* commands) which usually happens during CI. 
@@ -563,4 +563,4 @@ Note that above we link a page from documentation version *21.3.0* into the QUIC
 
 Note that you should never link anything from the documentation version named *latest*. This version will change whenever you make changes to the QUICK-docs repository and thus must be used for testing purposes only.        
 
-*Last updated by Madu Manathunga on 03/23/2021.*
+*Last updated by Madu Manathunga on 03/03/2022.*

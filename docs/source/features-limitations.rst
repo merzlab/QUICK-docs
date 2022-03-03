@@ -1,7 +1,7 @@
 Features and Limitations
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-QUICK-21.03 has the following features and limitations.
+QUICK-22.03 has the following features and limitations.
 
 Features
 ********
@@ -11,7 +11,7 @@ Features
 • Gradient and geometry optimization calculations
 • Mulliken charge analysis
 • Wide range of basis sets included
-• Supports QM/MM calculations with Amber21
+• Supports QM/MM calculations with Amber22
 • Fortran API to use QUICK as QM energy and force engine
 • MPI parallelization for CPU platforms
 • Massively parallel GPU implementation via CUDA for Nvidia GPUs
@@ -26,4 +26,4 @@ Limitations
 • Effective core potentials (ECPs) are not supported
 • DFT calculations are performed exclusively using SG1 grid system
 
-*Last updated by Madu Manathunga on 03/18/2021.*
+*Last updated by Madu Manathunga on 03/03/2022.*

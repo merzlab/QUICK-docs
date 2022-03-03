@@ -1,7 +1,7 @@
 A List of Available DFT Functionals
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Based on our tests, following functionals are successully working in QUICK-21.03 serial, MPI, CUDA and CUDAMPI versions. 
+Based on our tests, following functionals are successully working in QUICK-22.03 serial, MPI, CUDA and CUDAMPI versions. 
 Note that here we are reporting LIBXC keywords that will be specified in QUICK input. `Please use LIBXC functionals page
 for more information on each keyword. <https://www.tddft.org/programs/libxc/functionals/previous/libxc-4.0.4/>`_. 
 
@@ -208,4 +208,4 @@ for more information on each keyword. <https://www.tddft.org/programs/libxc/func
   19. HYB_GGA_XC_REVB3LYP
   20. HYB_GGA_XC_X3LYP
 
-*Last updated by Madu Manathunga on 03/20/2021.*
+*Last updated by Madu Manathunga on 03/03/2022.*
