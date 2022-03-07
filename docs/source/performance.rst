@@ -1,7 +1,7 @@
 Accuracy and Performance
 ========================
 
-The data reported in this section is solely intended for informative purpose. Readers shall not use them for comparison with other quantum chemical codes. If you are interested in the latter, we highly encourage you to download QUICK, compile and perform your own benchmarks.    
+The data reported in this section is solely intended for informative purpose. These were obtained using QUICK-21.03. The code is continuously being improved. Readers shall not use the data presented here for comparison with other quantum chemical codes. If you are interested in doing so, we highly encourage you to download the latest QUICK version, compile and perform your own benchmarks.    
 
 Accuracy of energies and gradients
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -35,6 +35,6 @@ The multi-GPU implementation of QUICK is based on MPI. In particular for larger 
     :height: 450px
     :alt: bench2
 
-See the following preprint for more benchmarks of QUICK multi-GPU version: `Manathunga, M.; Chi, J.; Cruzeiro, V. W. D.; Miao, Y.; Mu, D.; Arumugam, K.; Keipert, K.; Aktulga, H. M.; Merz, K. M.; Götz, A. W. Harnessing the Power of Multi-GPU-Acceleration into the Quantum Interaction Computational Kernel Program. ChemRxiv Preprint, 2021. <https://doi.org/10.26434/chemrxiv.13769209.v1>`_.
+See the following paper for more benchmarks of QUICK multi-GPU version: `Manathunga, M.; Jin, C; Cruzeiro, V.W.D.; Miao, Y.; Mu, D.; Arumugam, K.; Keipert, K.; Aktulga, H.M.; Merz, K.M.; Götz, A.W. Harnessing the Power of Multi-GPU Acceleration into the Quantum Interaction Computational Kernel Program, J. Chem. Theory Comput. 2021, 17, 7, 3955–3966. <https://pubs.acs.org/doi/abs/10.1021/acs.jctc.1c00145>`_.
 
-*Last updated by Madu Manathunga on 03/23/2021.*
+*Last updated by Madu Manathunga on 03/03/2022.*

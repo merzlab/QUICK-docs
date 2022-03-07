@@ -8,7 +8,7 @@ Compatible Compilers and Hardware
 ---------------------------------
 
 In general QUICK works well with a range of GNU or Intel compilers, Intel MKL, Open MPI, Intel MPI, and different CUDA version. 
-We have specifically tested QUICK-21.03 with following compilers under the Linux operating system.
+We have specifically tested QUICK-22.03 with following compilers under the Linux operating system.
 
 • Serial version
 
@@ -33,7 +33,7 @@ We have specifically tested QUICK-21.03 with following compilers under the Linux
  2. GNU/9.3.0; CUDA/11.0.207; OPENMPI/4.0.3          : No issue detected so far.
  3. Intel/2018.1.163; Intelmpi/2018.1.163; CUDA/10.2 : No issue detected so far.
 
-QUICK-21.03 CUDA version has been tested on the following GPU cards: A100, RTX2080Ti, RTX8000, RTX6000, RTX2080, T4, V100, Titan V, P100, M40, GTX1080, K80 and K40.
+QUICK-22.03 CUDA version has been tested on the following GPU cards: A100, RTX2080Ti, RTX8000, RTX6000, RTX2080, T4, V100, Titan V, P100, M40, GTX1080, K80 and K40.
 
 **Note:** we recommend that the CUDA and CUDA-MPI versions be executed only on dedicated GPU cards where no other tasks are being run.
 For the CUDA-MPI version we also recommend that only one CPU per GPU is used; this can be done by setting the number of processes (*e.g.*,
