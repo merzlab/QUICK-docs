@@ -6,8 +6,8 @@ structure calculations on general organic/biomolecular systems. It was initially
 Yipu Miao implemented the GPU enabled ERI engine and laid the foundation for GPU enabled DFT calculations.
 Jamie Smith has contributed the CMake build system.
 Vinícius Wilian D. Cruzeiro contributed to enable QM/MM simulations with AMBER.
-Timothy J. Giese has contributed to enable long range interactions in QM/MM.    
-Kris Keipert, Kamesh Arumugam, Kyle Jacobs, Stefan Maintz, Peng Wang and Jonathan Lefman from NVIDIA has provided useful suggestions on various technical aspects to improve the code. 
+Timothy J. Giese contributed to enable long range interactions in QM/MM.    
+Kris Keipert, Kamesh Arumugam, Kyle Jacobs, Stefan Maintz, Peng Wang and Jonathan Lefman from NVIDIA provided useful suggestions on various technical aspects to improve the code. 
 
 Madu Manathunga, Akhil Shajan, Andy Götz and Kennie Merz currently develop and maintain the code. 
 
