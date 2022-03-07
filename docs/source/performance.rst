@@ -1,7 +1,7 @@
 Accuracy and Performance
 ========================
 
-The data reported in this section is solely intended for informative purpose. These were obtained using QUICK-21.03. Readers shall not use them for comparison with other quantum chemical codes. If you are interested in the latter, we highly encourage you to download latest QUICK version, compile and perform your own benchmarks.    
+The data reported in this section is solely intended for informative purpose. These were obtained using QUICK-21.03. The code is continuously being improved. Readers shall not use the data presented here for comparison with other quantum chemical codes. If you are interested in doing so, we highly encourage you to download the latest QUICK version, compile and perform your own benchmarks.    
 
 Accuracy of energies and gradients
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
