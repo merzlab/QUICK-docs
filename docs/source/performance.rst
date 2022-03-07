@@ -35,6 +35,6 @@ The multi-GPU implementation of QUICK is based on MPI. In particular for larger 
     :height: 450px
     :alt: bench2
 
-See the following paper for more benchmarks of QUICK multi-GPU version: `Manathunga, M.; Jin, C; Cruzeiro, V.W.D.; Miao, Y.; Mu, D.; Arumugam, K.; Keipert, K.; Aktulga, H.M.; Merz, K.M.; Goetz, A.W. Harnessing the Power of Multi-GPU Acceleration into the Quantum Interaction Computational Kernel Program, J. Chem. Theory Comput. 2021, 17, 7, 3955–3966. <https://pubs.acs.org/doi/abs/10.1021/acs.jctc.1c00145>`_.
+See the following paper for more benchmarks of QUICK multi-GPU version: `Manathunga, M.; Jin, C; Cruzeiro, V.W.D.; Miao, Y.; Mu, D.; Arumugam, K.; Keipert, K.; Aktulga, H.M.; Merz, K.M.; Götz, A.W. Harnessing the Power of Multi-GPU Acceleration into the Quantum Interaction Computational Kernel Program, J. Chem. Theory Comput. 2021, 17, 7, 3955–3966. <https://pubs.acs.org/doi/abs/10.1021/acs.jctc.1c00145>`_.
 
 *Last updated by Madu Manathunga on 03/03/2022.*
