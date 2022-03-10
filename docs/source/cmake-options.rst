@@ -7,7 +7,7 @@ General options
 ***************
 
 • *-DCOMPILER=<GNU|INTEL|AUTO>*: Allows selection of the compiler toolchain to use. *-DCOMPILER=AUTO* enables default CMake behaviour. 
-• *-DENABLEF=TRUE*: Enables the compilation of time consuming f functions in the ERI code of cuda version.
+• *-DENABLEF=TRUE*: Enables the compilation of time consuming f functions in the ERI code of cuda version. Experimental.
 • *-DCMAKE_BUILD_TYPE=<Debug|Release>*: Controls whether to build debug or release versions.
 • *-DOPTIMIZE=<TRUE|FALSE>*: Controls whether to enable compiler optimizations. On by default.
 • *-DCMAKE_INSTALL_PREFIX=<path>*: Controls where QUICK will be installed. Default is /usr/local/bin/. 
