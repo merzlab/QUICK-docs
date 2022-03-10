@@ -7,7 +7,7 @@ General options
 ***************
 
 • *-DCOMPILER=<GNU|INTEL|AUTO>*: Allows selection of the compiler toolchain to use. *-DCOMPILER=AUTO* enables default CMake behaviour. 
-• *-DNOF=TRUE*: Disables the compilation of time consuming f functions in the ERI code of cuda version. Not recommended for production.
+• *-DENABLEF=TRUE*: Enables the compilation of time consuming f functions in the ERI code of cuda version. Experimental.
 • *-DCMAKE_BUILD_TYPE=<Debug|Release>*: Controls whether to build debug or release versions.
 • *-DOPTIMIZE=<TRUE|FALSE>*: Controls whether to enable compiler optimizations. On by default.
 • *-DCMAKE_INSTALL_PREFIX=<path>*: Controls where QUICK will be installed. Default is /usr/local/bin/. 
@@ -32,4 +32,4 @@ By default QUICK will only build the serial version. This can be changed with th
 • *-DQUICK_USER_ARCH=<kepler|maxwell|pascal|volta|turing|ampere>*: Build CUDA code only for the given architecture. If not provided, quick will compile for all supported architectures in your CUDA version.
 • *-DQUICK_VERBOSE_PTXAS=TRUE*:  Pass -v flag to ptxas to dump details about compiled functions in CUDA code.
 
-*Last updated by Madu Manathunga on 01/19/2021.*
+*Last updated by Madu Manathunga on 03/09/2022.*
