@@ -85,11 +85,30 @@ any of the following.
 
    **DIPOLE**       : Write dipole moments, Mulliken and Löwdin charges into the output file.
 
-6. Geometry Optimization
+6. Gradient Calculation
+***********************
+
+   **GRADIENT**         : Calculates analytical gradients.
+
+7. Geometry Optimization
 ************************
 
    **OPTIMIZE=Integer** : Performs a geometry optimization with a maximum of *Integer* steps. Default: 3 x Number of atoms.
 
-   **GRADIENT**         : Calculates analytical gradients.
+   **DLFIND**           : Use DL-FIND optimizer. This is the default. 
 
-*Last updated by Madu Manathunga on 03/22/2021.*
+   **LOPT**             : Use legacy QUICK optimizer instead of DL-FIND.
+
+   **GTOL**             : User defined maximum RMS value of the gradient vector. Default: 4.5E-4  
+
+   **ETOL**             : User defined maximum energy change between two consecutive optimization cycles. Default: 1.0E-6
+
+   **ICOORD=INTEGER**   : User defined coordinate system for DL-Find geometry optimization. Default: 3 (delocalized internal coordinates(DLC)). Other available option is 0 (cartesian).
+
+   **ALLOW_BAD_SCF**  : Allow unconverged SCF in geometry optimization. By default, the optimization will not proceed if the SCF fails to converge. 
+
+   If you are using DL-FIND optimizer in your work, please make sure to cite the paper below.
+
+   `stner, Joanne M. Carr, Thomas W. Keal, Walter Thiel, Adrian Wander, and Paul Sherwood, DL-FIND: An Open-Source Geometry Optimizer for Atomistic Simulations, J. Phys. Chem. A, 2009, 113 (43), 11856-11865. <https://pubs.acs.org/doi/10.1021/jp9028968>`_.
+
+*Last updated by Madu Manathunga on 03/14/2022.*
