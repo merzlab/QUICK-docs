@@ -10,6 +10,7 @@ Features
 • Density functional theory calculations (LDA, GGA and Hybrid-GGA functionals available).
 • Gradient and geometry optimization calculations
 • Mulliken charge analysis
+• Exports Molden format for visualization of geometry and orbital data
 • Wide range of basis sets included
 • Supports QM/MM calculations with Amber22
 • Fortran API to use QUICK as QM energy and force engine
@@ -20,10 +21,9 @@ Features
 Limitations
 ***********
 
-• Supports only closed shell systems
 • Supports energy/gradient calculations with basis functions up to d
 • Supports only Cartesian basis functions (no spherical harmonics)
 • Effective core potentials (ECPs) are not supported
 • DFT calculations are performed exclusively using SG1 grid system
 
-*Last updated by Madu Manathunga on 03/03/2022.*
+*Last updated by Andy Goetz on 09/29/2022.*
