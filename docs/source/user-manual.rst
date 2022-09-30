@@ -111,4 +111,9 @@ any of the following.
 
    `Johannes Kästner, Joanne M. Carr, Thomas W. Keal, Walter Thiel, Adrian Wander, and Paul Sherwood, DL-FIND: An Open-Source Geometry Optimizer for Atomistic Simulations, J. Phys. Chem. A, 2009, 113 (43), 11856-11865. <https://pubs.acs.org/doi/10.1021/jp9028968>`_.
 
-*Last updated by Madu Manathunga on 03/14/2022.*
+8. Data Exporting
+*****************
+
+   **EXPORT=MOLDEN** : Generates a molden file that contains orbitals, charges, geometries, etc. 
+
+*Last updated by Madu Manathunga on 09/29/2022.*
