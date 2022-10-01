@@ -1,7 +1,9 @@
+.. include:: quick_docs_common.rst
+
 A List of Available DFT Functionals
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Based on our tests, following functionals are successully working in QUICK-22.03 serial, MPI, CUDA and CUDAMPI versions. 
+Based on our tests, following functionals are successully working in |QUICK_VERSION| serial, MPI, CUDA and CUDAMPI versions. 
 Note that here we are reporting LIBXC keywords that will be specified in QUICK input. `Please use LIBXC functionals page
 for more information on each keyword. <https://www.tddft.org/programs/libxc/functionals/previous/libxc-4.0.4/>`_. 
 

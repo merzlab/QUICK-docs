@@ -1,10 +1,12 @@
+.. include:: quick_docs_common.rst
+
 Citation
 ========
 
-  Please cite QUICK-22.03 as follows. 
+  Please cite |QUICK_VERSION| as follows. 
 
   Manathunga, M.; Shajan, A.; Giese, T. J.; Cruzeiro, V. W. D.; Smith, J.; Miao, Y.; He, X.; Ayers,K;
-  Brothers, E.; Götz, A. W.; Merz, K. M. QUICK-22.03 University of California San Diego, CA and Michigan State University, East Lansing, MI, 2022.
+  Brothers, E.; Götz, A. W.; Merz, K. M. |QUICK_VERSION| University of California San Diego, CA and Michigan State University, East Lansing, MI, 2022.
 
   Publications to date:
 
