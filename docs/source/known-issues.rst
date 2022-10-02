@@ -1,7 +1,7 @@
 Known Issues of Current Version
 ===============================
 
-QUICK is under continous development and as of latest version, we have detected
+QUICK is under continous development and as of the latest version, we have detected
 the issues listed below. If you find anything other than these, please feel free to
 report any bugs or issues through our Git Hub page: `https://github.com/merzlab/QUICK/issues <https://github.com/merzlab/QUICK/issues>`_.
 
