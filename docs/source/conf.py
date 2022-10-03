@@ -22,7 +22,7 @@ copyright = '2022 Götz Lab & Merz Lab'
 author = 'Madu Manathunga'
 
 # The full version, including alpha/beta/rc tags
-release = '23.3.0'
+release = '22.3.0'
 
 
 # -- General configuration ---------------------------------------------------
