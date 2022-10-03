@@ -1,7 +1,9 @@
 .. Keep this file up to date with index.rst file. 
 
-Welcome to QUICK-22.03 Documentation!
-======================================
+.. include:: quick_docs_common.rst
+
+Welcome to |QUICK_VERSION| Documentation!
+===============================================
 
 .. toctree::
    :maxdepth: 2
@@ -17,7 +19,6 @@ Welcome to QUICK-22.03 Documentation!
    developer-guide
    citation
    license
-
 
 **Note to Users:** QUICK is still in the experimental stage and we do not guarantee
 it will work flawlessly in all your applications. But we are working hard to detect

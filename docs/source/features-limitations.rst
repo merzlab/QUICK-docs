@@ -1,7 +1,9 @@
+.. include:: quick_docs_common.rst
+
 Features and Limitations
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-QUICK-22.03 has the following features and limitations.
+|QUICK_VERSION| has the following features and limitations.
 
 Features
 ********

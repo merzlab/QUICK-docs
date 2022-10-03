@@ -3,8 +3,10 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to QUICK-22.03 Documentation!
-======================================
+.. include:: quick_docs_common.rst
+
+Welcome to |QUICK_VERSION| Documentation!
+=========================================
 
 .. toctree::
    :maxdepth: 2
