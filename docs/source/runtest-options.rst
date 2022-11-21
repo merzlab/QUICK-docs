@@ -10,10 +10,12 @@ This page gives a summary of options available in QUICK runtest script and how t
 Available flags
 ***************
 
-• **--serial**: Builds a serial version. (Default)
-• **--mpi**: Compiles MPI parallel version.
-• **--cuda**: Builds GPU version that utilizes a single NVIDIA GPU.
-• **--cudampi**: Builds multi-GPU version that utilizes multiple NVIDIA GPUs.
+• **--serial**: Tests a serial version. (Default)
+• **--mpi**: Tests MPI parallel version.
+• **--cuda**: Tests GPU version that utilizes a single NVIDIA GPU.
+• **--cudampi**: Tests multi-GPU version that utilizes multiple NVIDIA GPUs.
+• **--hip**: Tests GPU version that utilizes a single AMD GPU.
+• **--hipmpi**: Tests multi-GPU version that utilizes multiple AMD GPUs.
 • **--ene**: Run only energy tests.
 • **--grad**: Run only gradient tests.
 • **--opt**: Run only geometry optimization tests.
@@ -24,4 +26,4 @@ Available flags
 
 If the version flags are not specified, the script will try to detect the executables and test them.
 
-*Last updated by Madu Manathunga on 03/21/2021.*
+*Last updated by Madu Manathunga on 11/21/2022.*
