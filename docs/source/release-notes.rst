@@ -8,6 +8,7 @@ QUICK-23.03
 • Performance enhancements
 • Support for AMD GPUs, Multi-GPU support via MPI + HIP, also across multiple compute nodes 
 • Supports accouting for long range interactions in QM/MM simulations with AmberTools v23 
+• Supports data exporting to MOLDEN format 
 • Configure based build system is no longer supported
 
 QUICK-22.03
