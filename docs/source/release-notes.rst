@@ -9,6 +9,7 @@ QUICK-23.03
 • Support for AMD GPUs, Multi-GPU support via MPI + HIP, also across multiple compute nodes 
 • Supports accouting for long range interactions in QM/MM simulations with AmberTools v23 
 • Supports data exporting to MOLDEN format 
+• Supports Grimme's dispersion correction in DFT
 • Configure based build system is no longer supported
 
 QUICK-22.03
@@ -16,7 +17,6 @@ QUICK-22.03
 • Performance enhancements
 • Support for spin-unrestricted calculations
 • Efficient geometry optimizations using DL-FIND geometry optimizer
-• DFT-D3 dispersion correction
 
 QUICK-21.03
 ***********
