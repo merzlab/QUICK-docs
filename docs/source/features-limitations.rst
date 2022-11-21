@@ -17,8 +17,8 @@ Features
 • Supports QM/MM calculations with Amber22
 • Fortran API to use QUICK as QM energy and force engine
 • MPI parallelization for CPU platforms
-• Massively parallel GPU implementation via CUDA for Nvidia GPUs
-• Multi-GPU support via MPI + CUDA, also across multiple compute nodes
+• Massively parallel GPU implementation via CUDA and HIP for Nvidia and AMD GPUs 
+• Multi-GPU support via MPI + CUDA/HIP, also across multiple compute nodes
 
 Limitations
 ***********
@@ -28,4 +28,4 @@ Limitations
 • Effective core potentials (ECPs) are not supported
 • DFT calculations are performed exclusively using SG1 grid system
 
-*Last updated by Andy Goetz on 09/29/2022.*
+*Last updated by Andy Goetz on 11/21/2022.*
