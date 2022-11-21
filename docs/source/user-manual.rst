@@ -61,6 +61,8 @@ Keywords for QUICK Input
    `Susi Lehtola, Conrad Steigemann, Micael J.T. Oliveira, and Miguel A.L. Marques, Recent developments
    in Libxc - A comprehensive library of functionals for density functional theory, Software X 7, 1 (2018) <https://www.sciencedirect.com/science/article/pii/S2352711017300602?via%3Dihub>`_.
 
+   **XCCUTOFF=FLOAT**: user defined threshold for grid pruning in exchange correlation algorithm. Default: 1.0E-7  
+
 3. Basis sets
 *************
 
@@ -76,6 +78,14 @@ any of the following.
 
    **DENSERMS=FLOAT** : user defined density matrix maximum RMS for convergence. Default : 1.0E-6.
 
+   **CUTOFF=FLOAT**   : user defined integral cutoff. Default : 1.0E-8.
+
+   **BASISCUTOFF=FLOAT**   : user defined cutoff for neglecting insignificant basis functions. Default : 1.0E-6.
+
+   **COARSEINT**      : use coarse cutoffs. (i.e. DENSERMS=1.0E-5, CUTOFF=1.0E-6, BASISCUTOFF=1.0E-5, XCCUTOFF=1.0E-6)
+
+   **TIGHTINT**       : use tight cutoffs.  (i.e. DENSERMS=1.0E-7, CUTOFF=1.0E-8, BASISCUTOFF=1.0E-7, XCCUTOFF=1.0E-8)
+
 5. Atomic Charges
 *****************
 
@@ -89,6 +99,8 @@ any of the following.
 ***********************
 
    **GRADIENT**         : Calculates analytical gradients.
+
+   **GRADCUTOFF=FLOAT** : user defined cutoff for gradients. Default : 1.0E-7 (automatically set to 1.0E-6 or 1.0E-8 if COARSEINT or TIGHTINT keyword is specified) 
 
 7. Geometry Optimization
 ************************
