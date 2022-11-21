@@ -28,4 +28,4 @@ Limitations
 • Effective core potentials (ECPs) are not supported
 • DFT calculations are performed exclusively using SG1 grid system
 
-*Last updated by Andy Goetz on 11/21/2022.*
+*Last updated by Madu Manathunga on 11/21/2022.*
