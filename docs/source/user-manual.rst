@@ -61,6 +61,16 @@ Keywords for QUICK Input
    `Susi Lehtola, Conrad Steigemann, Micael J.T. Oliveira, and Miguel A.L. Marques, Recent developments
    in Libxc - A comprehensive library of functionals for density functional theory, Software X 7, 1 (2018) <https://www.sciencedirect.com/science/article/pii/S2352711017300602?via%3Dihub>`_.
 
+   **D2** : use Grimme's D2 dispersion correction in DFT.
+
+   **D3** : use Grimme's D3 dispersion correction with zero damping.
+
+   **D3BJ** : use Grimme's D3 dispersion correction with Becke-Johnson damping.
+ 
+   **D3M** : use Grimme's D3 dispersion correction with modified zero damping by Sherrill and coworkers.
+
+   **D3MBJ** - use Grimme's D3 dispersion correction with modified Becke-Johnson damping by Sherrill and coworkers.
+
    **XCCUTOFF=FLOAT**: user defined threshold for grid pruning in exchange correlation algorithm. Default: 1.0E-7  
 
 3. Basis sets
@@ -75,6 +85,8 @@ any of the following.
 ******************
 
    **SCF=Integer**    : user defined maximum self-consistent field cycles = Integer. Default: 200
+
+   **NCYC=Integer**   : user defined self-consistent field cycles to turn on differential Fock build = Integer. Default: 3
 
    **DENSERMS=FLOAT** : user defined density matrix maximum RMS for convergence. Default : 1.0E-6.
 
@@ -128,4 +140,4 @@ any of the following.
 
    **EXPORT=MOLDEN** : Generates a molden file that contains orbitals, charges, geometries, etc. 
 
-*Last updated by Madu Manathunga on 09/29/2022.*
+*Last updated by Madu Manathunga on 11/21/2022.*
