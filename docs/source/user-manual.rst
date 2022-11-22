@@ -71,7 +71,7 @@ Keywords for QUICK Input
 
    **D3MBJ** - use Grimme's D3 dispersion correction with modified Becke-Johnson damping by Sherrill and coworkers.
 
-   **XCCUTOFF=FLOAT**: user defined threshold for grid pruning in exchange correlation algorithm. Default: 1.0E-7  
+   **XCCUTOFF=Float**: user defined threshold for grid pruning in exchange correlation algorithm. Default: 1.0E-7  
 
 3. Basis sets
 *************
@@ -86,13 +86,13 @@ any of the following.
 
    **SCF=Integer**    : user defined maximum self-consistent field cycles = Integer. Default: 200
 
-   **NCYC=Integer**   : user defined self-consistent field cycles to turn on differential Fock build = Integer. Default: 3
+   **NCYC=Integer**   : user defined self-consistent field cycles to turn on incremental Fock build = Integer. Default: 3
 
-   **DENSERMS=FLOAT** : user defined density matrix maximum RMS for convergence. Default : 1.0E-6.
+   **DENSERMS=Float** : user defined density matrix maximum RMS for convergence. Default : 1.0E-6.
 
-   **CUTOFF=FLOAT**   : user defined integral cutoff. Default : 1.0E-8.
+   **CUTOFF=Float**   : user defined integral cutoff. Default : 1.0E-8.
 
-   **BASISCUTOFF=FLOAT**   : user defined cutoff for neglecting insignificant basis functions. Default : 1.0E-6.
+   **BASISCUTOFF=Float**   : user defined cutoff for neglecting insignificant basis functions. Default : 1.0E-6.
 
    **COARSEINT**      : use coarse cutoffs. (i.e. DENSERMS=1.0E-5, CUTOFF=1.0E-6, BASISCUTOFF=1.0E-5, XCCUTOFF=1.0E-6)
 
@@ -101,7 +101,7 @@ any of the following.
 5. Atomic Charges
 *****************
 
-   **CHARGE=INT**     : A net charge is to be placed on system.
+   **CHARGE=Integer**     : A net charge is to be placed on system. Default: 0
 
    **EXTCHARGES**     : External charges are included in the system. The point charges must be listed after the molecular Cartesian coordinates in the input file. See the corresponding section in the Hands-on Tutorials of this manual.
 
@@ -112,7 +112,7 @@ any of the following.
 
    **GRADIENT**         : Calculates analytical gradients.
 
-   **GRADCUTOFF=FLOAT** : user defined cutoff for gradients. Default : 1.0E-7 (automatically set to 1.0E-6 or 1.0E-8 if COARSEINT or TIGHTINT keyword is specified) 
+   **GRADCUTOFF=Float** : user defined cutoff for gradients. Default : 1.0E-7 (automatically set to 1.0E-6 or 1.0E-8 if COARSEINT or TIGHTINT keyword is specified) 
 
 7. Geometry Optimization
 ************************
@@ -127,7 +127,7 @@ any of the following.
 
    **ETOL**             : User defined maximum energy change between two consecutive optimization cycles. Default: 1.0E-6
 
-   **ICOORD=INTEGER**   : User defined coordinate system for DL-Find geometry optimization. Default: 3 (delocalized internal coordinates(DLC)). Other available option is 0 (cartesian).
+   **ICOORD=Integer**   : User defined coordinate system for DL-Find geometry optimization. Default: 3 (delocalized internal coordinates(DLC)). Other available option is 0 (cartesian).
 
    **ALLOW_BAD_SCF**  : Allow unconverged SCF in geometry optimization. By default, the optimization will not proceed if the SCF fails to converge. 
 

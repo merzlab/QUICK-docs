@@ -3,7 +3,7 @@
 Installation Guide
 ==================
 
-QUICK has been compiled and tested on x86 and ARM CPU and Intel Nvidia GPU hardware.
+QUICK has been compiled and tested on x86, ARM CPU and Nvidia, AMD GPU hardware.
 The compilation of the GPU enabled ERI code can take a significant amount of time (several minutes) - be patient, the compiler is working hard to generate lightning fast code for you.
 
 Compatible Compilers and Hardware
@@ -19,21 +19,21 @@ We have specifically tested |QUICK_VERSION| with following compilers under the L
 
 • MPI version
 
- 1. GNU/8.3.1; Open MPI/4.0.4              : No issue detected so far.
- 2. GNU/9.3.0; Open MPI/4.0.3              : No issue detected so far.
- 3. Intel/2018.1.163; Intel MPI/2018.1.163 : No issue detected so far.
- 4. Intel/2019.1.127; Intel MPI/2019.8.254 : No issue detected so far.
+ 1. GNU/8.3.1; OpenMPI/4.0.4              : No issue detected so far.
+ 2. GNU/9.3.0; OpenMPI/4.0.3              : No issue detected so far.
+ 3. Intel/2018.1.163; IntelMPI/2018.1.163 : No issue detected so far.
+ 4. Intel/2019.1.127; IntelMPI/2019.8.254 : No issue detected so far.
 
 • CUDA version
 
- 1. GNU/4.8.5, 7.2.0, 8.3.1, 9.3.0; CUDA/10.1, 10.2 : No issue detected so far.
+ 1. GNU/4.8.5, 7.2.0, 8.3.1, 9.3.0; CUDA/10.1, 10.2, 11.0, 11.2, 11.4 : No issue detected so far.
  2. Intel/2018.1.163, 2019.1.127; CUDA/10.2         : No issue detected so far.
 
 • CUDA-MPI version
 
- 1. GNU/8.3.1; CUDA/10.2; OPENMPI/4.0.4              : No issue detected so far.
- 2. GNU/9.3.0; CUDA/11.0.207; OPENMPI/4.0.3          : No issue detected so far.
- 3. Intel/2018.1.163; Intelmpi/2018.1.163; CUDA/10.2 : No issue detected so far.
+ 1. GNU/8.3.1; CUDA/10.2; OpenMPI/4.0.4              : No issue detected so far.
+ 2. GNU/9.3.0; CUDA/11.0.207, 11.2, 11.4; OpenMPI/4.0.3          : No issue detected so far.
+ 3. Intel/2018.1.163; IntelMPI/2018.1.163; CUDA/10.2 : No issue detected so far.
 
 • HIP version
 
@@ -41,13 +41,13 @@ We have specifically tested |QUICK_VERSION| with following compilers under the L
 
 • HIP-MPI version
 
- 1. GNU/9.3.0; ROCM/5.1, 5.2, 5.3; OPENMPI/4.0.3, 4.1.4 : No issue detected so far.
+ 1. GNU/9.3.0; ROCM/5.1, 5.2, 5.3; OpenMPI/4.0.3, 4.1.4 : No issue detected so far.
 
 |QUICK_VERSION| CUDA version has been tested on the following GPU cards: A100, RTX3080Ti, RTX2080Ti, RTX8000, RTX6000, RTX2080, T4, V100, Titan V, P100, M40, GTX1080, K80 and K40.
 
 |QUICK_VERSION| HIP version has been tested on the following GPU cards: MI100, MI210, MI250. As of QUICK-23.03, the performance on MI210 and MI250 cards is not optimized but the code runs properly. 
 
-**Note:** we recommend that the CUDA, CUDA-MPI, HIP, HIP-MPI versions be executed only on dedicated GPU cards where no other tasks are being run.
+**Note:** We recommend that the CUDA, CUDA-MPI, HIP, HIP-MPI versions be executed only on dedicated GPU cards where no other tasks are being run.
 For CUDA-MPI and HIP-MPI versions, we also recommend that only one CPU per GPU is used; this can be done by setting the number of processes (*e.g.*, in the *mpirun* command) equal to the number of CPUs.
 
 Installation
@@ -87,18 +87,18 @@ Assuming you have created a directory named *builddir* in the ``QUICK_HOME`` dir
 .. code-block:: none
 
         cd ${QUICK_HOME}/builddir
-        cmake .. -DCOMPILER=GNU -DMPI=TRUE -DHIP=TRUE -DQUICK_USER_ARCH=gfx908 \
+        cmake .. -DCOMPILER=GNU -DMPI=TRUE -DHIP=TRUE -DQUICK_USER_ARCH=gfx90a \
           -DCMAKE_INSTALL_PREFIX=${QUICK_INSTALL} -DHIP_TOOLKIT_ROOT_DIR=${ROCM_PATH} \
           -DMAGMA=TRUE -DMAGMA_ROOT=${MAGMA_PATH} 
         make
         make install
 
-Where ``-DMPI`` and ``-DHIP`` flags enable compiling MPI parallel and HIP serial versions. Specifying both flags simultaneously will trigger compilation of the MPI-HIP multi-GPU version. The serial version is compiled by default. Path to ROCM installation can be specified using ``-DHIP_TOOLKIT_ROOT_DIR`` but this is optional. Flags ``-DMAGMA`` and ``-DMAGMA_ROOT`` are used to enable Magma library support for matrix diagonalization and specify Magma installation directory. The use of Magma is optional but highly recommended since the diagonalization is performed on host by default.    
+Where ``-DMPI`` and ``-DHIP`` flags enable compiling MPI parallel and HIP serial versions. Specifying both flags simultaneously will trigger compilation of the MPI-HIP multi-GPU version. The serial version is compiled by default. Path to ROCM installation can be specified using ``-DHIP_TOOLKIT_ROOT_DIR`` but this is optional. Flags ``-DMAGMA`` and ``-DMAGMA_ROOT`` are used to enable Magma library support for matrix diagonalization and specify Magma installation directory. The use of Magma is optional but highly recommended since the diagonalization is performed on host by default. 
 
-If the microarchitecture is not specified, then QUICK will be compiled for gfx908 architecture. 
+If the microarchitecture is not specified (i.e. in the absence of ``-DQUICK_USER_ARCH``), QUICK will be compiled for gfx908 architecture. As of QUICK-23.03, specifying multiple microarchitectures for HIP version (e.g. ``-DQUICK_USER_ARCH=gfx908 gfx90a``) is not supported. This means that the resulting ``quick.hip`` and ``quick.hip.MPI`` executables will only run on a single AMD GPU architecture.    
 
 
-A full list of available flags and their defintions written by Jamie Smith can be found `here <cmake-options.html>`_. 
+A full list of available flags and their definitions can be found `here <cmake-options.html>`_. 
 
 Testing
 -------
