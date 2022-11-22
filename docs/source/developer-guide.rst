@@ -263,8 +263,9 @@ Next, we implement the following example program (example.f90) that uses the abo
 	    ! test snapshots (md steps), ierr is for error handling
 	    integer :: i, j, frames, ierr
 	   
-	    ! number of atoms, number of atom types, number of external point charges
-	    integer :: natoms, nxt_charges
+	    ! number of atoms, number of external point charges, flag to specify whether
+            ! density matrix should be reused in MD 
+	    integer :: natoms, nxt_charges, reuse_dmx
 	
 	    ! atom type ids, atomic numbers, atomic coordinates, point charges and
 	    !  coordinates
@@ -322,10 +323,13 @@ Next, we implement the following example program (example.f90) that uses the abo
 	
 	    ! Set the gradient vector to zero.
 	    gradients    = 0.0d0
-	
-	    ! initialize QUICK, required only once. Assumes keywords for
+
+            ! Set to reuse density matrix in MD.
+            reuse_dmx = 1
+
+	    ! Initialize QUICK, required only once. Assumes keywords for
 	    ! the QUICK job are provided through a template file.  
-	    call setQuickJob(fname, keywd, natoms, atomic_numbers, ierr)
+	    call setQuickJob(fname, keywd, natoms, atomic_numbers, reuse_dmx, ierr)
 	
 	    do i=1, frames
 	      ! Actual QM/MM simulations may have different number of point charges during MD.
