@@ -9,7 +9,7 @@ Features
 ********
 
 • Hartree-Fock energy calculations
-• Density functional theory calculations (LDA, GGA and Hybrid-GGA functionals available).
+• Density functional theory calculations with dispersion correction (LDA, GGA and Hybrid-GGA functionals available)
 • Gradient and geometry optimization calculations
 • Mulliken charge analysis
 • Exports Molden format for visualization of geometry and orbital data
