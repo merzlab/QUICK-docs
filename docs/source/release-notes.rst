@@ -5,18 +5,18 @@ The new features released with each QUICK version are as follows.
 
 QUICK-23.03
 ***********
-• Performance enhancements
+• Performance enhancements leading to 2x speedup of the GPU code compared to the previous release
 • Support for AMD GPUs, Multi-GPU support via MPI + HIP, also across multiple compute nodes 
-• Supports accouting for long range interactions in QM/MM simulations with AmberTools v23 
+• Supports accounting for long range electrostatic interactions in QM/MM simulations under periodic boundary conditions with AmberTools v23 
 • Supports data exporting to MOLDEN format 
 • Supports Grimme's dispersion correction in DFT
-• Configure based build system is no longer supported
+• Configure based legacy build system is no longer supported
 
 QUICK-22.03
 ***********
 • Performance enhancements
 • Support for spin-unrestricted calculations
-• Efficient geometry optimizations using DL-FIND geometry optimizer
+• Efficient geometry optimizations using the DL-FIND geometry optimizer
 
 QUICK-21.03
 ***********
