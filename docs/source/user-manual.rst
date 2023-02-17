@@ -61,6 +61,18 @@ Keywords for QUICK Input
    `Susi Lehtola, Conrad Steigemann, Micael J.T. Oliveira, and Miguel A.L. Marques, Recent developments
    in Libxc - A comprehensive library of functionals for density functional theory, Software X 7, 1 (2018) <https://www.sciencedirect.com/science/article/pii/S2352711017300602?via%3Dihub>`_.
 
+   **D2** : use Grimme's D2 dispersion correction in DFT.
+
+   **D3** : use Grimme's D3 dispersion correction with zero damping.
+
+   **D3BJ** : use Grimme's D3 dispersion correction with Becke-Johnson damping.
+ 
+   **D3M** : use Grimme's D3 dispersion correction with modified zero damping by Sherrill and coworkers.
+
+   **D3MBJ** - use Grimme's D3 dispersion correction with modified Becke-Johnson damping by Sherrill and coworkers.
+
+   **XCCUTOFF=Float**: user defined threshold for grid pruning in exchange correlation algorithm. Default: 1.0E-7  
+
 3. Basis sets
 *************
 
@@ -74,12 +86,22 @@ any of the following.
 
    **SCF=Integer**    : user defined maximum self-consistent field cycles = Integer. Default: 200
 
-   **DENSERMS=FLOAT** : user defined density matrix maximum RMS for convergence. Default : 1.0E-6.
+   **NCYC=Integer**   : user defined self-consistent field cycles to turn on incremental Fock build = Integer. Default: 3
+
+   **DENSERMS=Float** : user defined density matrix maximum RMS for convergence. Default : 1.0E-6.
+
+   **CUTOFF=Float**   : user defined integral cutoff. Default : 1.0E-8.
+
+   **BASISCUTOFF=Float**   : user defined cutoff for neglecting insignificant basis functions. Default : 1.0E-6.
+
+   **COARSEINT**      : use coarse cutoffs. (i.e. DENSERMS=1.0E-5, CUTOFF=1.0E-6, BASISCUTOFF=1.0E-5, XCCUTOFF=1.0E-6)
+
+   **TIGHTINT**       : use tight cutoffs.  (i.e. DENSERMS=1.0E-7, CUTOFF=1.0E-8, BASISCUTOFF=1.0E-7, XCCUTOFF=1.0E-8)
 
 5. Atomic Charges
 *****************
 
-   **CHARGE=INT**     : A net charge is to be placed on system.
+   **CHARGE=Integer**     : A net charge is to be placed on system. Default: 0
 
    **EXTCHARGES**     : External charges are included in the system. The point charges must be listed after the molecular Cartesian coordinates in the input file. See the corresponding section in the Hands-on Tutorials of this manual.
 
@@ -89,6 +111,8 @@ any of the following.
 ***********************
 
    **GRADIENT**         : Calculates analytical gradients.
+
+   **GRADCUTOFF=Float** : user defined cutoff for gradients. Default : 1.0E-7 (automatically set to 1.0E-6 or 1.0E-8 if COARSEINT or TIGHTINT keyword is specified) 
 
 7. Geometry Optimization
 ************************
@@ -103,11 +127,11 @@ any of the following.
 
    **ETOL**             : User defined maximum energy change between two consecutive optimization cycles. Default: 1.0E-6
 
-   **ICOORD=INTEGER**   : User defined coordinate system for DL-Find geometry optimization. Default: 3 (delocalized internal coordinates(DLC)). Other available option is 0 (cartesian).
+   **ICOORD=Integer**   : User defined coordinate system for DL-Find geometry optimization. Default: 3 (delocalized internal coordinates(DLC)). Other available option is 0 (Cartesian).
 
    **ALLOW_BAD_SCF**  : Allow unconverged SCF in geometry optimization. By default, the optimization will not proceed if the SCF fails to converge. 
 
-   If you are using DL-FIND optimizer in your work, please make sure to cite the paper below.
+   If you are using the DL-FIND optimizer in your work, please make sure to cite the paper below.
 
    `Johannes Kästner, Joanne M. Carr, Thomas W. Keal, Walter Thiel, Adrian Wander, and Paul Sherwood, DL-FIND: An Open-Source Geometry Optimizer for Atomistic Simulations, J. Phys. Chem. A, 2009, 113 (43), 11856-11865. <https://pubs.acs.org/doi/10.1021/jp9028968>`_.
 
@@ -116,4 +140,4 @@ any of the following.
 
    **EXPORT=MOLDEN** : Generates a molden file that contains orbitals, charges, geometries, etc. 
 
-*Last updated by Madu Manathunga on 09/29/2022.*
+*Last updated by Madu Manathunga on 11/21/2022.*

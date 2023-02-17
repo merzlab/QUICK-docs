@@ -9,16 +9,16 @@ Features
 ********
 
 • Hartree-Fock energy calculations
-• Density functional theory calculations (LDA, GGA and Hybrid-GGA functionals available).
+• Density functional theory calculations with dispersion correction (LDA, GGA and Hybrid-GGA functionals available)
 • Gradient and geometry optimization calculations
 • Mulliken charge analysis
 • Exports Molden format for visualization of geometry and orbital data
 • Wide range of basis sets included
-• Supports QM/MM calculations with Amber22
+• Supports QM/MM calculations with Amber22 and later
 • Fortran API to use QUICK as QM energy and force engine
 • MPI parallelization for CPU platforms
-• Massively parallel GPU implementation via CUDA for Nvidia GPUs
-• Multi-GPU support via MPI + CUDA, also across multiple compute nodes
+• Massively parallel GPU implementation via CUDA and HIP for Nvidia and AMD GPUs 
+• Multi-GPU support via MPI + CUDA/HIP, also across multiple compute nodes
 
 Limitations
 ***********
@@ -26,6 +26,7 @@ Limitations
 • Supports energy/gradient calculations with basis functions up to d
 • Supports only Cartesian basis functions (no spherical harmonics)
 • Effective core potentials (ECPs) are not supported
-• DFT calculations are performed exclusively using SG1 grid system
+• DFT calculations are performed exclusively using the SG1 grid system
+• No meta-GGA nor range-separated hybrid functionals are supported at present
 
-*Last updated by Andy Goetz on 09/29/2022.*
+*Last updated by Madu Manathunga on 11/21/2022.*

@@ -3,13 +3,13 @@
 Installation Guide
 ==================
 
-QUICK has been compiled and tested on x86 and ARM CPU and Intel Nvidia GPU hardware.
+QUICK has been compiled and tested on x86, ARM CPU and Nvidia, AMD GPU hardware.
 The compilation of the GPU enabled ERI code can take a significant amount of time (several minutes) - be patient, the compiler is working hard to generate lightning fast code for you.
 
 Compatible Compilers and Hardware
 ---------------------------------
 
-In general QUICK works well with a range of GNU or Intel compilers, Intel MKL, Open MPI, Intel MPI, and different CUDA version. 
+In general QUICK works well with a range of GNU or Intel compilers, Intel MKL, Open MPI, Intel MPI, different CUDA and ROCM versions. 
 We have specifically tested |QUICK_VERSION| with following compilers under the Linux operating system.
 
 • Serial version
@@ -19,41 +19,55 @@ We have specifically tested |QUICK_VERSION| with following compilers under the L
 
 • MPI version
 
- 1. GNU/8.3.1; Open MPI/4.0.4              : No issue detected so far.
- 2. GNU/9.3.0; Open MPI/4.0.3              : No issue detected so far.
- 3. Intel/2018.1.163; Intel MPI/2018.1.163 : No issue detected so far.
- 4. Intel/2019.1.127; Intel MPI/2019.8.254 : No issue detected so far.
+ 1. GNU/8.3.1; OpenMPI/4.0.4              : No issue detected so far.
+ 2. GNU/9.3.0; OpenMPI/4.0.3              : No issue detected so far.
+ 3. Intel/2018.1.163; IntelMPI/2018.1.163 : No issue detected so far.
+ 4. Intel/2019.1.127; IntelMPI/2019.8.254 : No issue detected so far.
 
 • CUDA version
 
- 1. GNU/4.8.5, 7.2.0, 8.3.1, 9.3.0; CUDA/10.1, 10.2 : No issue detected so far.
+ 1. GNU/4.8.5, 7.2.0, 8.3.1, 9.3.0; CUDA/10.1, 10.2, 11.0, 11.2, 11.4 : No issue detected so far.
  2. Intel/2018.1.163, 2019.1.127; CUDA/10.2         : No issue detected so far.
 
 • CUDA-MPI version
 
- 1. GNU/8.3.1; CUDA/10.2; OPENMPI/4.0.4              : No issue detected so far.
- 2. GNU/9.3.0; CUDA/11.0.207; OPENMPI/4.0.3          : No issue detected so far.
- 3. Intel/2018.1.163; Intelmpi/2018.1.163; CUDA/10.2 : No issue detected so far.
+ 1. GNU/8.3.1; CUDA/10.2; OpenMPI/4.0.4              : No issue detected so far.
+ 2. GNU/9.3.0; CUDA/11.0.207, 11.2, 11.4; OpenMPI/4.0.3          : No issue detected so far.
+ 3. Intel/2018.1.163; IntelMPI/2018.1.163; CUDA/10.2 : No issue detected so far.
 
-|QUICK_VERSION| CUDA version has been tested on the following GPU cards: A100, RTX2080Ti, RTX8000, RTX6000, RTX2080, T4, V100, Titan V, P100, M40, GTX1080, K80 and K40.
+• HIP version
 
-**Note:** we recommend that the CUDA and CUDA-MPI versions be executed only on dedicated GPU cards where no other tasks are being run.
-For the CUDA-MPI version we also recommend that only one CPU per GPU is used; this can be done by setting the number of processes (*e.g.*,
-in the *mpirun* command) equal to the number of CPUs.
+ 1. GNU/9.3.0; ROCM/5.1, 5.2, 5.3 : No issue detected so far.
 
-Installation and Testing
-------------------------
+• HIP-MPI version
+
+ 1. GNU/9.3.0; ROCM/5.1, 5.2, 5.3; OpenMPI/4.0.3, 4.1.4 : No issue detected so far.
+
+|QUICK_VERSION| CUDA version has been tested on the following GPU cards: A100, RTX3080Ti, RTX2080Ti, RTX8000, RTX6000, RTX2080, T4, V100, Titan V, P100, M40, GTX1080, K80 and K40.
+
+|QUICK_VERSION| HIP version has been tested on the following GPU cards: MI100, MI210, MI250. As of QUICK-23.03, the performance on MI210 and MI250 cards is not optimized but the code runs properly. 
+
+**Note:** We recommend that the CUDA, CUDA-MPI, HIP, HIP-MPI versions be executed only on dedicated GPU cards where no other tasks are being run. Performance is better on datacenter GPUs than on consumer GPUs. 
+For CUDA-MPI and HIP-MPI versions, we also recommend that only one CPU core (MPI task) is used per GPU; this can be done by setting the number of processes (*e.g.*, in the *mpirun* command) equal to the number of GPUs.
+
+We have also tested |QUICK_VERSION| on Intel based Macbooks with following software stack (compiler installed via Macports):
+
+ 1. macOS 11.7.3; GNU/10.4.0, 11.3.0, 12.2.0; OpenMPI 4.1.4 : No issue detected so far.
+ 2. macOS 13.2; GNU 12.2.0, OpenMPI 4.1.4 : No issue detected so far.
 
 
-Using the CMake build system
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Installation
+------------
 
-CMake installation requires at least CMake/3.9.0 installed in the target machine. To install QUICK using CMake, one must first create a build  directory. After installation you can safely delete this build directory if you want to save disk space. Assuming the root folder of the repository is ``QUICK_HOME``, you can make the build directory like this:
+QUICK installation requires at least CMake/3.9.0 installed in the target machine. To install QUICK using CMake, one must first create a build  directory. After installation you can safely delete this build directory if you want to save disk space. Assuming the root folder of the repository is ``QUICK_HOME``, you can make the build directory like this:
 
 .. code-block:: none
 
 	cd ${QUICK_HOME}
 	mkdir builddir
+
+CUDA version
+^^^^^^^^^^^^
 
 Assuming you have created a directory named *builddir* in the ``QUICK_HOME`` directory and you want to install QUICK into directory ``QUICK_INSTALL``, use GNU compiler tool chain, and want to compile for Nvidia Volta microarchitecture, all QUICK versions can be configured and built as follows.
 
@@ -71,8 +85,29 @@ If you want to compile CUDA code for different microarchitectures, you can speci
 
 If the microarchitecture is not specified, then QUICK will be compiled for multiple architectures based on your CUDA toolkit version. This will lead to a very time consuming compilation but to maximum compatibility of the ``quick.cuda`` and ``quick.cuda.MPI`` executables with different types of GPUs.
 
-A full list of available flags and their defintions written by Jamie Smith can be found `here <cmake-options.html>`_. 
+HIP version
+^^^^^^^^^^^^
 
+Assuming you have created a directory named *builddir* in the ``QUICK_HOME`` directory and you want to install QUICK into directory ``QUICK_INSTALL``, use GNU compiler tool chain, and want to compile for AMD gfx908 microarchitecture, all QUICK versions can be configured and built as follows.
+
+.. code-block:: none
+
+        cd ${QUICK_HOME}/builddir
+        cmake .. -DCOMPILER=GNU -DMPI=TRUE -DHIP=TRUE -DQUICK_USER_ARCH=gfx90a \
+          -DCMAKE_INSTALL_PREFIX=${QUICK_INSTALL} -DHIP_TOOLKIT_ROOT_DIR=${ROCM_PATH} \
+          -DMAGMA=TRUE -DMAGMA_ROOT=${MAGMA_PATH} 
+        make
+        make install
+
+Where ``-DMPI`` and ``-DHIP`` flags enable compiling MPI parallel and HIP serial versions. Specifying both flags simultaneously will trigger compilation of the MPI-HIP multi-GPU version. The serial version is compiled by default. Path to ROCM installation can be specified using ``-DHIP_TOOLKIT_ROOT_DIR`` but this is optional. Flags ``-DMAGMA`` and ``-DMAGMA_ROOT`` are used to enable Magma library support for matrix diagonalization and specify Magma installation directory. The use of Magma is optional but highly recommended since the diagonalization is performed on host by default. 
+
+If the microarchitecture is not specified (i.e. in the absence of ``-DQUICK_USER_ARCH``), QUICK will be compiled for gfx908 architecture. As of QUICK-23.03, specifying multiple microarchitectures for HIP version (e.g. ``-DQUICK_USER_ARCH=gfx908 gfx90a``) is not supported. This means that the resulting ``quick.hip`` and ``quick.hip.MPI`` executables will only run on a single AMD GPU architecture.    
+
+
+A full list of available flags and their definitions can be found `here <cmake-options.html>`_. 
+
+Testing
+-------
 
 Once you have installed QUICK, you can add the location of the executables to your path and set relevant environment variables by sourcing (source executes the commands in a file) the ``quick.rc`` script. This must be done again every time a new terminal session is opened:
 
@@ -80,7 +115,7 @@ Once you have installed QUICK, you can add the location of the executables to yo
 
 		source ${QUICK_INSTALL}/quick.rc
 
-Both build systems make use of a shell script (``runtest``, located in ``${QUICK_HOME}/tools`` but will be copied to the installation directory ``QUICK_INSTALL``) for testing QUICK. Below we describe the standard procedure to carry out tests; but if you are interested, see `here <runtest-options.html>`_ for more information on the ``runtest`` script.
+The build system makes use of a shell script (``runtest``, located in ``${QUICK_HOME}/tools`` but will be copied to the installation directory ``QUICK_INSTALL``) for testing QUICK. Below we describe the standard procedure to carry out tests; but if you are interested, see `here <runtest-options.html>`_ for more information on the ``runtest`` script.
 
 Short tests can be run using the ``runtest`` shell script found inside the install directory. 
 
@@ -99,126 +134,9 @@ Similarly, robust testing can be performed as follows.
 
 You may now try some hands-on tutorials to learn how to use QUICK `here <hands-on-tutorials.html>`_.
 
-Legacy build system
-^^^^^^^^^^^^^^^^^^^
-The initial step is to configure the installation for the desired QUICK version. For this, go to the QUICK home folder and run the ``configure`` script
-as explained below. Running the configure script without options or with the ``--help`` flag will print available options.
-
-For serial version installation:
-
-.. code-block:: none
-
-	./configure --serial --prefix <installdir> compiler
-
-possible options for compiler are *gnu* or *intel*.
-
-For MPI parallel version installation:
-
-.. code-block:: none
-
-        ./configure --mpi --prefix <installdir> compiler
-
-For CUDA version installation:
-
-.. code-block:: none
-
-        ./configure --cuda --arch <micro-arch> --prefix <installdir> compiler
-
-For CUDA-MPI version installation:
-
-.. code-block:: none
-
-        ./configure --cudampi --arch <micro-arch> --prefix <installdir> compiler
-
-possible options for <micro-arch> are *kepler*, *maxwell*, *pascal*, *volta*, *turing*, *ampere*.
-
-You can configure the installtion for multiple CUDA architectures as follows.
-
-.. code-block:: none
-
-	./configure --cuda --arch <micro-arch-1> --arch <micro-arch-2> --prefix <installdir> compiler
-
-Note that if you do not set the ``--arch`` option, QUICK will be compiled for multiple architectures based on your CUDA toolkit version.
-This will lead to a very time consuming compilation but to maximum compatibility of the ``quick.cuda`` and ``quick.cuda.MPI`` executables with different types of GPUs.
-
-If you specify multiple build type flags together (e.g. ``--serial`` and ``--cuda``) then all different versions will be compiled and installed.
-
-More information on configure script options can be found `here <configure-options.html>`_.
-
-Once the configuration script has been successfully executed, you will have a file ``make.in`` in the QUICK home directory.
-At this point simply run:
-
-.. code-block:: none
-
-	make
-
-This will build the QUICK version you requested and place an executable inside ``QUICK_HOME/bin``. All object files
-and libraries will be located inside ``QUICK_HOME/build``. 
-
-Next, install QUICK using:
-
-.. code-block:: none
-
-	make install
-
-This will copy executables, libraries and .mod files into *installdir*. In case the ``--prefix`` variable is not specified,
-*installdir* will be set to the ``QUICK_HOME`` folder.
-
-Once you have installed any version of QUICK, it is necessary to set environment variables.
-This can be done by sourcing ``quick.rc`` in the installation directory.
-
-.. code-block:: none
-
-	source $(installdir)/quick.rc
-
-Tests can be executed as follows from the ``$QUICK_HOME`` directory.
-
-.. code-block:: none
-
-	make test
-
-This will run a series of short test cases and inform you which tests passed or failed. It is also possible to run a robust
-test as follows. 
-
-.. code-block:: none
-
-	make fulltest
-
-
-You may now try some hands-on tutorials to learn how to use QUICK `here <hands-on-tutorials.html>`_.
-
-
 Uninstallation and Cleaning
 ---------------------------
 
-CMake build system
-^^^^^^^^^^^^^^^^^^
-
 Simply delete contents inside build and install directories and / or delete the build and install directories.
 
-Legacy build system
-^^^^^^^^^^^^^^^^^^^
-
-If QUICK was built using the legacy build system, uninstallation can be performed by executing the following from the QUICK home directory:
-
-.. code-block:: none
-
-	make uninstall
-
-In order to clean a QUICK build, the following must be run from the QUICK home directory:
-
-.. code-block:: none
-
-	make clean
-
-This will remove all the object files located inside ``QUICK_HOME/build``.
-
-For a complete removal of object files, executables and .mod files, including  ``QUICK_HOME/bin``
-and ``QUICK_HOME/build`` directories:
-
-.. code-block:: none
-
-	make distclean
-
-
-*Last updated by Saatvik Aggarwal on 07/07/2021.*
+*Last updated by Madu Manathunga on 11/21/2022.*

@@ -263,8 +263,9 @@ Next, we implement the following example program (example.f90) that uses the abo
 	    ! test snapshots (md steps), ierr is for error handling
 	    integer :: i, j, frames, ierr
 	   
-	    ! number of atoms, number of atom types, number of external point charges
-	    integer :: natoms, nxt_charges
+	    ! number of atoms, number of external point charges, flag to specify whether
+            ! density matrix should be reused in MD 
+	    integer :: natoms, nxt_charges, reuse_dmx
 	
 	    ! atom type ids, atomic numbers, atomic coordinates, point charges and
 	    !  coordinates
@@ -322,10 +323,13 @@ Next, we implement the following example program (example.f90) that uses the abo
 	
 	    ! Set the gradient vector to zero.
 	    gradients    = 0.0d0
-	
-	    ! initialize QUICK, required only once. Assumes keywords for
+
+            ! Set to reuse density matrix in MD.
+            reuse_dmx = 1
+
+	    ! Initialize QUICK, required only once. Assumes keywords for
 	    ! the QUICK job are provided through a template file.  
-	    call setQuickJob(fname, keywd, natoms, atomic_numbers, ierr)
+	    call setQuickJob(fname, keywd, natoms, atomic_numbers, reuse_dmx, ierr)
 	
 	    do i=1, frames
 	      ! Actual QM/MM simulations may have different number of point charges during MD.
@@ -526,8 +530,8 @@ When you are ready, clone the documentation from `GitHub repository <https://git
 
 In the root QUICK-docs directory (from now on $QUICK_DOCS), you should find two directories called *docs* and *resources*. Inside the *docs* directory, a Makefile and 
 *source* directory should exist. The latter contains all the documentation source and images that would go in. If you have large text files to be included, these should be saved
-in $QUICK_DOCS/resources inside an appropriate directory and linked properly.
-Once you have made changes, make sure to set the QUICK version (i.e. set *version* variable, semantic versioning must be used) in $QUICK_DOCS/docs/source/conf.py and compile the documentation using Make. In order to do so, you must have installed *sphinx* and *python* in your system. If the *sphix-build* executable is not accessible through your path variable, make sure to set the *SPHINXBUILD* variable in $QUICK_DOCS/docs/Makefile. Then from $QUICK_DOCS/docs folder, execute the following command.
+in $QUICK_DOCS/resources inside an appropriate directory and linked properly. Setting the QUICK version appearing in the documentation is achieved by assigning a value to the *QUICK_VERSION* variable in $QUICK_DOCS/docs/source/quick_docs_common.rst file. For a release version, we will have to set this to a proper string value (eg. QUICK-23.03).
+Once you have made changes, also make sure to change the QUICK version (i.e. set *version* variable, semantic versioning must be used) in $QUICK_DOCS/docs/source/conf.py and compile the documentation using Make. In order to do so, you must have installed *sphinx* and *python* in your system. If the *sphix-build* executable is not accessible through your path variable, make sure to set the *SPHINXBUILD* variable in $QUICK_DOCS/docs/Makefile. Then from $QUICK_DOCS/docs folder, execute the following command.
 
 .. code-block:: none
 
@@ -565,4 +569,4 @@ Note that above we link a page from documentation version *21.3.0* into the QUIC
 
 Note that you should never link anything from the documentation version named *latest*. This version will change whenever you make changes to the QUICK-docs repository and thus must be used for testing purposes only.        
 
-*Last updated by Madu Manathunga on 03/03/2022.*
+*Last updated by Madu Manathunga on 11/22/2022.*

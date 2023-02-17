@@ -16,6 +16,7 @@ Welcome to |QUICK_VERSION| Documentation!
    user-manual
    hands-on-tutorials
    known-issues
+   release-notes
    developer-guide
    citation
    license
