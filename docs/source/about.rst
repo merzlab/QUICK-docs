@@ -7,7 +7,7 @@ Yipu Miao implemented the GPU enabled ERI engine and laid the foundation for GPU
 Jamie Smith has contributed the CMake build system.
 Vinícius Wilian D. Cruzeiro contributed to enable QM/MM simulations with AMBER.
 Timothy J. Giese contributed to enable long range interactions in QM/MM.    
-Kris Keipert, Kamesh Arumugam, Kyle Jacobs, Stefan Maintz, Peng Wang and Jonathan Lefman from NVIDIA provided useful suggestions on various technical aspects to improve the CUDA version. Gina Sitaraman, Leopold Grinberg, Mahdieh Ghazimirsaeed, Trinayan Baruah from AMD contributed by providing important suggestions to improve the performance of HIP version.  
+Kris Keipert, Kamesh Arumugam, Kyle Jacobs, Stefan Maintz, Peng Wang and Jonathan Lefman from NVIDIA provided useful suggestions on various technical aspects to improve the CUDA version. Gina Sitaraman, Leopold Grinberg, Mahdieh Ghazimirsaeed, Trinayan Baruah from AMD contributed by providing important suggestions to improve the performance of the HIP version.  
 
 Madu Manathunga, Akhil Shajan, Andy Götz and Kennie Merz currently develop and maintain the code. 
 
