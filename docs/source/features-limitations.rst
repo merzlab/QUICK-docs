@@ -14,7 +14,7 @@ Features
 • Mulliken charge analysis
 • Exports Molden format for visualization of geometry and orbital data
 • Wide range of basis sets included
-• Supports QM/MM calculations with Amber22
+• Supports QM/MM calculations with Amber22 and later
 • Fortran API to use QUICK as QM energy and force engine
 • MPI parallelization for CPU platforms
 • Massively parallel GPU implementation via CUDA and HIP for Nvidia and AMD GPUs 
@@ -26,6 +26,7 @@ Limitations
 • Supports energy/gradient calculations with basis functions up to d
 • Supports only Cartesian basis functions (no spherical harmonics)
 • Effective core potentials (ECPs) are not supported
-• DFT calculations are performed exclusively using SG1 grid system
+• DFT calculations are performed exclusively using the SG1 grid system
+• No meta-GGA nor range-separated hybrid functionals are supported at present
 
 *Last updated by Madu Manathunga on 11/21/2022.*
