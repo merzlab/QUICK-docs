@@ -50,6 +50,12 @@ We have specifically tested |QUICK_VERSION| with following compilers under the L
 **Note:** We recommend that the CUDA, CUDA-MPI, HIP, HIP-MPI versions be executed only on dedicated GPU cards where no other tasks are being run. Performance is better on datacenter GPUs than on consumer GPUs. 
 For CUDA-MPI and HIP-MPI versions, we also recommend that only one CPU core (MPI task) is used per GPU; this can be done by setting the number of processes (*e.g.*, in the *mpirun* command) equal to the number of GPUs.
 
+We have also tested |QUICK_VERSION| on Intel based Macbooks with following software stack (compiler installed via Macports):
+
+ 1. macOS 11.7.3; GNU/10.4.0, 11.3.0, 12.2.0; OpenMPI 4.1.4 : No issue detected so far.
+ 2. macOS 13.2; GNU 12.2.0, OpenMPI 4.1.4 : No issue detected so far.
+
+
 Installation
 ------------
 
