@@ -8,12 +8,14 @@ Features and Limitations
 Features
 ********
 
-• Hartree-Fock energy calculations
-• Density functional theory calculations with dispersion correction (LDA, GGA and Hybrid-GGA functionals available)
+• Hartree-Fock theory
+• Density functional theory (LDA, GGA and Hybrid-GGA functionals)
+• Grimme type dispersion corrections
+• Restricted closed-shell and unrestricted open-shell wavefunctions
 • Gradient and geometry optimization calculations
 • Mulliken charge analysis
 • Exports Molden format for visualization of geometry and orbital data
-• Wide range of basis sets included
+• Wide range of popular Gaussian basis sets included
 • Supports QM/MM calculations with Amber22 and later
 • Fortran API to use QUICK as QM energy and force engine
 • MPI parallelization for CPU platforms
