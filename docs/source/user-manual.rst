@@ -23,14 +23,17 @@ Keywords for QUICK Input
 
    NOTE 1 : One Hamiltonian must be selected. There is no default.
 
-   NOTE 2 : UHF or UDFT calculations are under development and currently not available.
 
 2. Density Functional Theory
 ****************************
 
+QUICK has two built-in DFT methods that do not rely on Libxc:
+
    **BLYP** : Built in BLYP functional (A. D. Becke, Phys. Rev. A 38, 3098 (1988), C. Lee, W. Yang, and R. G. Parr, Phys. Rev. B 37, 785 (1988), B. Miehlich, A. Savin, H. Stoll, and H. Preuss, Chem. Phys. Lett. 157, 200 (1989))
 
    **B3LYP**: Built in B3LYP functional (P. J. Stephens, F. J. Devlin, C. F. Chabalowski, and M. J. Frisch, J. Phys. Chem. 98, 11623 (1994) )
+
+Following functionals use Libxc (version 4.0.4) and can be requested by their popular names:
 
    **BP86**: BP86 functional (A. D. Becke, Phys. Rev. A 38, 3098 (1988), J. P. Perdew, Phys. Rev. B 33, 8822 (1986))
 
@@ -50,16 +53,18 @@ Keywords for QUICK Input
 
    **PBE0**: PBE0/PBEH functional (C. Adamo and V. Barone, J. Chem. Phys. 110, 6158 (1999), M. Ernzerhof and G. E. Scuseria, J. Chem. Phys. 110, 5029 (1999))
 
-   Except for the built-in BLYP and B3LYP functionals QUICK makes use of the LIBXC density functional library (version 4.0.4). A LIBXC functional can be requested as follows.
+Except for the built-in BLYP and B3LYP functionals QUICK makes use of the Libxc density functional library (version 4.0.4). All LDA, GGA and hybrid-GGA functionals available in Libxc can be requested. As a reminder, (hybrid) meta-GGA and range-separated hybrid functionals are not supported at present. You must make sure to select a valid combination of exchange and correlation functionals. A generic Libxc functional can be requested as follows:
 
    **LIBXC=FUNCTIONAL1,FUNCTIONAL2** : Where FUNCTIONAL1 and FUNCTIONAL2 are exchange and correlation functionals. *Note: Spaces near '=' or ',' are not allowed.*
 
    See here for a `list of available functionals in the current QUICK version <working_libxc_funcs.html>`_.
 
-   If you are using LIBXC in your work, please make sure to cite the paper below.
+If you are using LIBXC in your work, please make sure to cite followin paper:
 
    `Susi Lehtola, Conrad Steigemann, Micael J.T. Oliveira, and Miguel A.L. Marques, Recent developments
    in Libxc - A comprehensive library of functionals for density functional theory, Software X 7, 1 (2018) <https://www.sciencedirect.com/science/article/pii/S2352711017300602?via%3Dihub>`_.
+
+Grimme type dispersion corrections are requested by adding one of the following keywords:
 
    **D2** : use Grimme's D2 dispersion correction in DFT.
 
@@ -76,8 +81,7 @@ Keywords for QUICK Input
 3. Basis sets
 *************
 
-**BASIS=BASIS_SET_NAME** : Selects *BASIS_SET_NAME* basis set for the calculation. *BASIS_SET_NAME* could be
-any of the following.
+**BASIS=BASIS_SET_NAME** : Selects *BASIS_SET_NAME* basis set for the calculation. *BASIS_SET_NAME* could be any of the following. The basis set name is not case sensitive.
 
 .. include:: ./basis-sets.rst
 
@@ -131,7 +135,7 @@ any of the following.
 
    **ALLOW_BAD_SCF**  : Allow unconverged SCF in geometry optimization. By default, the optimization will not proceed if the SCF fails to converge. 
 
-   If you are using the DL-FIND optimizer in your work, please make sure to cite the paper below.
+If you are using the DL-FIND optimizer in your work, please make sure to cite the following paper:
 
    `Johannes Kästner, Joanne M. Carr, Thomas W. Keal, Walter Thiel, Adrian Wander, and Paul Sherwood, DL-FIND: An Open-Source Geometry Optimizer for Atomistic Simulations, J. Phys. Chem. A, 2009, 113 (43), 11856-11865. <https://pubs.acs.org/doi/10.1021/jp9028968>`_.
 
@@ -140,4 +144,4 @@ any of the following.
 
    **EXPORT=MOLDEN** : Generates a molden file that contains orbitals, charges, geometries, etc. 
 
-*Last updated by Madu Manathunga on 11/21/2022.*
+*Last updated by Andy Goetz on 02/17/2023.*
