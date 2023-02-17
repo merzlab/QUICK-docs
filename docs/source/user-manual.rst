@@ -127,11 +127,11 @@ any of the following.
 
    **ETOL**             : User defined maximum energy change between two consecutive optimization cycles. Default: 1.0E-6
 
-   **ICOORD=Integer**   : User defined coordinate system for DL-Find geometry optimization. Default: 3 (delocalized internal coordinates(DLC)). Other available option is 0 (cartesian).
+   **ICOORD=Integer**   : User defined coordinate system for DL-Find geometry optimization. Default: 3 (delocalized internal coordinates(DLC)). Other available option is 0 (Cartesian).
 
    **ALLOW_BAD_SCF**  : Allow unconverged SCF in geometry optimization. By default, the optimization will not proceed if the SCF fails to converge. 
 
-   If you are using DL-FIND optimizer in your work, please make sure to cite the paper below.
+   If you are using the DL-FIND optimizer in your work, please make sure to cite the paper below.
 
    `Johannes Kästner, Joanne M. Carr, Thomas W. Keal, Walter Thiel, Adrian Wander, and Paul Sherwood, DL-FIND: An Open-Source Geometry Optimizer for Atomistic Simulations, J. Phys. Chem. A, 2009, 113 (43), 11856-11865. <https://pubs.acs.org/doi/10.1021/jp9028968>`_.
 
