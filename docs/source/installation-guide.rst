@@ -47,8 +47,8 @@ We have specifically tested |QUICK_VERSION| with following compilers under the L
 
 |QUICK_VERSION| HIP version has been tested on the following GPU cards: MI100, MI210, MI250. As of QUICK-23.03, the performance on MI210 and MI250 cards is not optimized but the code runs properly. 
 
-**Note:** We recommend that the CUDA, CUDA-MPI, HIP, HIP-MPI versions be executed only on dedicated GPU cards where no other tasks are being run.
-For CUDA-MPI and HIP-MPI versions, we also recommend that only one CPU per GPU is used; this can be done by setting the number of processes (*e.g.*, in the *mpirun* command) equal to the number of CPUs.
+**Note:** We recommend that the CUDA, CUDA-MPI, HIP, HIP-MPI versions be executed only on dedicated GPU cards where no other tasks are being run. Performance is better on datacenter GPUs than on consumer GPUs. 
+For CUDA-MPI and HIP-MPI versions, we also recommend that only one CPU core (MPI task) is used per GPU; this can be done by setting the number of processes (*e.g.*, in the *mpirun* command) equal to the number of GPUs.
 
 Installation
 ------------
