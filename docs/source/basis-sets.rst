@@ -14,9 +14,9 @@
   6-311+G(2d,p)
   6-311++G(2d,2p)
   cc-pVDZ
-  def2-svp
-  def2-sv(p)
-  def2-svpd
+  def2-SV(P)
+  def2-SVP
+  def2-SVPD
   PC-0
   PC-1
 
