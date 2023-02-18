@@ -59,7 +59,7 @@ Except for the built-in BLYP and B3LYP functionals QUICK makes use of the Libxc 
 
    See here for a `list of available functionals in the current QUICK version <working_libxc_funcs.html>`_.
 
-If you are using LIBXC in your work, please make sure to cite followin paper:
+If you are using Libxc in your work, please cite following paper:
 
    `Susi Lehtola, Conrad Steigemann, Micael J.T. Oliveira, and Miguel A.L. Marques, Recent developments
    in Libxc - A comprehensive library of functionals for density functional theory, Software X 7, 1 (2018) <https://www.sciencedirect.com/science/article/pii/S2352711017300602?via%3Dihub>`_.
