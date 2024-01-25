@@ -344,4 +344,10 @@ You can then verify the transfer succeeded:
 	---
 	water.out
 
+Once you have transferred your data, you should end the job:
+
+.. code-block:: none
+
+	kubectl delete -f quick.yaml
+
 *Last updated by Madu Manathunga on 11/21/2022.*
