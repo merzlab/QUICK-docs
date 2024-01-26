@@ -142,7 +142,7 @@ Simply delete contents inside build and install directories and / or delete the 
 Running QUICK in a Container
 ----------------------------
 For users that are familiar with software containers, QUICK is also made available as a Docker container which can be run in Docker, Singularity and Kubernetes.
-The current version of the QUICK container is compiled for x86 CPUs and NVIDIA GPUs and runs serial, MPI, CUDA and CUDA-MPI versions of QUICK.
+The current version of the QUICK container is compiled for x86_64/amd64 CPUs and NVIDIA GPUs and runs serial, MPI, CUDA and CUDA-MPI versions of QUICK.
 
 **Note:** For CUDA-enabled versions of QUICK, the container requires the host system have the necessary GPU drivers installed.
 
