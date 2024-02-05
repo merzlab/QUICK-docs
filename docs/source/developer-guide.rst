@@ -569,4 +569,265 @@ Note that above we link a page from documentation version *21.3.0* into the QUIC
 
 Note that you should never link anything from the documentation version named *latest*. This version will change whenever you make changes to the QUICK-docs repository and thus must be used for testing purposes only.        
 
-*Last updated by Madu Manathunga on 11/22/2022.*
+Maintaining the container
+-------------------------
+This section provides some guidance on keeping the QUICK container up to date.
+
+This section assumes that you are familiar with GitHub Actions and Docker containers.
+If you are not familiar with both, it is highly recommended that you watch the below videos:
+
+* `30-minute lesson on GitHub Actions <https://www.youtube.com/watch?v=R8_veQiYBjI>`_
+* `1-hour lesson on Docker <https://www.youtube.com/watch?v=pg19Z8LL06w>`_
+
+In addition to those short lessons, the official documentation for each is below:
+
+* `GitHub Actions Docs <https://docs.github.com/en/actions>`_
+* `Docker Docs <https://docs.docker.com/>`_
+
+Updating the Dockerfile
+^^^^^^^^^^^^^^^^^^^^^^^
+The Dockerfile may require updates from time to time.
+Reasons for updating the Dockerfile could include: updating the CUDA base image, adding a build target for ROCm or accounting for changes in compilation & configuration of QUICK.
+
+The below description considers the Dockerfile as originally authored, provided below:
+
+.. code-block:: none
+	:linenos:
+
+	############################
+	### Base MPI CUDA 12.0.1 ###
+	############################
+	FROM nvidia/cuda:12.0.1-devel-ubuntu22.04 AS base-mpi-cuda-12.0.1
+
+	RUN apt-get update -y \
+	&& apt-get install -y \
+		gfortran \
+		cmake \
+		g++ \
+		openmpi-bin \
+		openmpi-common \
+		libopenmpi-dev
+
+	RUN mkdir /src \
+	&& mkdir /src/build
+
+	WORKDIR /src
+
+	# Copy the current version of QUICK into the container
+	COPY . .
+
+	WORKDIR /src/build
+
+	RUN cmake .. -DCOMPILER=GNU -DCMAKE_INSTALL_PREFIX=$(pwd)/../install -DCUDA=TRUE -DMPI=TRUE
+
+	RUN make -j2 install
+
+	#############################
+	## Runtime MPI CUDA 12.0.1 ##
+	#############################
+
+	# Runtime image is smaller than the devel/build image
+	FROM nvidia/cuda:12.0.1-runtime-ubuntu22.04 AS mpi-cuda-12.0.1
+
+	RUN apt-get update -y \
+	&& apt-get install -y \
+		openmpi-bin \
+		openmpi-common \
+		libopenmpi-dev
+
+	# Copy the compiled quick runtimes, leaving behind extra build dependencies & reducing image size
+	COPY --from=base-mpi-cuda-12.0.1 /src /src
+
+	WORKDIR /src/install
+
+	# Manually run steps from quick.rc
+	ENV QUICK_INSTALL /src/install
+	ENV QUICK_BASIS $QUICK_INSTALL/basis
+	ENV PATH $PATH:$QUICK_INSTALL/bin
+
+Beginning with line 4, we can see that the base image chosen is "nvidia/cuda:12.0.1-devel-ubuntu22.04" which is aliased as "base-mpi-cuda-12.0.1".
+The aliases serve as a shorthand reference inside this Dockerfile, as well as to the Docker build process where these can be specified as build targets.
+From the tag ":12.0.1-devel-ubuntu22.04" we can infer that this image is itself based on Ubuntu version 22.04 and that it comes with CUDA version 12.0.1 pre-installed.
+
+Similarly on line 34, we see an additional image of "nvidia/cuda:12.0.1-runtime-ubuntu22.04" aliased as "mpi-cuda-12.0.1".
+The main difference between these two images is the amount of software they have pre-installed. 
+This translates to their overall file size with the development image having a size of nearly 3.5 GB and the runtime image having a size of nearly 1.25 GB.
+A smaller image size is preferrable, as it takes less storage for the end-user as well as less time to download.
+
+Both images are fetched from the `Docker Hub <https://hub.docker.com/>`_, specifically the repository `nvidia/cuda <https://hub.docker.com/r/nvidia/cuda>`_.
+Both of these images will require an update in the future to support the latest version of CUDA.  
+When released, newer versions of these container images can be found on the tags section of the nvida/cuda repo.
+These future versions should then be replaced in the Dockerfile.
+
+Next we consider lines 6-13 and 36-40. We can see additional dependencies being installed for the development and runtime images, respectively.
+These are packages required for building and running QUICK that are not included in the respective images.
+When additional build and runtime dependencies are added for QUICK these sections should be updated to install those dependencies.
+
+Continuing with lines 15-27, we can see linux commands being executed according to the directions for compiling QUICK.
+When the steps for compiling QUICK change, this section should be updated to match.
+
+Next on line 43, we see that we copy the /src directory from the development image to the runtime image.
+At this point in the process the /src directory has all of the built binaries for QUICK.
+This step is critical as it is resposible for drastically reducing the final (runtime) image size from >= 3.5 GB to >= 1.25 GB by leaving behind all of the extra software in the development build.
+When the development alias is updated, this line should be updated to match.
+
+Finally, we see on lines 47-50 that the steps outlined in the quick.rc are performed. 
+These steps must be executed here so that these environment variables are automatically available to the user each time they run the container.
+As steps are added to the quick.rc, they should be added here as well.
+
+Manual builds with Docker
+^^^^^^^^^^^^^^^^^^^^^^^^^
+When making changes to QUICK or the Dockerfile, you can manually build the image to test your changes. 
+These steps will require that you have an installation of Docker and familiarity with a linux terminal.
+These examples assume that you have a `Docker Hub <https://hub.docker.com/>`_ account and that you have QUICK cloned on your computer, referenced as $QUICK_PATH in the examples below.
+These examples will reference the Dockerfile discussed above.
+
+We will cover a few options for building the image: building all stages, building a specific stage, and building without the cache.
+Stages, in the context of Docker, means any section of the Dockerfile that begins with the "FROM" keyword until the next instance of "FROM" or the end of the file, whichever comes first.
+More can be learned on this subject from the `Docker docs on multi-stage builds <https://docs.docker.com/build/building/multi-stage/>`_.
+
+Building all stages
+"""""""""""""""""""
+We will start with building all stages, as that is typically the default build choice. 
+When you build all stages, the last stage in the Dockerfile becomes the final image.
+
+Begin by navigating to your clone of the QUICK repository:
+
+.. code-block:: none
+
+	cd $QUICK_PATH
+
+
+To build all stages, run this command from $QUICK_PATH, where the Dockerfile exists:
+
+.. code-block:: none
+
+	docker build -f Dockerfile -t [your-dockerhub-username]/quick:[your-tag] .
+
+**Note**: You should replace the brackets and contents with your username and your choice of the tag.
+
+The build process will take several minutes. When it has finished successfully, you can find the image with this command:
+
+.. code-block:: none
+
+	docker image ls | grep "quick"
+
+Assuming the container built successfully, you can then run the container:
+
+.. code-block:: none
+
+	docker run --rm -it [your-dockerhub-username]/quick:[your-tag] /bin/bash
+
+When you are done testing the container, you can exit the container:
+
+.. code-block:: none
+
+	exit
+
+Building a specific stage
+"""""""""""""""""""""""""
+This build option is useful when you only need to change something in one stage of the container, for instance installing new runtime dependencies in the runtime stage.
+Building just one stage can save you quite a bit of build time, assuming that you have previously built its dependent stages.
+In the Dockerfile discussed previously, the runtime stage has a dependency on the base stage, as it copies files from the base stage.
+
+Begin by navigating to your clone of the QUICK repository:
+
+.. code-block:: none
+
+	cd $QUICK_PATH
+
+You can then specify that Docker should only build the stage that you want:
+
+.. code-block:: none
+
+	docker build -f Dockerfile --target [stage] -t [your-dockerhub-username]/quick:[your-tag] .
+
+**Note**: You should replace the stage and brackets with an alias from the Dockerfile, for example "mpi-cuda-12.0.1".
+
+Assuming the container built successfully, you can then run the container:
+
+.. code-block:: none
+
+	docker run --rm -it [your-dockerhub-username]/quick:[your-tag] /bin/bash
+
+When you are done testing the container, you can exit the container:
+
+.. code-block:: none
+
+	exit
+
+Building without the cache
+"""""""""""""""""""""""""""
+Lastly, you can force Docker to build a container image without using its cache.
+By default, Docker will keep a cache of the layers in a Dockerfile and will only build layers that have been changed or that have a dependency on a changed layer.
+You will want to build without the cache when changing things that get copied into the container image, such as the source code for QUICK.
+
+For example, if you were to change some of the source code, but you don't have to update the Dockerfile in any way, Docker will not know to rebuild the layer and you could find that the container does not reflect your latest changes.
+Building without the cache will force Docker to build the entire Dockerfile, which will take longer, but it will catch any changes made outside the Dockerfile.
+
+Begin by navigating to your clone of the QUICK repository:
+
+.. code-block:: none
+
+	cd $QUICK_PATH
+
+You can then specify that Docker should build the entire Dockerfile without the cache:
+
+.. code-block:: none
+
+	docker build -f Dockerfile --no-cache -t [your-dockerhub-username]/quick:[your-tag] .
+
+Assuming the container built successfully, you can then run the container:
+
+.. code-block:: none
+
+	docker run --rm -it [your-dockerhub-username]/quick:[your-tag] /bin/bash
+
+When you are done testing the container, you can exit the container:
+
+.. code-block:: none
+
+	exit
+
+Automated builds with GitHub Actions
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+The QUICK container should automatically be built and published by the GitHub Actions worfklow "Docker," which is defined in the `GitHub repository <https://github.com/merzlab/QUICK>`_ at the path .github/workflows/docker-publish.yml.
+Runs of this GitHub Action can be found in the repository on the "Actions" tab under the name "Docker."
+This workflow is triggered upon pushes and pull requests to the master branch as well as when releases are published.
+The workflow builds the Dockerfile located in the root of the repository.
+When this workflow runs successfully, the newly built container image can be found on the repository homepage under the packages tab on the right:
+
+.. image:: packages.png
+    :width: 300px
+    :align: center
+    :height: 275px
+    :alt: packages
+
+Clicking "quick" will take you to the page for the container and display the most recent version, as well as other versions:
+
+.. image:: quick-container.png
+    :width: 750px
+    :align: center
+    :height: 350px
+    :alt: containers
+
+From time to time, it may be necessary to update the versions of the steps in the workflow.
+When doing so, it is important to leave the first step "Convert IMAGE_NAME to lowercase" in the workflow. 
+This step conforms the image name, initially "QUICK", to lowercase which is required by Docker for image names.
+
+Beginning with the second step "Checkout repository", other steps in the workflow will have versions ranging from "@vX" to "@x.x.x" or "@XXXXXXXXXXXXXXX".
+For example, at the time of writing, the second step is "actions/checkout@v3".
+The step name is in the form of "[author]/[action name][version]".
+To update an action, visit the `GitHub Marketplace for actions <https://github.com/marketplace?category=&query=&type=actions>`_ and enter the name of the action into the search bar.
+For example, if we needed to update the second step, we would search the action name of "checkout" and look for the author "actions."
+
+.. image:: actions.png
+    :width: 750px
+    :align: center
+    :height: 350px
+    :alt: containers
+
+Clicking into that first result will take us to the `action's page <https://github.com/marketplace/actions/checkout>`_ which will have instructions for using the latest version.
+You can then update the version as appropriate in the workflow definition file at the path .github/workflows/docker-publish.yml.
+
+*Last updated by Kyle Krick on 02/05/2024.*
