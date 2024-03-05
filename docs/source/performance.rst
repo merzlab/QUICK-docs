@@ -37,12 +37,12 @@ The multi-GPU implementation of QUICK is based on MPI. In particular for larger 
 
 See the following paper for more benchmarks of QUICK multi-GPU version: `Manathunga, M.; Jin, C; Cruzeiro, V.W.D.; Miao, Y.; Mu, D.; Arumugam, K.; Keipert, K.; Aktulga, H.M.; Merz, K.M.; Götz, A.W. Harnessing the Power of Multi-GPU Acceleration into the Quantum Interaction Computational Kernel Program, J. Chem. Theory Comput. 2021, 17, 7, 3955–3966. <https://pubs.acs.org/doi/abs/10.1021/acs.jctc.1c00145>`_.
 
-QUICK Container Performance
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Performance of QUICK Container 
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 The following benchmark results were obtained using QUICK-23.08a.
 
-QUICK Container Compared to Normal Installation Performance
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Performance of QUICK Container Compared to Normal Installation
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 This section compares performance between containerized QUICK and a normal installation of QUICK on the same computer using A100 GPUs.
 
 Both versions of QUICK were timed on the following molecules & settings and were run on one and two GPUs for comparison.
@@ -52,7 +52,7 @@ Both versions of QUICK were timed on the following molecules & settings and were
 - Taxol - DFT B3LYP BASIS=6-31G** cutoff=1.0e-7 denserms=1.0e-6 GRADIENT
 - Valinomycin - DFT B3LYP BASIS=6-31G** cutoff=1.0e-7 denserms=1.0e-6 GRADIENT
 
-The results show the SCF, gradient and total time in seconds for each molecule.
+The results show the SCF + gradient calculations and total runtime in seconds for each molecule.
 
 .. image:: quick-container-vs-normal-timings.png
     :width: 900px
@@ -62,11 +62,11 @@ The results show the SCF, gradient and total time in seconds for each molecule.
 
 Overall, we found the performance difference to be minimal between containerized QUICK and a normal installation of QUICK.
 
-QUICK Container Performance on Various GPUs
-"""""""""""""""""""""""""""""""""""""""""""
+Performance of QUICK Container on Various GPUs
+""""""""""""""""""""""""""""""""""""""""""""""
 This section compares containerized QUICK performance on various GPUs for the taxol molecule with same settings as above. 
 
-The results show the SCF, gradient and total time in seconds for each GPU.
+The results show the SCF + gradient calculations and total runtime in seconds on each GPU.
 
 .. image:: quick-container-taxol-timings-various-gpus.png
     :width: 450px
