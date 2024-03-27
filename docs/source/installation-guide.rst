@@ -139,4 +139,215 @@ Uninstallation and Cleaning
 
 Simply delete contents inside build and install directories and / or delete the build and install directories.
 
+Running QUICK in a Container
+----------------------------
+For users that are familiar with software containers, QUICK is also made available as a Docker container which can be run in Docker, Singularity and Kubernetes.
+The current version of the QUICK container is compiled for x86_64/amd64 CPUs and NVIDIA GPUs and runs serial, MPI, CUDA and CUDA-MPI versions of QUICK.
+
+**Note:** For CUDA-enabled versions of QUICK, the container requires the host system have the necessary GPU drivers installed.
+
+**Note:** For MPI-enabled versions of QUICK, the container comes with an MPI runtime which can run on multiple CPUs of a single node. Multi-node execution has not been tested.
+
+The container is published on the GitHub container registry and can be found in the packages section of the GitHub repository: `<https://github.com/merzlab/QUICK/>`_.
+You may want to review the available versions, but for the examples below we will use this image: ghcr.io/merzlab/quick:23.08a-mpi-cuda-12.0.1.
+
+The following examples have been generalized, so you should be familiar with the system you plan to run the container on. 
+Many HPC resources will have additional steps that might be required, for example loading modules needed to run Docker or Singularity. 
+
+Below is the file contents for water.in used in the examples below:
+
+.. code-block:: none
+
+	HF BASIS=cc-pVDZ CUTOFF=1.0d-10 DENSERMS=1.0d-6 ENERGY
+
+	O              -0.06756756   -0.31531531    0.00000000 |
+	H               0.89243244   -0.31531531    0.00000000 |
+	H              -0.38802215    0.58962052    0.00000000 |
+
+Docker
+^^^^^^
+To run the container with Docker, begin by pulling the image:
+
+.. code-block:: none
+
+	docker image pull ghcr.io/merzlab/quick:23.08a-mpi-cuda-12.0.1
+
+Once the image has been pulled, you can run the image and mount your current directory in the container at /data:
+
+.. code-block:: none
+
+	docker run --rm -it -v $(pwd):/data ghcr.io/merzlab/quick:23.08a-mpi-cuda-12.0.1 /bin/bash
+
+Change your directory to /data:
+
+.. code-block:: none
+
+	cd /data
+
+You can then run quick, quick.MPI, quick.cuda or quick.cuda.MPI on an input file:
+
+.. code-block:: none
+
+	quick water.in
+
+When you are done, you can exit the container with the exit command:
+
+.. code-block:: none
+
+	exit
+
+Your output file(s) will be left on your local directory:
+
+.. code-block:: none
+
+	ls
+	--
+	water.in  water.out
+
+Singularity
+^^^^^^^^^^^
+To run the container with Singularity, begin by pulling the image:
+
+.. code-block:: none
+
+	singularity pull docker://ghcr.io/merzlab/quick:23.08a-mpi-cuda-12.0.1
+
+This will pull the image and convert the Docker container to a Singularity container such as quick_23.08a-cuda-12.0.1.sif.
+
+Once the image has been pulled and converted, you can run a shell from your current directory:
+
+.. code-block:: none
+
+	singularity shell --nv quick_23.08a-cuda-12.0.1.sif
+
+**Note**: Singularity requires the --nv flag for the CUDA-enabled versions of QUICK
+
+You can then run quick, quick.MPI, quick.cuda or quick.cuda.MPI on an input file:
+
+.. code-block:: none
+
+	quick water.in
+
+When you are done, you can exit the container with the exit command:
+
+.. code-block:: none
+
+	exit
+
+Your output file(s) will be left on your local directory:
+
+.. code-block:: none
+
+	ls
+	--
+	water.in  water.out
+
+Kubernetes
+^^^^^^^^^^
+Since the container is published as a Docker container, it can also be run on Kubernetes-based systems.
+
+Below is an example Kubernetes manifest file, saved as "quick.yaml", for a job:
+
+.. code-block:: yaml
+
+    apiVersion: batch/v1
+    kind: Job
+    metadata:
+      name: quick-qm
+    spec:
+      template:
+        spec:
+          containers:
+          - name: quick
+            image: ghcr.io/merzlab/quick:23.08a-mpi-cuda-12.0.1
+            command: ["sleep", "infinity"]
+            resources:
+              limits:
+                cpu: "4"
+                memory: "16Gi"
+                nvidia.com/gpu: "4"
+              requests:
+                cpu: "4"
+                memory: "16Gi"
+                nvidia.com/gpu: "4"
+          restartPolicy: Never
+
+**Note**: This manifest should be updated to conform to the resources available on the nodes in your Kubernetes cluster. 
+For example, this manifest assumes the availability of nodes with 4 NVIDIA GPUs.
+
+Once you have appropriately modified the manifest for your cluster configuration, you can schedule the job:
+
+.. code-block:: none
+
+	kubectl apply -f quick.yaml
+
+You can check the availability of the pod running the QUICK container like so:
+
+.. code-block:: none
+
+	kubectl get pods --watch
+	---
+	NAME             READY   STATUS              RESTARTS   AGE
+	quick-qm-wpwns   0/1     ContainerCreating   0          7s
+	quick-qm-wpwns   1/1     Running             0          68s
+
+
+Once the pod is running and ready shows (1/1), stop the watch command with ^C (ctrl + c).
+
+**Note**: The pod name "quick-qm-wpwns" will be different for you. Make sure to update the pod name in the following commands.
+
+You can now execute a terminal into the container:
+
+.. code-block:: none
+
+	kubectl exec -it quick-qm-wpwns -- /bin/bash
+
+You can then copy data into the container via your preffered method. 
+For simplicity in this example we will use the kubectl cp command from a second terminal on our local machine:
+
+.. code-block:: none
+
+	kubectl cp water.in quick-qm-wpwns:/root/water.in
+
+Returning to the terminal attached to the container, we can change directory to /root to find our file:
+
+.. code-block:: none
+
+	cd /root
+	ls
+	---
+	water.in
+
+You can then run quick, quick.MPI, quick.cuda or quick.cuda.MPI on an input file:
+
+.. code-block:: none
+
+	quick water.in
+
+When you are done, you can exit the container with the exit command:
+
+.. code-block:: none
+
+	exit
+
+You can then copy the output data back to your local machine:
+
+.. code-block:: none
+
+	kubectl cp quick-qm-wpwns:/root/water.out ./water.out
+
+You can then verify the transfer succeeded:
+
+.. code-block:: none
+
+	ls
+	---
+	water.out
+
+Once you have transferred your data, you should end the job:
+
+.. code-block:: none
+
+	kubectl delete -f quick.yaml
+
 *Last updated by Madu Manathunga on 11/21/2022.*
