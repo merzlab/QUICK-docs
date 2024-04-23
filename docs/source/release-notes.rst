@@ -3,6 +3,14 @@ Release notes
 
 The new features released with each QUICK version are as follows. 
 
+QUICK-24.03
+***********
+• Added ERI engine support for f basis functions to CUDA/MPI+CUDA codes (disabled be default)
+• HIP/MPI+HIP support disabled, please use QUICK version 23.08b for HIP support
+• Added initial Intel OneAPI/LLVM compiler support
+• Added support for the following basis sets: aug-cc-pVTZ, def2-TZVDP, def2-TZVPP, aug-pc-1, pc-2, and aug-pc-2
+• Various bug fixes, optimizations, and test updates
+
 QUICK-23.03
 ***********
 • Performance enhancements leading to 2x speedup of the GPU code compared to the previous release

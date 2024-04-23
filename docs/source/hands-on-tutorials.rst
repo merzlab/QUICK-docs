@@ -1,9 +1,11 @@
 Hands-on Tutorials
 ==================
 
-Examples of QUICK input files can be found at QUICK_HOME/test and at  this `link <https://github.com/merzlab/QUICK-tests>`_.
+Examples of QUICK input files can be found at QUICK_HOME/test and at this
+`link <https://github.com/merzlab/QUICK-tests>`_.
 
-For this tutorial we will use one water molecule as an example. The structure of a typical QUICK input is as follows.
+For this tutorial we will use one water molecule as an example. The structure
+of a typical QUICK input is as follows.
 
 .. code-block:: none
 
@@ -14,13 +16,17 @@ For this tutorial we will use one water molecule as an example. The structure of
      H              -0.38802215    0.58962052    0.00000000 |
 
 
-Before running QUICK, make sure to set the necessary environmental variables as follows:
+Before running QUICK, make sure to set the necessary environmental variables as
+follows:
 
 .. code-block:: none
 
  source $(installdir)/quick.rc
 
-Where *installdir* is the folder where QUICK was installed. This will add the directory that contains the QUICK executables to your path and also set an environment variable that points to the basis set directory. Depending on the installation, you may run QUICK as follows:
+where *installdir* is the folder where QUICK was installed. This will add the
+directory that contains the QUICK executables to your path and also set an
+environment variable that points to the basis set directory. Depending on the
+installation, you may run QUICK as follows:
 
 Serial version:
 
@@ -42,21 +48,26 @@ CUDA version:
 
      quick.cuda input.in
 
-CUDA MPI version:
+MPI+CUDA version:
 
 .. code-block:: none
 
      mpirun -np M quick.cuda.MPI input.in
 
-where M (M <= number of GPUs) is the number of processes that you wish to launch. Each process will use one GPU. The GPUs can be distributed across multiple nodes, in which case you have to make sure that the correct number of processes are started on each node.
+where M (M <= number of GPUs) is the number of processes that you wish to
+launch. Each process will use one GPU. The GPUs can be distributed across
+multiple nodes, in which case you have to make sure that the correct number of
+processes are started on each node.
 
-Now assume that we have successfully installed the CUDA version and set the environment variables.
+Now assume that we have successfully installed the CUDA version and set
+relevant the environment variables.
 
 HF/DFT single point energy calculation
 **************************************
 
-The typical keyword line in the input file for a HF/DFT calculation looks like this.
-Note that all keywords are separated by a single space. The order of the keywords is not relevant.
+The typical keyword line in the input file for a HF/DFT calculation looks like
+this.  Note that all keywords are separated by a single space. The order of the
+keywords is not relevant.
 
 .. code-block:: none
 
@@ -69,8 +80,9 @@ Note that all keywords are separated by a single space. The order of the keyword
      |     Basis set
      Hamiltonian
 
-For DFT, we replace the *HF* hamiltonian with *DFT* and specify the functional name separated by a
-space. For example, we may ask for a B3LYP energy calculation with the following keyword line.
+For DFT, we replace the *HF* hamiltonian with *DFT* and specify the functional
+name separated by a space. For example, we may ask for a B3LYP energy
+calculation with the following keyword line.
 
 .. code-block:: none
 
@@ -84,8 +96,9 @@ space. For example, we may ask for a B3LYP energy calculation with the following
      |     Functional
      Hamiltonian
 
-Note that in the above line, we are using the NATIVE B3LYP functional. If we want to use
-the B3LYP functional through LIBXC, the keyword line should be specified as follows.
+Note that in the above line, we are using the NATIVE B3LYP functional. If we
+want to use the B3LYP functional through LIBXC, the keyword line should be
+specified as follows.
 
 .. code-block:: none
 
@@ -99,8 +112,9 @@ the B3LYP functional through LIBXC, the keyword line should be specified as foll
      |     Functional
      Hamiltonian
 
-It is also possible to ask for exchange and correlation LIBXC functionals separately.
-For instance, if we use BLYP, the keyword line is specified as follows.
+It is also possible to ask for exchange and correlation LIBXC functionals
+separately.  For instance, if we use BLYP, the keyword line is specified as
+follows.
 
 .. code-block:: none
 
@@ -114,10 +128,10 @@ For instance, if we use BLYP, the keyword line is specified as follows.
      |        Functionals (Functional_1, Functional_2 separated by a comma)
      Hamiltonian
 
-**Note:** Currently, QUICK cannot handle more than two functionals at a time.
+**NOTE:** Currently, QUICK cannot handle more than two functionals at a time.
 
-We now proceed with a HF single point energy calculation for a water molecule. Here is the input file,
-called *water.in*.
+We now proceed with a HF single point energy calculation for a water molecule.
+Below is the input file, called *water.in*:
 
 .. code-block:: none
 
@@ -127,15 +141,17 @@ called *water.in*.
      H                  0.89243244   -0.31531531    0.00000000
      H                 -0.38802215    0.58962052    0.00000000
 
-Executing QUICK will give us a *water.out* file. Here is how to run using the CUDA version of QUICK.
+Executing QUICK will give us a *water.out* file. Here is how to run using the
+CUDA version of QUICK.
 
 .. code-block:: none
 
      quick.cuda water.in
 
-The information reported in the *water.out* file are as follows. In the beginning of the output
-file, we can find information about job card and the GPU used for the calculation. The next section
-reports information from SAD initial guess. This will be followed by some information about the molecule
+The information reported in the *water.out* file are as follows. In the
+beginning of the output file, we can find information about job card and the
+GPU used for the calculation. The next section reports information from SAD
+initial guess. This will be followed by some information about the molecule
 such as input geometry, basis function information, etc.
 
 .. code-block:: none
@@ -185,7 +201,7 @@ Next we find information about the SCF iterations.
  MAX ERROR = 0.202570E-05   RMS CHANGE = 0.487164E-06   MAX CHANGE = 0.420193E-05
  -----------------------------------------------
 
-This is followed by electronic, nuclear and total energies.
+This is followed by electronic, nuclear, and total energies.
 
 .. code-block:: none
 
@@ -198,8 +214,8 @@ Finally, we find timing information about the calculation.
 HF/DFT gradient calculation
 ***************************
 
-For a HF/DFT gradient calculation input the **ENERGY** flag is replaced by **GRADIENT**.
-Our water example input is now modified as follows.
+For a HF/DFT gradient calculation input the **ENERGY** flag is replaced by
+**GRADIENT**.  Our water example input is now modified as follows.
 
 .. code-block:: none
 
@@ -209,8 +225,9 @@ Our water example input is now modified as follows.
      H                  0.89243244   -0.31531531    0.00000000
      H                 -0.38802215    0.58962052    0.00000000
 
-In the calculation output, we can find the gradient immediately after the SCF cycles and energy information,
-and before the timings. The above example will print the following gradient.
+In the calculation output, we can find the gradient immediately after the SCF
+cycles and energy information, and before the timings. The above example will
+print the following gradient.
 
 .. code-block:: none
 
@@ -229,13 +246,15 @@ and before the timings. The above example will print the following gradient.
     3Z     0.0000000000    -0.0000000115
  ----------------------------------------
 
-Finally, the timings section also shows gradient timings for 1e, 2e and exchange correlation calculations.
+Finally, the timings section also shows gradient timings for 1e, 2e, and
+exchange correlation calculations.
 
 HF/DFT geometry optimization
 ****************************
 
-For HF/DFT geometry optimizations, we should specify the **OPTIMIZE** flag in the QUICK input.
-For instance, the geometry optimization input for our water molecule would be:
+For HF/DFT geometry optimizations, we should specify the **OPTIMIZE** flag in
+the QUICK input.  For instance, the geometry optimization input for our water
+molecule would be:
 
 .. code-block:: none
 
@@ -245,9 +264,10 @@ For instance, the geometry optimization input for our water molecule would be:
      H                  0.89243244   -0.31531531    0.00000000
      H                 -0.38802215    0.58962052    0.00000000
 
-QUICK geometry optimization output will contain information of SCF, gradient and cartesian coordinates for
-each optimization step. As in the gradient calculation, the analytical gradients will be printed out immediately
-after the SCF information.
+QUICK geometry optimization output will contain information of SCF, gradient,
+and cartesian coordinates for each optimization step. As in the gradient
+calculation, the analytical gradients will be printed out immediately after the
+SCF information.
 
 .. code-block:: none
 
@@ -276,7 +296,8 @@ Next we find information essential for the convergence of geometry optimization.
   GEOMETRY CHANGE RMS     =    0.1958922994E-04 (REQUEST= 0.12000E-02)
   GRADIENT NORM           =    0.1292934393E-04 (REQUEST= 0.30000E-03)
 
-The cartesian coordinates of the molecular geometry on each optimization step are printed next.
+The cartesian coordinates of the molecular geometry on each optimization step
+are printed next.
 
 .. code-block:: none
 
@@ -286,15 +307,17 @@ The cartesian coordinates of the molecular geometry on each optimization step ar
   H        0.8794   -0.2850   -0.0000
   H       -0.3550    0.5874    0.0000
 
-We can also find the energy of the minimum structure at the end of output, right before the timings are printed out.
+We can also find the energy of the minimum structure at the end of output,
+right before the timings are printed out.
 
 HF/DFT energies and gradients in the presence of external point charges
 ***********************************************************************
 
-In order to compute energies and gradients of molecular systems containing external point charges, 
-we must include cartesian coordinates (in Angstroms), charges (in au.) and *EXTCHARGES* keyword in the input file.
-Below is an example input of a point charge gradient calculation for a system containing a single water molecule
-and 3 point charges.
+In order to compute energies and gradients of molecular systems containing
+external point charges, we must include cartesian coordinates (in Angstroms),
+charges (in au.), and *EXTCHARGES* keyword in the input file.  Below is an
+example input of a point charge gradient calculation for a system containing a
+single water molecule and 3 point charges.
 
 .. code-block:: none
 
@@ -312,7 +335,11 @@ and 3 point charges.
             |             Charge
    Cartesian coordinates
 
-The total energy and nuclear gradients reported in the output of this calculation include the effect of point charges. In addition,
-QUICK will report point charge gradients next to nuclear gradients section in the output. The point charge gradient is the force exerted on the point charges due to the electric field of the molecular charge density (electron density plus nuclear charges).
+The total energy and nuclear gradients reported in the output of this
+calculation include the effect of point charges. In addition, QUICK will report
+point charge gradients next to nuclear gradients section in the output. The
+point charge gradient is the force exerted on the point charges due to the
+electric field of the molecular charge density (electron density plus nuclear
+charges).
 
 *Last updated by Madu Manathunga on 03/23/2021.*

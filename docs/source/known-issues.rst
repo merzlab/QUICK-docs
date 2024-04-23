@@ -1,24 +1,35 @@
 Known Issues of Current Version
 ===============================
 
-QUICK is under continous development and as of the latest version, we have detected
-the issues listed below. If you find anything other than these, please feel free to
-report any bugs or issues through our Git Hub page: `https://github.com/merzlab/QUICK/issues <https://github.com/merzlab/QUICK/issues>`_.
+QUICK is under continous development and as of the latest version, we have
+detected the issues listed below. If you find anything other than these, please
+feel free to report any bugs or issues through our GitHub page:
+`https://github.com/merzlab/QUICK/issues <https://github.com/merzlab/QUICK/issues>`_.
 
 Compile time
 ^^^^^^^^^^^^
 
-1. Compiling CUDA/CUDAMPI version for K40 and K80 using CUDA/11.0 or higher
-***************************************************************************
+1. Compiling CUDA/MPI+CUDA versions for Kepler GPUs using CUDA v11.0 or higher
+******************************************************************************
 
-NVIDIA has dropped support for sm_30 microarchitecture starting from CUDA/11.0. Both QUICK build systems however, still use sm_30 flags
-in NVCC compiler flag list for CUDA/11.0 or higher toolkits if the user specifies kepler as target microarchitecture (i.e. --arch kepler, 
--DQUICK_USER_ARCH=kepler in legacy and CMake builds respectively). This will lead to a compile time error.
+NVIDIA has dropped support for sm_30 microarchitecture starting from CUDA
+v11.1, and support for sm_35 amd sm_37 starting from CUDA v12.0.  However,
+QUICK build systems still use sm_30/sm_35/sm_37 flags in NVCC compiler flag
+list for CUDA v11 or higher toolkits if the user specifies Kepler as target
+microarchitecture (i.e. --arch kepler, -DQUICK_USER_ARCH=kepler in legacy and
+CMake builds respectively). This will lead to a compile time error.
 
-Solution: Manually change -arch and -gencode flag values from sm_30 to sm_35 (for K40 gpu) or sm_37 (K80 gpu) in make input files.
-In legacy build system, this change should be made in $QUICK_HOME/build/Make.cuda.in (for CUDA serial build) and $QUICK_HOME/build/Make.cudampi.in 
-(for CUDAMPI build) after executing configure script but before running *make* or *make install* commands.  
-In CMake build system, one has to replace sm_30 instances in files inside cmake build directory.
+Solution: Manually ensure that the installed CUDA version supports the correct
+Kepler targeted microarchitectures (<= v11.0 for sm_30, <= v11.8 for
+sm_35/sm_37).  Please consult the Release Notes for your installed CUDA SDK
+version for further details on supported GPU microarchitectures.
+
+2. Compiling HIP/MPI+HIP versions fails for this release (unsupported)
+**********************************************************************
+HIP/MPI+HIP support disabled for this release due to required GPU code rewrites
+(related to added f basis function support).
+
+Solution: Use QUICK v23.08b for HIP/MPI+HIP support until support is restored.
 
 Runtime
 ^^^^^^^
@@ -36,23 +47,31 @@ or
 
  gpu_get2e.cu.getGrad.358: 0x2 (out of memory)
 
-The above memory allocation errors are observed in CUDA version when the available global memory of the device is insufficient.  
+The above memory allocation errors are observed in CUDA version when the
+available global memory of the device is insufficient.  
 
-Solution: Use a device with more global memory. Also make sure not to execute other codes on the GPU while running QUICK.
+Solution: Use a device with more global memory. Also make sure not to execute
+other codes on the GPU while running QUICK.
 
 2. Accuracy of gradients on old gaming cards
 ********************************************
 
-When computing gradients using CUDA/CUDAMPI versions on old gaming cards (eg. from maxwell and kepler microarchitectures), the resulting gradients may be less accurate if one uses the default density matrix cutoff (1.0E-6). 
+When computing gradients using CUDA/MPI+CUDA versions on old gaming cards
+(e.g., from Kepler and Maxwell microarchitectures), the resulting gradients may
+be less accurate if the default density matrix cutoff (1.0E-6) is used. 
 
 Solution: Tighten the cutoff value to 1.0E-7 or 1.0E-8.
 
-3. Wrong gradients in CUDAMPI version
-*************************************
+3. Wrong gradients in MPI+CUDA version
+**************************************
 
-If one launches CUDAMPI version with a number of processes greater than the available GPUs on the system, it is possible to result in wrong gradients on some hardware. 
+If one launches MPI+CUDA version with a number of processes greater than the
+available GPUs on the system, it is possible to result in wrong gradients on
+some hardware. 
 
-Solution: Always launch CUDAMPI version with a number of processes less than or equal to the available number of GPUs (i.e. mpirun -np N ;where N <= # of GPUs)  
+Solution: Always launch the MPI+CUDA version with a number of processes less
+than or equal to the available number of GPUs (i.e. mpirun -np N ; where N <= #
+of GPUs)  
   
 
 *Last updated by Madu Manathunga on 03/03/2022.*

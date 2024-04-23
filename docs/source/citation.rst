@@ -5,8 +5,8 @@ Citation
 
 Please cite |QUICK_VERSION| as follows. 
 
-  Manathunga, M.; Shajan, A.; Giese, T. J.; Cruzeiro, V. W. D.; Smith, J.; Miao, Y.; He, X.; Ayers,K;
-  Brothers, E.; Götz, A. W.; Merz, K. M. |QUICK_VERSION| University of California San Diego, CA and Michigan State University, East Lansing, MI, 2023.
+  Manathunga, M.; O'Hearn, K. A.; Shajan, A.; Giese, T. J.; Cruzeiro, V. W. D.; Smith, J.; Miao, Y.; He, X.; Ayers,K;
+  Brothers, E.; Götz, A. W.; Merz, K. M. |QUICK_VERSION| University of California San Diego, CA and Michigan State University, East Lansing, MI, 2024.
 
 If you perform density functional theory calculations please also cite:
 
