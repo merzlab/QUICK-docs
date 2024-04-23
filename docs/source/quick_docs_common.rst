@@ -1,1 +1,1 @@
-.. |QUICK_VERSION| replace:: QUICK-development
+.. |QUICK_VERSION| replace:: QUICK-24.03

@@ -12,22 +12,32 @@ QUICK API
     :height: 294px
     :alt: api
 
-Starting from version 20.06, the QUICK build system compiles the source code and creates static or
-shared object libraries. Such libraries are then linked to the main QUICK program. Assuming that a
-user specifies a prefix (*$installdir*) during the configuration of legacy or CMake builds, libraries will be located inside
-*$installdir/lib*.
+Starting from version 20.06, the QUICK build system compiles the source code
+and creates static or shared object libraries. Such libraries are then linked
+to the main QUICK program. Assuming that a user specifies a prefix
+(*$installdir*) during the configuration of legacy or CMake builds, libraries
+will be located inside *$installdir/lib*.
 
-In the case of the **legacy build system**, there will be subdirectories *$installdir/lib/$buildtype* where *buildtype* could be *serial*, *mpi* or *cuda*. Required .mod or 
-header files can be found inside *$QUICK_HOME/include/$buildtype*.
+In the case of the **legacy build system**, there will be subdirectories
+*$installdir/lib/$buildtype* where *buildtype* could be *serial*, *mpi* or
+*cuda*. Required .mod or header files can be found inside
+*$QUICK_HOME/include/$buildtype*.
 
-In the case of the **CMake build system** the libraries will be in directory *$installdir/lib*. Depending on the type of build, there will be the serial library *libquick.so* and any of CUDA and MPI enabled libraries *libquick_cuda.so*, *libquick_mpi.so*, and *libquick_mpi_cuda.so*. The corresponding module files are located in build type specific subdirectories of *$installdir/include/libxc* and *$installdir/include/quick*. 
+In the case of the **CMake build system** the libraries will be in directory
+*$installdir/lib*. Depending on the type of build, there will be the serial
+library *libquick.so* and any of CUDA and MPI enabled libraries
+*libquick_cuda.so*, *libquick_mpi.so*, and *libquick_mpi_cuda.so*. The
+corresponding module files are located in build type specific subdirectories of
+*$installdir/include/libxc* and *$installdir/include/quick*. 
 
-It is possible to link QUICK libraries into external programs to obtain HF/DFT energies, gradients
-and point charge gradients through the Fortran 90 QUICK API. This is useful for example for MM programs to perform QM/MM calculations. We will explain the usage of the API
-with an example.
+It is possible to link QUICK libraries into external programs to obtain HF/DFT
+energies, gradients and point charge gradients through the Fortran 90 QUICK
+API. This is useful for example for MM programs to perform QM/MM calculations.
+We will explain the usage of the API with an example.
 
-Let us consider a simple system containing a water molecule surrounded by 3 point charges. We now create the
-following fortran module (test_module.f90) and store atomic coordinates and charges for 5 snapshots. Furthermore, we implement
+Let us consider a simple system containing a water molecule surrounded by 3
+point charges. We now create the following fortran module (test_module.f90) and
+store atomic coordinates and charges for 5 snapshots. Furthermore, we implement
 several subroutines to load test data and print data retrieved from QUICK.
 
 ::
@@ -237,7 +247,8 @@ several subroutines to load test data and print data retrieved from QUICK.
 
 
 
-Next, we implement the following example program (example.f90) that uses the above module and calls QUICK through the API.
+Next, we implement the following example program (example.f90) that uses the
+above module and calls QUICK through the API.
 
 ::
 
@@ -392,10 +403,11 @@ Next, we implement the following example program (example.f90) that uses the abo
 	
 	end program test_quick_api
 
-Note that in our test program, errors are propagated from QUICK using *ierr* integer variable. 
-The errors must be properly handled although we have not shown error handling here. 
-Assuming we configured QUICK serial version with a prefix and compiled using intel compiler toolchain,we can 
-compile above source files and link QUICK libraries as follows.
+Note that in our test program, errors are propagated from QUICK using *ierr*
+integer variable.  The errors must be properly handled although we have not
+shown error handling here.  Assuming we configured QUICK serial version with a
+prefix and compiled using intel compiler toolchain,we can compile above source
+files and link QUICK libraries as follows.
 
 ::
 
@@ -417,7 +429,7 @@ CUDA version of the libraries can be linked as follows.
 	-L$installdir/lib/cuda/ -L$CUDA_HOME/lib64 -lcuda -lm -lcudart -lcublas -lcusolver 
 	-lquick-cuda -lxc-cuda -lstdc++
 
-CUDAMPI version of the libraries can be linked as follows.
+MPI+CUDA version of the libraries can be linked as follows.
 
 ::
 
@@ -425,13 +437,22 @@ CUDAMPI version of the libraries can be linked as follows.
 	-I$installdir/include/cuda/ -L$installdir/lib/cuda/ -L$CUDA_HOME/lib64 -lcuda -lm -lcudart 
 	-lcublas -lcusolver -lquick-cudampi -lxc-cuda -lstdc++
 
-Running serial or CUDA executable should produce `this output <https://raw.githubusercontent.com/merzlab/QUICK-docs/master/resources/v21.03/api-serial.txt>`_.
-A `similar output <https://raw.githubusercontent.com/merzlab/QUICK-docs/master/resources/v21.03/api-mpi.txt>`_ may be obtained by running MPI or CUDAMPI version with 2 processes.
+Running serial or CUDA executable should produce
+`this output <https://raw.githubusercontent.com/merzlab/QUICK-docs/master/resources/v21.03/api-serial.txt>`_.
+A `similar output <https://raw.githubusercontent.com/merzlab/QUICK-docs/master/resources/v21.03/api-mpi.txt>`_
+may be obtained by running MPI or MPI+CUDA version with 2 processes.
 
 Adding new basis sets
 ---------------------
 
-QUICK follows the basis set format established by the *Gaussian* software. You have to follow this format if you want to construct your own basis set. Established basis sets can be obtained from the `basis set exchange web page <https://www.basissetexchange.org/>`_. In order to add a basis set into QUICK, one should download the basis set in the *Gaussian* software format and save it in the *basis* folder. Then, link this basis set to QUICK by updating the *basis_link* file inside the *basis* folder. The *basis_link* file contains a table in the following format.
+QUICK follows the basis set format established by the *Gaussian* software. You
+have to follow this format if you want to construct your own basis set.
+Established basis sets can be obtained from the `basis set exchange web page
+<https://www.basissetexchange.org/>`_. In order to add a basis set into QUICK,
+one should download the basis set in the *Gaussian* software format and save it
+in the *basis* folder. Then, link this basis set to QUICK by updating the
+*basis_link* file inside the *basis* folder. The *basis_link* file contains a
+table in the following format.
 
 .. code-block:: none
 
@@ -461,16 +482,20 @@ You should update this table by adhering to the rules below.
 
  4. DO NOT CHANGE THE TABLE/COLUMN WIDTH! VERTICAL BORDERS MUST REMAIN THE SAME.
 
-Note 1: Current version of QUICK ERI engine only support basis functions up to *d*. Therefore, do not add high angular momentum basis sets and attempt to use f/g functions.
+Note 1: Current version of QUICK ERI engine only support basis functions up to
+*d* (up to f support for CUDA/MPI+CUDA if enabled). Therefore, do not add high
+angular momentum basis sets and attempt to use f/g functions.
 
-Note 2: ECPs are not supported by |QUICK_VERSION|. Therefore care must be taken not to add elements that require ECPs as this would lead to wrong results.
+Note 2: ECPs are not supported by |QUICK_VERSION|. Therefore care must be taken
+not to add elements that require ECPs as this would lead to wrong results.
 
 Adding new test cases into test suite
 -------------------------------------
 
-In order to add new test cases into the QUICK test suite, one must follow 3 steps. First, the test input and reference output file
-should be added into $QUICK_HOME/test and $QUICK_HOME/test/saved directories respectively. Make sure to adhere to following naming
-convention. 
+In order to add new test cases into the QUICK test suite, one must follow 3
+steps. First, the test input and reference output file should be added into
+$QUICK_HOME/test and $QUICK_HOME/test/saved directories respectively. Make sure
+to adhere to following naming convention. 
 
 .. code-block:: none
 
@@ -484,12 +509,15 @@ Some example test case names that follow this convention are shown below.
  grad_CH4_b3lyp_def2svp.in, grad_CH4_b3lyp_def2svp.out
  opt_wat_rhf_631g.in, opt_wat_rhf_631g.out
 
-Second, test list files located inside $QUICK_HOME/test should be updated. These are just .txt files that record names of test cases. 
-Currently, there are 4 testlist files: testlist_short.txt, testlist_short_cuda.txt, testlist_full.txt, testlist_full_cuda.txt.
-The first and second contain short test lists that would be used for standard testing (i.e. by executing *make test* or *./runtest* commands) 
-of quick/quick.MPI and quick.cuda/quick.cuda.MPI executables. The third and fourth are used for robust testing (i.e. by executing *make fulltest* 
-or *./runtest - -full* commands) which usually happens during CI. 
-They have the following format:
+Second, test list files located inside $QUICK_HOME/test should be updated.
+These are just plain text TXT (*.txt) files that record names of test cases.
+Currently, there are 4 testlist files: testlist_short.txt,
+testlist_short_cuda.txt, testlist_full.txt, testlist_full_cuda.txt.  The first
+and second contain short test lists that would be used for standard testing
+(i.e. by executing *make test* or *./runtest* commands) of quick/quick.MPI and
+quick.cuda/quick.cuda.MPI executables. The third and fourth are used for robust
+testing (i.e. by executing *make fulltest* or *./runtest - -full* commands)
+which usually happens during CI.  They have the following format:
 
 .. code-block:: none
 
@@ -500,8 +528,10 @@ They have the following format:
  grad_wat_b3lyp_ccpvdz             #B3LYP point charge gradient test
  opt_wat_rhf_631g                  #RHF geometry optimization test with s and p basis functions
 
-Third, the runtest script located in $QUICK_HOME/tools should be updated with test information. Specifically, *print_test_info()* function of the 
-script contains a case statement that sets a string variable value which will be printed during the test runs. 
+Third, the runtest script located in $QUICK_HOME/tools should be updated with
+test information. Specifically, *print_test_info()* function of the script
+contains a case statement that sets a string variable value which will be
+printed during the test runs. 
 
 .. code-block:: none
 
@@ -514,40 +544,69 @@ script contains a case statement that sets a string variable value which will be
     ene_BeH2_rhf_sto3g)                   testinfo="BeH2: RHF energy test: STO-3G basis set";;
     ene_BH3_rhf_sto3g)                    testinfo="BH3: RHF energy test: STO-3G basis set";;
 
-You should add the new test name as a case and store test information in *testinfo* variable. Finally, when you add changes using git, make sure to
-use *git add -f* command for adding the reference output files. This is due to the fact that files with .out extension are ignored by git according
-to .gitignore rules.
+You should add the new test name as a case and store test information in
+*testinfo* variable. Finally, when you add changes using git, make sure to use
+*git add -f* command for adding the reference output files. This is due to the
+fact that files with .out extension are ignored by git according to .gitignore
+rules.
 
 Maintaining the documentation
 -----------------------------
 
-This section provides some guidence to keep this documentation alive and up to date when the current doc keeper is gone.
+This section provides some guidence to keep this documentation alive and up to
+date when the current doc keeper is gone.
 
-The documentation is written
-in the rst language and you must be familiar with the syntax before starting. A short and sweet rst lesson can be found `here <https://thomas-cokelaer.info/tutorials/sphinx/rest_syntax.html>`_.
+Prerequisites required for modify and build this documentation are as follows:
 
-When you are ready, clone the documentation from `GitHub repository <https://github.com/merzlab/QUICK-docs>`_.
+• Git
+• GNU Make
+• Python
+• `Sphinx <https://www.sphinx-doc.org/en/master/usage/installation.html>`_
 
-In the root QUICK-docs directory (from now on $QUICK_DOCS), you should find two directories called *docs* and *resources*. Inside the *docs* directory, a Makefile and 
-*source* directory should exist. The latter contains all the documentation source and images that would go in. If you have large text files to be included, these should be saved
-in $QUICK_DOCS/resources inside an appropriate directory and linked properly. Setting the QUICK version appearing in the documentation is achieved by assigning a value to the *QUICK_VERSION* variable in $QUICK_DOCS/docs/source/quick_docs_common.rst file. For a release version, we will have to set this to a proper string value (eg. QUICK-23.03).
-Once you have made changes, also make sure to change the QUICK version (i.e. set *version* variable, semantic versioning must be used) in $QUICK_DOCS/docs/source/conf.py and compile the documentation using Make. In order to do so, you must have installed *sphinx* and *python* in your system. If the *sphix-build* executable is not accessible through your path variable, make sure to set the *SPHINXBUILD* variable in $QUICK_DOCS/docs/Makefile. Then from $QUICK_DOCS/docs folder, execute the following command.
+The documentation is written in the reStructuredText (rST) language and built
+into HTML using Sphinx. You must be familiar with the syntax before making
+changes.  A short and sweet lesson on the rST syntax can be found
+`here <https://thomas-cokelaer.info/tutorials/sphinx/rest_syntax.html>`_.
+
+When the above prerequisites have been satisfied, clone the documentation from
+`GitHub repository <https://github.com/merzlab/QUICK-docs>`_.
+
+In the root QUICK-docs directory (from now on $QUICK_DOCS), you should find two
+directories called *docs* and *resources*. Inside the *docs* directory, a
+Makefile and *source* directory should exist. The latter contains all the
+documentation source and images that would go in. If you have large text files
+to be included, these should be saved in $QUICK_DOCS/resources inside an
+appropriate directory and linked properly. Setting the QUICK version appearing
+in the documentation is achieved by assigning a value to the *QUICK_VERSION*
+variable in $QUICK_DOCS/docs/source/quick_docs_common.rst file. For a release
+version, we will have to set this to a proper string value (eg. QUICK-23.03).
+Once you have made changes, also make sure to change the QUICK version (i.e.
+set *version* variable, semantic versioning must be used) in
+$QUICK_DOCS/docs/source/conf.py and compile the documentation using Make.  If
+the *sphix-build* executable is not accessible through your path variable, make
+sure to set the *SPHINXBUILD* variable in $QUICK_DOCS/docs/Makefile. Then from
+$QUICK_DOCS/docs folder, execute the following command:
 
 .. code-block:: none
 
  cd $QUICK_DOCS/docs
  make html
 
-This should compile the documentation. Once the compilation is done, open up the documentation and check your changes. This may be done as follows.
+This should compile the documentation. Once the compilation is done, open up
+the documentation in a web browser and check your changes. A good first file to
+view for navigation is as follows:
 
 .. code-block:: none
 
- open $QUICK_DOCS/docs/build/html/index.html 
+ $QUICK_DOCS/docs/build/html/index.html 
 
-If you are happy with the changes, push/merge the new content into `GitHub repository <https://github.com/merzlab/QUICK-docs>`_. 
+If you are happy with the changes, fork and submit a merge request with the new
+content into `GitHub repository <https://github.com/merzlab/QUICK-docs>`_. 
 
-The QUICK-docs GitHub repository is linked to readthedocs.org web portal where the documentation is compiled and hosted. Log into merzlab account of the readthedocs.org web portal
-using appropriate username and password. You should find the following QUICK-docs project page once landed inside the account. 
+The QUICK-docs GitHub repository is linked to readthedocs.org web portal where
+the documentation is compiled and hosted. Log into merzlab account of the
+readthedocs.org web portal using appropriate username and password. You should
+find the following QUICK-docs project page once landed inside the account. 
 
 .. image:: readthedocs1.png
     :width: 650px
@@ -555,18 +614,35 @@ using appropriate username and password. You should find the following QUICK-doc
     :height: 498px
     :alt: support
 
-Note that we have different documentation versions in versions in the panel. The *latest* version is a compilation of the most recent source from the QUICK-docs repository. The other versions correspond to different QUICK release versions.
+Note that we have different documentation versions in versions in the panel.
+The *latest* version is a compilation of the most recent source from the
+QUICK-docs repository. The other versions correspond to different QUICK release
+versions.
 
-To create such a version, you must create a GitHub tag that points to a specific commit of the QUICK-docs repository. More details on creating a GitHub tag can be found in the GitHub documentation. Once the tag is created, you can select this tag and create a new documentation version from the *versions* page of the readthedocs web portal. Note that when creating the GitHub tag, you must name it following semantic versioning. Otherwise, the tag wont appear in the readthedocs web portal. Next, build the documentation by simply hitting the *Build Version* button of the *build* page. Once the documentation is built, this will appear online.
+To create such a version, you must create a GitHub tag that points to a
+specific commit of the QUICK-docs repository. More details on creating a GitHub
+tag can be found in the GitHub documentation. Once the tag is created, you can
+select this tag and create a new documentation version from the *versions* page
+of the readthedocs web portal. Note that when creating the GitHub tag, you must
+name it following semantic versioning. Otherwise, the tag wont appear in the
+readthedocs web portal. Next, build the documentation by simply hitting the
+*Build Version* button of the *build* page. Once the documentation is built,
+this will appear online.
 
-You can link the html pages of a particular documentation version anywhere you want. For example, we can link the installation guide of the documentation into the README.md file of QUICK repository. 
+You can link the html pages of a particular documentation version anywhere you
+want. For example, we can link the installation guide of the documentation into
+the README.md file of QUICK repository. 
 
 .. code-block:: none
 
  * [Installation Guide](https://quick-docs.readthedocs.io/en/21.3.0/installation-guide.html#installation-guide)
 
-Note that above we link a page from documentation version *21.3.0* into the QUICK-21.03 README.md file. Similarly, a status badge from a particular version can be included in the README.md file.
+Note that above we link a page from documentation version *21.3.0* into the
+QUICK-21.03 README.md file. Similarly, a status badge from a particular version
+can be included in the README.md file.
 
-Note that you should never link anything from the documentation version named *latest*. This version will change whenever you make changes to the QUICK-docs repository and thus must be used for testing purposes only.        
+Note that you should never link anything from the documentation version named
+*latest*. This version will change whenever you make changes to the QUICK-docs
+repository and thus must be used for testing purposes only.        
 
 *Last updated by Madu Manathunga on 11/22/2022.*

@@ -1,15 +1,20 @@
 User Manual
 =================
 
-QUICK uses a simple text based input file that consists of a line with keywords followed by an empty line, the molecular coordinates in xyz format, and potentially point charge information after another empty line. 
-Please see the Hands-on Tutorials for details on the input file format. 
+QUICK uses a simple text based input file that consists of a line with keywords
+followed by an empty line, the molecular coordinates in xyz format, and
+potentially point charge information after another empty line.  Please see the
+Hands-on Tutorials for details on the input file format. 
 
 Units
 ^^^^^
 
-The QUICK input file requires atomic coordinates in Angstrom and charges (molecular charge and point charges) in atomic units.
+The QUICK input file requires atomic coordinates in Angstrom and charges
+(molecular charge and point charges) in atomic units.
 
-The QUICK output reports coordinates in Angstrom and charges, energies and gradients in atomic units. This means that energies are reported in Hartree and gradients in Hartree/Bohr.
+The QUICK output reports coordinates in Angstroms, and charges, energies, and
+gradients in atomic units. This means that energies are reported in Hartree and
+gradients in Hartree/Bohr.
 
 Keywords for QUICK Input
 ^^^^^^^^^^^^^^^^^^^^^^^^
@@ -53,7 +58,12 @@ Following functionals use Libxc (version 4.0.4) and can be requested by their po
 
    **PBE0**: PBE0/PBEH functional (C. Adamo and V. Barone, J. Chem. Phys. 110, 6158 (1999), M. Ernzerhof and G. E. Scuseria, J. Chem. Phys. 110, 5029 (1999))
 
-Except for the built-in BLYP and B3LYP functionals QUICK makes use of the Libxc density functional library (version 4.0.4). All LDA, GGA and hybrid-GGA functionals available in Libxc can be requested. As a reminder, (hybrid) meta-GGA and range-separated hybrid functionals are not supported at present. You must make sure to select a valid combination of exchange and correlation functionals. A generic Libxc functional can be requested as follows:
+Except for the built-in BLYP and B3LYP functionals QUICK makes use of the Libxc
+density functional library (version 4.0.4). All LDA, GGA and hybrid-GGA
+functionals available in Libxc can be requested. As a reminder, (hybrid)
+meta-GGA and range-separated hybrid functionals are not supported at present.
+You must make sure to select a valid combination of exchange and correlation
+functionals. A generic Libxc functional can be requested as follows:
 
    **LIBXC=FUNCTIONAL1,FUNCTIONAL2** : Where FUNCTIONAL1 and FUNCTIONAL2 are exchange and correlation functionals. *Note: Spaces near '=' or ',' are not allowed.*
 
