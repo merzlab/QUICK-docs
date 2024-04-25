@@ -16,40 +16,23 @@ Compatible Compilers and Hardware
 ---------------------------------
 
 In general QUICK works well with a range of compilers (GNU, Intel), math
-libraries (Intel MKL, reference BLAS/LAPACK, MAGMA), MPI implementations (OpenMPI,
-Intel MPI), and GPU SDK versions (CUDA and ROCm/HIP).  We have specifically tested
-|QUICK_VERSION| with following compilers under the Linux operating system.
+libraries (Intel MKL, reference BLAS/LAPACK, MAGMA), MPI implementations
+(OpenMPI, Intel MPI), and GPU SDK versions (CUDA and ROCm/HIP).  We have
+specifically tested |QUICK_VERSION| with following compilers, libraries, and
+tools under the Linux operating system.
 
-• Serial version
+ 1. GNU GCC v7.3.0; OpenMPI v3.1.1; CUDA v9.2.88; CMake v3.11.4
+ 2. GNU GCC v8.3.0; OpenMPI v3.1.4; CUDA v10.2.89; CMake v3.15.1
+ 3. GNU GCC v11.3.0; OpenMPI v4.1.4; CUDA v11.8; CMake v3.23.1
+ 4. GNU GCC v12.3.0; OpenMPI v5.0.0; CUDA v12.3; CMake v3.26.3
+ 5. Clang v14.0 / GNU GCC v11.3.0 (Fortran); OpenMPI v3.1.4; CUDA v10.2.89; CMake v3.15.3
+ 6. Intel v2021b; Intel MPI v2021b; CUDA v11.8; CMake v3.23.1
+ 7. Intel OneAPI/LLVM v2022.2.1; Intel MPI v2022.2.1; CMake v3.18.4
+ 8. Clang v17.0 / GNU GCC v11.3.1 (Fortran); OpenMPI v4.1.6; ROCm/HIP v5.7.11; CMake v3.26.0
 
- 1. GNU/4.8.5, 7.2.0, 8.3.1, 9.3.0
- 2. Intel/2018.1.163, 2019.1.127
-
-• MPI version
-
- 1. GNU/8.3.1; OpenMPI/4.0.4
- 2. GNU/9.3.0; OpenMPI/4.0.3
- 3. Intel/2018.1.163; IntelMPI/2018.1.163
- 4. Intel/2019.1.127; IntelMPI/2019.8.254
-
-• CUDA version
-
- 1. GNU/4.8.5, 7.2.0, 8.3.1, 9.3.0; CUDA/10.1, 10.2, 11.0, 11.2, 11.4
- 2. Intel/2018.1.163, 2019.1.127; CUDA/10.2
-
-• MPI+CUDA version
-
- 1. GNU/8.3.1; CUDA/10.2; OpenMPI/4.0.4
- 2. GNU/9.3.0; CUDA/11.0.207, 11.2, 11.4; OpenMPI/4.0.3
- 3. Intel/2018.1.163; IntelMPI/2018.1.163; CUDA/10.2
-
-• HIP version
-
- 1. GNU/9.3.0; ROCm/5.1, 5.2, 5.3
-
-• MPI+HIP version
-
- 1. GNU/9.3.0; ROCm/5.1, 5.2, 5.3; OpenMPI/4.0.3, 4.1.4
+**NOTE:** QUICK GPU builds require at least CUDA v7.x and ROCm v5.1.x for CUDA
+and HIP versions, respectively. Please consult the Release Notes for the
+respective GPU SDKs on supported GPU devices.
 
 |QUICK_VERSION| CUDA version has been tested on the following GPU cards: A100,
 RTX3080Ti, RTX2080Ti, RTX8000, RTX6000, RTX2080, T4, V100, Titan V, P100, M40,
