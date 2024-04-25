@@ -11,6 +11,8 @@ a significant amount of time (several minutes for default builds and several
 hours for f-function basis set support) - be patient, the compiler is working
 hard to generate lightning fast code for you.
 
+**NOTE:** HIP/MPI+HIP support is disabled for this release.  Please use QUICK
+version 23.08b for HIP support
 
 Compatible Compilers and Hardware
 ---------------------------------
@@ -28,7 +30,6 @@ tools under the Linux operating system.
  5. Clang v14.0 / GNU GCC v11.3.0 (Fortran); OpenMPI v3.1.4; CUDA v10.2.89; CMake v3.15.3
  6. Intel v2021b; Intel MPI v2021b; CUDA v11.8; CMake v3.23.1
  7. Intel OneAPI/LLVM v2022.2.1; Intel MPI v2022.2.1; CMake v3.18.4
- 8. Clang v17.0 / GNU GCC v11.3.1 (Fortran); OpenMPI v4.1.6; ROCm/HIP v5.7.11; CMake v3.26.0
 
 **NOTE:** QUICK GPU builds require at least CUDA v7.x and ROCm v5.1.x for CUDA
 and HIP versions, respectively. Please consult the Release Notes for the
