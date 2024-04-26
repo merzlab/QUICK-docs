@@ -75,7 +75,7 @@ keywords is not relevant.
      ^     ^              ^             ^              ^
      |     |              |             |              |
      |     |              |             |            Compute energy
-     |     |              |             Density matrix cutoff
+     |     |              |             Density matrix convergence threshold
      |     |              Integral cutoff
      |     Basis set
      Hamiltonian
@@ -90,7 +90,7 @@ calculation with the following keyword line.
      ^     ^      ^              ^             ^              ^
      |     |      |              |             |              |
      |     |      |              |             |            Compute energy
-     |     |      |              |             Density matrix cutoff
+     |     |      |              |             Density matrix convergence threshold
      |     |      |              Integral cutoff
      |     |      Basis set
      |     Functional
@@ -106,7 +106,7 @@ specified as follows.
      ^     ^                          ^           ^             ^              ^
      |     |                          |           |             |              |
      |     |                          |           |             |            Compute energy
-     |     |                          |           |           Density matrix cutoff
+     |     |                          |           |           Density matrix convergence threshold
      |     |                          |         Integral cutoff
      |     |                         Basis set
      |     Functional
@@ -122,7 +122,7 @@ follows.
      ^        ^                          ^           ^             ^              ^
      |        |                          |           |             |              |
      |        |                          |           |             |            Compute energy
-     |        |                          |           |             Density matrix cutoff
+     |        |                          |           |             Density matrix convergence threshold
      |        |                          |       Integral cutoff
      |        |                       Basis set
      |        Functionals (Functional_1, Functional_2 separated by a comma)
