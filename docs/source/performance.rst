@@ -25,8 +25,8 @@ observed larger deviations for some molecular systems. Such deviations usually
 arise due to differences in the exchange correlation quadrature grid.
 
 
-Performance of QUICK CUDA serial and MPI parallel versions
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Performance of QUICK CUDA single GPU and MPI parallel versions
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 **Benchmark data obtained with QUICK-21.03**. The code is continuously
 being improved. **QUICK-23.08 is about 2.5 times faster**.
@@ -47,7 +47,7 @@ point.
     :height: 460px
     :alt: bench1  
 
-Performance of QUICK CUDA MPI version
+Performance of QUICK MPI+CUDA version
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 The distributed multi-GPU implementation of QUICK utilizes the Message Passing
 Interface (MPI). In particular for larger calculations the code shows excellent
