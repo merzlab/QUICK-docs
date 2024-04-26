@@ -6,6 +6,8 @@ detected the issues listed below. If you find anything other than these, please
 feel free to report any bugs or issues through our GitHub page:
 `https://github.com/merzlab/QUICK/issues <https://github.com/merzlab/QUICK/issues>`_.
 
+Feel free to ask questions or start a discussion on the Discussions section of our GitHub page: `https://github.com/merzlab/QUICK/discussions <https://github.com/merzlab/QUICK/discussions>`_.
+
 Compile time
 ^^^^^^^^^^^^
 
@@ -13,7 +15,7 @@ Compile time
 ******************************************************************************
 
 NVIDIA has dropped support for sm_30 microarchitecture starting from CUDA
-v11.1, and support for sm_35 amd sm_37 starting from CUDA v12.0.  However,
+v11.1, and support for sm_35 and sm_37 starting from CUDA v12.0.  However,
 QUICK build systems still use sm_30/sm_35/sm_37 flags in NVCC compiler flag
 list for CUDA v11 or higher toolkits if the user specifies Kepler as target
 microarchitecture (i.e. --arch kepler, -DQUICK_USER_ARCH=kepler in legacy and

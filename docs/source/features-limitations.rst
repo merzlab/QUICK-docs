@@ -19,17 +19,19 @@ Features
 • Supports QM/MM calculations with Amber22 and later
 • Fortran API to use QUICK as QM energy and force engine
 • Message Passing Interface (MPI) distributed parallelization for CPU platforms
-• Massively parallel, single GPU implementation via CUDA and HIP for Nvidia and AMD GPUs 
+• Massively parallel, single GPU implementation via CUDA and HIP for Nvidia and AMD GPUs (HIP available in QUICK-23.08, currently disabled)
 • Distributed, multi-GPU support via MPI+CUDA/MPI+HIP, also across multiple compute nodes
 
 Limitations
 ***********
 
-• Supports energy/gradient calculations with basis functions up to d (f function support available on CUDA versions)
-• HIP/MPI+HIP support disabled for this release due to GPU code rewrites (f basis function support), please use QUICK version 23.08b for HIP support
+• Supports energy/gradient calculations with basis functions up to f
+• GPU f function code is not highly optimized, requires large amount of RAM (may fail on consumer GPUs)
+• No open shell gradients with f functions on GPUs
 • Supports only Cartesian basis functions (no spherical harmonics)
 • Effective core potentials (ECPs) are not supported
 • DFT calculations are performed exclusively using the SG1 grid system
 • No meta-GGA nor range-separated hybrid functionals are supported at present
+• HIP/MPI+HIP support disabled for this release due to GPU code rewrites (f basis function support), please use QUICK version 23.08b for HIP support
 
-*Last updated by Madu Manathunga on 11/21/2022.*
+*Last updated by Andreas Goetz on 04/25/2024.*

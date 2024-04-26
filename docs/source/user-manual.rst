@@ -4,7 +4,9 @@ User Manual
 QUICK uses a simple text based input file that consists of a line with keywords
 followed by an empty line, the molecular coordinates in xyz format, and
 potentially point charge information after another empty line.  Please see the
-Hands-on Tutorials for details on the input file format. 
+Hands-on Tutorials for details on the input file format.
+
+Feel free to ask questions or start a discussion on the Discussions section of our GitHub page: `https://github.com/merzlab/QUICK/discussions <https://github.com/merzlab/QUICK/discussions>`_.
 
 Units
 ^^^^^
@@ -24,9 +26,13 @@ Keywords for QUICK Input
 
    **HF**   : Hartree-Fock Hamiltonian to be used
 
+   **UHF**  : Unrestricted Hartree-Fock Hamiltonian to be used
+
    **DFT**  : Density Functional Theory to be used.
 
-   NOTE 1 : One Hamiltonian must be selected. There is no default.
+   **UDFT** : Unrestricted Density Functional Theory to be used.
+   
+   NOTE: One Hamiltonian must be selected. There is no default.
 
 
 2. Density Functional Theory
@@ -104,7 +110,7 @@ Grimme type dispersion corrections are requested by adding one of the following 
 
    **DENSERMS=Float** : user defined density matrix maximum RMS for convergence. Default : 1.0E-6.
 
-   **CUTOFF=Float**   : user defined integral cutoff. Default : 1.0E-8.
+   **CUTOFF=Float**   : user defined integral cutoff. Default : 1.0E-7.
 
    **BASISCUTOFF=Float**   : user defined cutoff for neglecting insignificant basis functions. Default : 1.0E-6.
 
@@ -112,23 +118,28 @@ Grimme type dispersion corrections are requested by adding one of the following 
 
    **TIGHTINT**       : use tight cutoffs.  (i.e. DENSERMS=1.0E-7, CUTOFF=1.0E-8, BASISCUTOFF=1.0E-7, XCCUTOFF=1.0E-8)
 
-5. Atomic Charges
-*****************
+5. Charge and Spin Multiplicity
+*******************************
 
-   **CHARGE=Integer**     : A net charge is to be placed on system. Default: 0
+   **CHARGE=Integer** : A net charge is to be placed on system. Default: 0
+
+   **MULT=Integer**   : Spin multiplicity of the system. Default: 1
+
+6. Atomic Charges
+*****************
 
    **EXTCHARGES**     : External charges are included in the system. The point charges must be listed after the molecular Cartesian coordinates in the input file. See the corresponding section in the Hands-on Tutorials of this manual.
 
    **DIPOLE**       : Write dipole moments, Mulliken and Löwdin charges into the output file.
 
-6. Gradient Calculation
+7. Gradient Calculation
 ***********************
 
    **GRADIENT**         : Calculates analytical gradients.
 
    **GRADCUTOFF=Float** : user defined cutoff for gradients. Default : 1.0E-7 (automatically set to 1.0E-6 or 1.0E-8 if COARSEINT or TIGHTINT keyword is specified) 
 
-7. Geometry Optimization
+8. Geometry Optimization
 ************************
 
    **OPTIMIZE=Integer** : Performs a geometry optimization with a maximum of *Integer* steps. Default: 3 x Number of atoms.
@@ -137,7 +148,7 @@ Grimme type dispersion corrections are requested by adding one of the following 
 
    **LOPT**             : Use legacy QUICK optimizer instead of DL-FIND.
 
-   **GTOL**             : User defined maximum RMS value of the gradient vector. Default: 4.5E-4  
+   **GTOL**             : User defined maximum RMS value of the gradient vector. Default: 4.5E-4 (using tighter convergence criteria may require tightening SCF convergence, see TIGHTINT keyword)
 
    **ETOL**             : User defined maximum energy change between two consecutive optimization cycles. Default: 1.0E-6
 
@@ -149,9 +160,9 @@ If you are using the DL-FIND optimizer in your work, please make sure to cite th
 
    `Johannes Kästner, Joanne M. Carr, Thomas W. Keal, Walter Thiel, Adrian Wander, and Paul Sherwood, DL-FIND: An Open-Source Geometry Optimizer for Atomistic Simulations, J. Phys. Chem. A, 2009, 113 (43), 11856-11865. <https://pubs.acs.org/doi/10.1021/jp9028968>`_.
 
-8. Data Exporting
+9. Data Exporting
 *****************
 
    **EXPORT=MOLDEN** : Generates a molden file that contains orbitals, charges, geometries, etc. 
 
-*Last updated by Andy Goetz on 02/17/2023.*
+*Last updated by Andy Goetz on 04/25/2024.*

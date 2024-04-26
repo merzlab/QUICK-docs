@@ -9,4 +9,4 @@ All QUICK documentation versions
 • `QUICK-20.06 <https://quick-docs.readthedocs.io/en/20.6.0/>`_ 
 • `QUICK-20.03 <https://quick-docs.readthedocs.io/en/20.3.0/>`_ 
 
-*Last updated by Madu Manathunga on 10/03/2022.*
+*Last updated by Andy Goetz on 04/25/2024.*

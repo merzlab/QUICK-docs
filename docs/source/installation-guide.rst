@@ -21,7 +21,9 @@ In general QUICK works well with a range of compilers (GNU, Intel), math
 libraries (Intel MKL, reference BLAS/LAPACK, MAGMA), MPI implementations
 (OpenMPI, Intel MPI), and GPU SDK versions (CUDA and ROCm/HIP).  We have
 specifically tested |QUICK_VERSION| with following compilers, libraries, and
-tools under the Linux operating system.
+tools.
+
+**Linux:**
 
  1. GNU GCC v7.3.0; OpenMPI v3.1.1; CUDA v9.2.88; CMake v3.11.4
  2. GNU GCC v8.3.0; OpenMPI v3.1.4; CUDA v10.2.89; CMake v3.15.1
@@ -39,9 +41,11 @@ respective GPU SDKs on supported GPU devices.
 RTX3080Ti, RTX2080Ti, RTX8000, RTX6000, RTX2080, T4, V100, Titan V, P100, M40,
 GTX1080, K80, and K40.
 
-|QUICK_VERSION| HIP version has been tested on the following GPU cards: MI100,
-MI210, and MI250. As of QUICK-23.03, the performance on MI210 and MI250 cards is
-not optimized but the code runs properly. 
+|QUICK_VERSION| HIP version is currently disabled. Please use QUICK-23.08b if you want to use AMD GPUs.
+
+.. |QUICK_VERSION| HIP version has been tested on the following GPU cards: MI100,
+   MI210, and MI250. As of QUICK-23.03, the performance on MI210 and MI250 cards is
+   not optimized but the code runs properly. 
 
 **NOTE:** We recommend that the CUDA/MPI+CUDA and HIP/MPI+HIP versions be
 executed only on dedicated GPU cards where no other tasks are being run.
@@ -50,12 +54,20 @@ and MPI+HIP versions, we also recommend that only one CPU core (MPI task) is
 used per GPU; this can be done by setting the number of processes (*e.g.*, in
 the *mpirun* command) equal to the number of GPUs.
 
-We have also tested |QUICK_VERSION| on Intel-based Macbooks with following
-software stack (compiler installed via Macports):
+**Intel-based Macbooks:**
+
+Software stack (compiler installed via Macports):
 
  1. macOS 11.7.3; GNU/10.4.0, 11.3.0, 12.2.0; OpenMPI 4.1.4
  2. macOS 13.2; GNU 12.2.0, OpenMPI 4.1.4
 
+**ARM-based Macbooks (M3 Pro CPU):**
+
+Software stack (compiler installed via Macports):
+
+ 1. macOS Sonoma 14.4.1; GNU GCC 12.3.0; OpenMPI 4.1.6
+ 2. macOS Sonoma 14.4.1; GNU GCC (Fortran); Clang 17.0.6; OpenMPI 4.1.6
+    
 
 Installation
 ------------
@@ -180,4 +192,4 @@ Uninstallation and Cleaning
 Simply delete contents inside build and install directories and/or delete the
 build and install directories.
 
-*Last updated by Madu Manathunga on 11/21/2022.*
+*Last updated by Andreas Goetz on 04/25/2024.*
