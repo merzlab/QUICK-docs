@@ -3,7 +3,7 @@ User Manual
 
 QUICK uses a simple text based input file that consists of a line with keywords
 followed by an empty line, the molecular coordinates in xyz format, and
-potentially point charge information after another empty line.  Please see the
+potentially external point charge information after another empty line.  Please see the
 Hands-on Tutorials for details on the input file format.
 
 Feel free to ask questions or start a discussion on the Discussions section of our GitHub page: `https://github.com/merzlab/QUICK/discussions <https://github.com/merzlab/QUICK/discussions>`_.
@@ -108,9 +108,9 @@ Grimme type dispersion corrections are requested by adding one of the following 
 
    **NCYC=Integer**   : user defined self-consistent field cycles to turn on incremental Fock build = Integer. Default: 3
 
-   **DENSERMS=Float** : user defined density matrix maximum RMS for convergence. Default : 1.0E-6.
+   **DENSERMS=Float** : user defined density matrix RMS change for convergence. Default : 1.0E-6.
 
-   **CUTOFF=Float**   : user defined integral cutoff. Default : 1.0E-7.
+   **CUTOFF=Float**   : user defined integral cutoff. This value should be smaller than DENSERMS. Default : 1.0E-7.
 
    **BASISCUTOFF=Float**   : user defined cutoff for neglecting insignificant basis functions. Default : 1.0E-6.
 
@@ -148,11 +148,13 @@ Grimme type dispersion corrections are requested by adding one of the following 
 
    **LOPT**             : Use legacy QUICK optimizer instead of DL-FIND.
 
-   **GTOL**             : User defined maximum RMS value of the gradient vector. Default: 4.5E-4 (using tighter convergence criteria may require tightening SCF convergence, see TIGHTINT keyword)
+   **GTOL**             : User defined convergence criterion for RMS value of the gradient vector. Default: 4.5E-4 (using tighter convergence criteria may require tightening SCF convergence, see TIGHTINT keyword)
 
-   **ETOL**             : User defined maximum energy change between two consecutive optimization cycles. Default: 1.0E-6
+   **ETOL**             : User defined convergence criterion for maximum energy change between two consecutive optimization cycles. Default: 1.0E-6
 
-   **ICOORD=Integer**   : User defined coordinate system for DL-Find geometry optimization. Default: 3 (delocalized internal coordinates(DLC)). Other available option is 0 (Cartesian).
+   **ICOORD=Integer**   : User defined coordinate system for DL-Find geometry optimization.
+                          - 3   delocalized internal coordinates(DLC) (*Default*)
+                          - 0   cartesian
 
    **ALLOW_BAD_SCF**  : Allow unconverged SCF in geometry optimization. By default, the optimization will not proceed if the SCF fails to converge. 
 
