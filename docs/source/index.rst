@@ -20,6 +20,7 @@ Welcome to |QUICK_VERSION| Documentation!
    hands-on-tutorials
    known-issues
    release-notes
+   additional-docs
    developer-guide
    citation
    license
@@ -29,4 +30,3 @@ Welcome to |QUICK_VERSION| Documentation!
 through our github repository: `<https://github.com/merzlab/QUICK/issues>`_. 
 
 *Last updated by Madu Manathunga on 11/21/2022.*
-

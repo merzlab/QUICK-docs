@@ -1,7 +1,10 @@
 Testing QUICK using runtest script
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-This page gives a summary of options available in QUICK runtest script and how to use it. If you want test QUICK manually, you must copy the script from $QUICK_HOME/tools into $QUICK_HOME or installation directory ($installdir). Then execute it as:
+This page gives a summary of options available in QUICK runtest script and how
+to use it. If you want test QUICK manually, you must copy the script from
+$QUICK_HOME/tools into $QUICK_HOME or installation directory ($installdir).
+Then execute it as:
 
 .. code-block:: none
 
@@ -13,9 +16,9 @@ Available flags
 • **--serial**: Tests a serial version. (Default)
 • **--mpi**: Tests MPI parallel version.
 • **--cuda**: Tests GPU version that utilizes a single NVIDIA GPU.
-• **--cudampi**: Tests multi-GPU version that utilizes multiple NVIDIA GPUs.
+• **--cudampi**: Tests multi-GPU version that utilizes multiple NVIDIA GPUs (MPI+CUDA).
 • **--hip**: Tests GPU version that utilizes a single AMD GPU.
-• **--hipmpi**: Tests multi-GPU version that utilizes multiple AMD GPUs.
+• **--hipmpi**: Tests multi-GPU version that utilizes multiple AMD GPUs (MPI+HIP).
 • **--ene**: Run only energy tests.
 • **--grad**: Run only gradient tests.
 • **--opt**: Run only geometry optimization tests.

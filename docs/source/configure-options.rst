@@ -30,6 +30,7 @@ Parallel versions
 • **--cuda**: Builds GPU version that utilizes a single NVIDIA GPU.
 • **--cudampi**: Builds multi-GPU version that utilizes multiple NVIDIA GPUs.
 • **--arch <kepler|maxwell|pascal|volta|turing|ampere>**: Specify gpu architecture. Applicable for CUDA and MPI+CUDA versions only. If unspecified, QUICK will be compiled for several architectures based on the CUDA toolkit version.
-• **--enablef**: Enables the compilation of time consuming f functions in the ERI code of cuda version. Experimental.
+• **--enablef**: Enables the compilation of time consuming F functions in the ERI code of cuda version. **NOTE**: The current version of the F function code takes very long to compile (hours) and requires a large amount of RAM. Work is planned to optimize this in future releases.
+• *-DCMAKE_BUILD_TYPE=<Debug|Release>*: Controls whether to build debug or release versions.
 
 *Last updated by Madu Manathunga on 03/09/2022.*
