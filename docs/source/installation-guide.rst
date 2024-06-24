@@ -148,8 +148,12 @@ QUICK-23.03, specifying multiple microarchitectures for HIP version (e.g.
 resulting ``quick.hip`` and ``quick.hip.MPI`` executables will only run on a
 single AMD GPU architecture.    
 
+Build System: CMake Options
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-A full list of available flags and their definitions can be found `here <cmake-options.html>`_. 
+For additional configurations, a full list of available options and their
+definitions for the CMake build system can be found here: `cmake options <cmake-options.html>`_. 
+
 
 Testing
 -------
@@ -166,7 +170,7 @@ time a new terminal session is opened:
 The build system makes use of a shell script (``runtest``, located in
 ``${QUICK_HOME}/tools`` but will be copied to the installation directory
 ``QUICK_INSTALL``) for testing QUICK. Below we describe the standard procedure
-to carry out tests; but if you are interested, see `here <runtest-options.html>`_
+to carry out tests; but if you are interested, see `runtest options <runtest-options.html>`_
 for more information on the ``runtest`` script.
 
 Short tests can be run using the ``runtest`` shell script found inside the install directory. 
@@ -184,7 +188,8 @@ Similarly, robust testing can be performed as follows.
 	cd ${QUICK_INSTALL}
 	./runtest --full
 
-You may now try some hands-on tutorials to learn how to use QUICK `here <hands-on-tutorials.html>`_.
+You may now try some hands-on tutorials to learn how to use QUICK
+here: `hands-on tutorials <hands-on-tutorials.html>`_.
 
 Uninstallation and Cleaning
 ---------------------------

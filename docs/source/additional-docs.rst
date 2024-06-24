@@ -25,4 +25,4 @@ Running QUICK: DFT Functional Support
 =====================================
 A list of the available and tested functionals can be found here: `functionals <working_libxc_funcs.html>`_.
 
-*Last updated on 06/19/2024.*
+*Last updated on 06/24/2024.*
