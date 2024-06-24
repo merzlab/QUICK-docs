@@ -6,7 +6,8 @@ followed by an empty line, the molecular coordinates in xyz format, and
 potentially point charge information after another empty line.  Please see the
 Hands-on Tutorials for details on the input file format.
 
-Feel free to ask questions or start a discussion on the Discussions section of our GitHub page: `https://github.com/merzlab/QUICK/discussions <https://github.com/merzlab/QUICK/discussions>`_.
+Feel free to ask questions or start a discussion on the Discussions section of our GitHub page:
+`https://github.com/merzlab/QUICK/discussions <https://github.com/merzlab/QUICK/discussions>`_.
 
 Units
 ^^^^^
@@ -38,13 +39,25 @@ Keywords for QUICK Input
 2. Density Functional Theory
 ****************************
 
-QUICK has two built-in DFT methods that do not rely on Libxc:
+When DFT is selected as the Hamiltonian, an additional keyword is required to
+specify which DFT method to use, followed by optional additional keywords for
+DFT-related parameters.
+
+Built-in Methods
+----------------
+
+QUICK has two built-in DFT methods:
 
    **BLYP** : Built in BLYP functional (A. D. Becke, Phys. Rev. A 38, 3098 (1988), C. Lee, W. Yang, and R. G. Parr, Phys. Rev. B 37, 785 (1988), B. Miehlich, A. Savin, H. Stoll, and H. Preuss, Chem. Phys. Lett. 157, 200 (1989))
 
    **B3LYP**: Built in B3LYP functional (P. J. Stephens, F. J. Devlin, C. F. Chabalowski, and M. J. Frisch, J. Phys. Chem. 98, 11623 (1994) )
 
-Following functionals use Libxc (version 4.0.4) and can be requested by their popular names:
+Functional Support via libxc
+----------------------------
+
+Except for the built-in BLYP and B3LYP functionals QUICK makes use of the Libxc
+density functional library (version 4.0.4). The following functionals can be
+requested by their popular names:
 
    **BP86**: BP86 functional (A. D. Becke, Phys. Rev. A 38, 3098 (1988), J. P. Perdew, Phys. Rev. B 33, 8822 (1986))
 
@@ -64,21 +77,24 @@ Following functionals use Libxc (version 4.0.4) and can be requested by their po
 
    **PBE0**: PBE0/PBEH functional (C. Adamo and V. Barone, J. Chem. Phys. 110, 6158 (1999), M. Ernzerhof and G. E. Scuseria, J. Chem. Phys. 110, 5029 (1999))
 
-Except for the built-in BLYP and B3LYP functionals QUICK makes use of the Libxc
-density functional library (version 4.0.4). All LDA, GGA and hybrid-GGA
-functionals available in Libxc can be requested. As a reminder, (hybrid)
-meta-GGA and range-separated hybrid functionals are not supported at present.
-You must make sure to select a valid combination of exchange and correlation
-functionals. A generic Libxc functional can be requested as follows:
+All LDA, GGA and hybrid-GGA functionals available in Libxc can be requested. As
+a reminder, (hybrid) meta-GGA and range-separated hybrid functionals are not
+supported at present.  You must make sure to select a valid combination of
+exchange and correlation functionals. A generic Libxc functional can be
+requested as follows:
 
    **LIBXC=FUNCTIONAL1,FUNCTIONAL2** : Where FUNCTIONAL1 and FUNCTIONAL2 are exchange and correlation functionals. *Note: Spaces near '=' or ',' are not allowed.*
 
-   See here for a `list of available functionals in the current QUICK version <working_libxc_funcs.html>`_.
+In addition to methods previously noted, a full list of the available and
+tested functionals can be found here: `libxc supported functionals in the current QUICK version <working_libxc_funcs.html>`_.
 
 If you are using Libxc in your work, please cite following paper:
 
    `Susi Lehtola, Conrad Steigemann, Micael J.T. Oliveira, and Miguel A.L. Marques, Recent developments
    in Libxc - A comprehensive library of functionals for density functional theory, Software X 7, 1 (2018) <https://www.sciencedirect.com/science/article/pii/S2352711017300602?via%3Dihub>`_.
+
+Grimme Dispersion Corrections
+-----------------------------
 
 Grimme type dispersion corrections are requested by adding one of the following keywords:
 
