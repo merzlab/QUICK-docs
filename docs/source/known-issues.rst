@@ -26,13 +26,6 @@ Kepler targeted microarchitectures (<= v11.0 for sm_30, <= v11.8 for
 sm_35/sm_37).  Please consult the Release Notes for your installed CUDA SDK
 version for further details on supported GPU microarchitectures.
 
-2. Compiling HIP/MPI+HIP versions fails for this release (unsupported)
-**********************************************************************
-HIP/MPI+HIP support disabled for this release due to required GPU code rewrites
-(related to added f basis function support).
-
-Solution: Use QUICK v23.08b for HIP/MPI+HIP support until support is restored.
-
 Runtime
 ^^^^^^^
 

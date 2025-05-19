@@ -3,6 +3,15 @@ Release notes
 
 The new features released with each QUICK version are as follows. 
 
+QUICK-25.03
+***********
+• AMD GPU support restored for HIP/MPI+HIP codes (requires ROCm <= v5.4.2, >= v6.2.1 due to known ROCm bugs)
+• Added Clang and NVHPC SDK (PGI) compiler support and fixes for MacOS builds
+• GPU code improvements (refactoring to unify codes, reduce memory utilization, provide better error checking, and provide fixes)
+• Updated SAD guesses to match those with QUICK-21.03 to fix SCF performance regression (faster convergence)
+• Various other bug fixes, optimizations, and test updates (expanded automated CI testing on Github)
+• QUICK-25.03 available with AmberTools 2025
+
 QUICK-24.03
 ***********
 • Added ERI engine support for f basis functions to CUDA/MPI+CUDA codes (disabled be default)
