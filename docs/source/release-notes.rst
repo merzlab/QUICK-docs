@@ -7,17 +7,17 @@ QUICK-25.03
 ***********
 • AMD GPU support restored for HIP/MPI+HIP codes (requires ROCm <= v5.4.2, >= v6.2.1 due to known ROCm bugs)
 • Added Clang and NVHPC SDK (PGI) compiler support and fixes for MacOS builds
-• GPU code improvements (refactoring to unify codes, reduce memory utilization, provide better error checking, and provide fixes)
-• Updated SAD guesses to match those with QUICK-21.03 to fix SCF performance regression (faster convergence)
+• GPU code improvements (refactoring to unify codes, reduce memory utilization, provide better error checking, and apply fixes)
+• Updated SAD guesses to fix SCF performance regression (to match those with QUICK-21.03 for faster SCF convergence)
 • Various other bug fixes, optimizations, and test updates (expanded automated CI testing on Github)
 • QUICK-25.03 available with AmberTools 2025
 
 QUICK-24.03
 ***********
-• Added ERI engine support for f basis functions to CUDA/MPI+CUDA codes (disabled be default)
+• Added two electron repulsion integral (ERI) engine support for f basis functions to CUDA/MPI+CUDA codes (disabled be default)
 • HIP/MPI+HIP support disabled, please use QUICK version 23.08b for HIP support
 • Added initial Intel OneAPI/LLVM compiler support
-• Added support for the following basis sets: aug-cc-pVTZ, def2-TZVPD, def2-TZVPP, aug-pc-1, pc-2, and aug-pc-2
+• Added support for the following basis sets: aug-cc-pVTZ, def2-TZVPD, def2-TZVPP, aug-PC-1, PC-2, and aug-PC-2
 • Various bug fixes, optimizations, and test updates
 
 QUICK-23.03

@@ -3,9 +3,11 @@
 A List of Available DFT Functionals
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Based on our tests, following functionals are successully working in |QUICK_VERSION| serial, MPI, CUDA and MPI+CUDA versions. 
-Note that here we are reporting LIBXC keywords that will be specified in QUICK input. `Please use LIBXC functionals page
-for more information on each keyword. <https://www.tddft.org/programs/libxc/functionals/previous/libxc-4.0.4/>`_. 
+Based on our tests, following functionals are successully working in
+|QUICK_VERSION| serial, MPI, CUDA and MPI+CUDA versions.  Note that here we are
+reporting LIBXC keywords that will be specified in QUICK input.
+`Please use LIBXC functionals page for more information on each keyword.
+<https://www.tddft.org/programs/libxc/functionals/previous/libxc-4.0.4/>`_. 
 
 1) LDA exchange functionals
 ***************************

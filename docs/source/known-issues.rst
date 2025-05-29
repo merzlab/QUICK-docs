@@ -6,7 +6,8 @@ detected the issues listed below. If you find anything other than these, please
 feel free to report any bugs or issues through our GitHub page:
 `https://github.com/merzlab/QUICK/issues <https://github.com/merzlab/QUICK/issues>`_.
 
-Feel free to ask questions or start a discussion on the Discussions section of our GitHub page: `https://github.com/merzlab/QUICK/discussions <https://github.com/merzlab/QUICK/discussions>`_.
+Feel free to ask questions or start a discussion on the Discussions section of
+our GitHub page: `https://github.com/merzlab/QUICK/discussions <https://github.com/merzlab/QUICK/discussions>`_.
 
 Compile time
 ^^^^^^^^^^^^

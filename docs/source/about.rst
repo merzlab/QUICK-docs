@@ -1,7 +1,7 @@
 About QUICK QM Package
 ======================
 
-QUICK is a GPU enabled *ab initio* and density functional theory software
+QUICK is a GPU-enabled *ab initio* and density functional theory software
 capable of performing electronic structure calculations on general
 organic/biomolecular systems. It was initially developed by Ed Brothers. His
 work included the development of the Hartree-Fock and density functional theory

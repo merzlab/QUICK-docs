@@ -1,7 +1,10 @@
 CMake Build System Options
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-This page gives a summary of CMake options that can be used with QUICK. Note that like all CMake options, these options are sticky. Once passed to CMake, they will remain set unless you set them to a different value (with -D), unset them (with -U), or delete the build directory.
+This page gives a summary of CMake options that can be used with QUICK. Note
+that like all CMake options, these options are sticky. Once passed to CMake,
+they will remain set unless you set them to a different value (with -D), unset
+them (with -U), or delete the build directory.
 
 General options
 ***************
@@ -28,7 +31,8 @@ External library control
 Parallel versions
 *****************
 
-By default QUICK will only build the serial version. This can be changed with these options:
+By default QUICK will only build the serial version. This can be changed with
+these options:
 
 • *-DMPI=TRUE*: Also build MPI versions of all programs.
 • *-DCUDA=TRUE*: Also build CUDA versions of all programs. If both MPI and CUDA are active at the same time, a MPI+CUDA version will additionally be built.

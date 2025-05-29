@@ -4,12 +4,12 @@ Installation Guide
 ==================
 
 QUICK has been compiled and tested on x86 and ARM CPU architectures, and on
-Nvidia and AMD GPU architectures.
+NVIDIA and AMD GPU architectures.
 
-**NOTE:** For GPU builds, the compilation of the GPU enabled ERI code can take
-a significant amount of time (several minutes for default builds and several
-hours for f-function basis set support) - be patient, the compiler is working
-hard to generate lightning fast code for you.
+**NOTE:** For GPU builds, the compilation of the GPU-enabled two electron
+repulsion integral (ERI) code can take a significant amount of time (several
+minutes for default builds and several hours for f-function basis set support)
+-- be patient as the compiler is working hard to generate highly-performant code.
 
 Compatible Compilers and Hardware
 ---------------------------------
@@ -38,9 +38,10 @@ combinations of OS versions, compilers, libraries, and tools:
  - MacOS 14 (ARM), GNU GCC v14.2.0_1; OpenMPI v; CMake v3.31.6 (Homebrew)
  - MacOS 14 (ARM), GNU GCC v15.0.7; OpenMPI v; CMake v3.31.6 (Homebrew)
 
-**NOTE:** QUICK GPU builds require at CUDA >= v7.x and ROCm <= v5.4.2, >=
-v6.2.1 for CUDA and HIP versions, respectively. Please consult the Release
-Notes for the respective GPU SDKs on supported GPU devices.
+**NOTE:** QUICK GPU builds require CUDA >= v7.x or ROCm <= v5.4.2, >= v6.2.1
+for CUDA and HIP versions, respectively. Please consult the Release Notes for
+the respective GPU SDKs on supported GPU devices and compatible software
+dependencies (compilers, etc.).
 
 |QUICK_VERSION| CUDA version has been tested on the following GPUs: H200, H100,
 A100, RTX3080TI, RTX2080TI, RTX8000, RTX6000, RTX2080, T4, V100, Titan V, P100,
@@ -51,16 +52,16 @@ MI210, MI250, and MI300A.
 
 **NOTE:** We recommend that the CUDA/MPI+CUDA and HIP/MPI+HIP versions be
 executed only on dedicated GPU cards where no other tasks are being run.
-Performance is better on datacenter GPUs than on consumer GPUs.  For MPI+CUDA
-and MPI+HIP versions, we also recommend that only one CPU core (MPI task) is
-used per GPU; this can be done by setting the number of processes (*e.g.*, in
-the *mpirun* command) equal to the number of GPUs.
+Performance is better on datacenter GPUs than on consumer GPUs.  For the
+MPI+CUDA and MPI+HIP versions, we also recommend that only one CPU core (MPI
+process) is used per GPU; this can be done by setting the number of processes
+(*e.g.*, in the *mpirun* command) equal to the number of GPUs.
     
 
 Installation
 ------------
 
-Installation of QUICK requires that at least CMake/3.9.0 be installed in the
+Installation of QUICK requires that at least CMake v3.12.0 be installed in the
 target machine. To install QUICK using CMake, one must first create a build
 directory (separate from the source directory). After installation you can
 safely delete this build directory if you want to save disk space. Assuming the
@@ -77,7 +78,7 @@ CUDA version
 
 Assuming you have created a directory named *builddir* in the ``QUICK_HOME``
 directory and you want to install QUICK into directory ``QUICK_INSTALL``, use
-GNU compiler tool chain, and want to compile for the Nvidia Volta
+GNU compiler tool chain, and want to compile for the NVIDIA Volta
 microarchitecture, all QUICK versions can be configured and built as follows:
 
 .. code-block:: none
@@ -183,7 +184,6 @@ here: `hands-on tutorials <hands-on-tutorials.html>`_.
 Uninstallation and Cleaning
 ---------------------------
 
-Simply delete contents inside build and install directories and/or delete the
-build and install directories.
+Delete the build and install directories and their contents.
 
 *Last updated by Andreas Goetz on 04/25/2024.*
