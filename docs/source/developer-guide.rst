@@ -486,8 +486,9 @@ Note 1: Current version of QUICK ERI engine only support basis functions up to
 *d* (up to f support for CUDA/MPI+CUDA if enabled). Therefore, do not add high
 angular momentum basis sets and attempt to use f/g functions.
 
-Note 2: ECPs are not supported by |QUICK_VERSION|. Therefore care must be taken
-not to add elements that require ECPs as this would lead to wrong results.
+Note 2: Effective core potentials (ECPs) are not supported by |QUICK_VERSION|.
+Therefore care must be taken not to add elements that require ECPs as this
+would lead to wrong results.
 
 Adding new test cases into test suite
 -------------------------------------

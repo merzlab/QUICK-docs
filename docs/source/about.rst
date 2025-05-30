@@ -1,7 +1,7 @@
 About QUICK QM Package
 ======================
 
-QUICK is a GPU enabled *ab initio* and density functional theory software
+QUICK is a GPU-enabled *ab initio* and density functional theory software
 capable of performing electronic structure calculations on general
 organic/biomolecular systems. It was initially developed by Ed Brothers. His
 work included the development of the Hartree-Fock and density functional theory
@@ -17,8 +17,8 @@ aspects to improve the CUDA versions. Gina Sitaraman, Leopold Grinberg, Mahdieh
 Ghazimirsaeed, and Trinayan Baruah from AMD contributed by providing important
 suggestions to improve the performance of the HIP versions.
 
-Madu Manathunga, Kurt A. O'Hearn, Akhil Shajan, Andy Götz, and Kennie Merz
-currently develop and maintain the code. 
+Kurt A. O'Hearn, Vikrant Tripathy, Akhil Shajan, Madu Manathunga, Andy Götz,
+and Kennie Merz currently develop and maintain the code. 
 
 Contact: `quick.merzlab@gmail.com <quick.merzlab@gmail.com>`_
 

@@ -1,1 +1,1 @@
-.. |QUICK_VERSION| replace:: QUICK-24.03
+.. |QUICK_VERSION| replace:: QUICK-25.03

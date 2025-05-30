@@ -31,9 +31,15 @@
   aug-PC-1
   aug-PC-2
 
-Note 1: We follow the same basis set names reported at the `basis set exchange web page <https://www.basissetexchange.org/>`_. 
+Note 1: We follow the same basis set names reported at the
+`basis set exchange web page <https://www.basissetexchange.org/>`_. 
 
-Note 2: The current version of the QUICK ERI engine only support basis functions up to *f*. Therefore, energy and gradient calculations with functions up to *f* are possible. By default, *f* functions are disabled in the GPU code. Open-shell gradient calculations with *f* functions are not yet available on GPU.
+Note 2: The current version of the QUICK two elecron repulsion integral (ERI)
+engine only support basis functions up to *f*. Therefore, energy and gradient
+calculations with functions up to *f* are possible. By default, *f* functions
+are disabled in the GPU code.  Open-shell gradient calculations with *f*
+functions are not yet available on GPU.
 
-Note 3: ECPs are currently not supported by QUICK. Due to this reason, we have excluded elements that require ECPs from the above basis sets that are included with QUICK.
-
+Note 3: Effective core potentials (ECPs) are currently not supported by QUICK.
+Due to this reason, we have excluded elements that require ECPs from the above
+basis sets that are included with QUICK.

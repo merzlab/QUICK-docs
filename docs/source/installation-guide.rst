@@ -4,75 +4,64 @@ Installation Guide
 ==================
 
 QUICK has been compiled and tested on x86 and ARM CPU architectures, and on
-Nvidia and AMD GPU architectures.
+NVIDIA and AMD GPU architectures.
 
-**NOTE:** For GPU builds, the compilation of the GPU enabled ERI code can take
-a significant amount of time (several minutes for default builds and several
-hours for f-function basis set support) - be patient, the compiler is working
-hard to generate lightning fast code for you.
-
-**NOTE:** HIP/MPI+HIP support is disabled for this release.  Please use QUICK
-version 23.08b for HIP support
+**NOTE:** For GPU builds, the compilation of the GPU-enabled two electron
+repulsion integral (ERI) code can take a significant amount of time (several
+minutes for default builds and several hours for f-function basis set support)
+-- be patient as the compiler is working hard to generate highly-performant code.
 
 Compatible Compilers and Hardware
 ---------------------------------
 
-In general QUICK works well with a range of compilers (GNU, Intel), math
-libraries (Intel MKL, reference BLAS/LAPACK, MAGMA), MPI implementations
-(OpenMPI, Intel MPI), and GPU SDK versions (CUDA and ROCm/HIP).  We have
-specifically tested |QUICK_VERSION| with following compilers, libraries, and
-tools.
+In general QUICK works well with a range of compilers (GNU, Clang, Intel, NVHPC
+SDK/PGI), math libraries (Intel MKL, reference BLAS/LAPACK, MAGMA), MPI
+implementations (OpenMPI, MPICH, Intel MPI), and GPU SDK versions (CUDA,
+ROCm/HIP). |QUICK_VERSION| is automatically tested on Github with following
+combinations of OS versions, compilers, libraries, and tools:
 
-**Linux:**
+ - Ubuntu v22.04.05 (x86_64), GNU GCC v10.5.0; OpenMPI v4.1.2; CMake v3.31.6
+ - Ubuntu v22.04.05 (x86_64), GNU GCC v11.4.0; OpenMPI v4.1.6; CMake v3.31.6
+ - Ubuntu v24.04.2 (x86_64), GNU GCC v12.3.0; OpenMPI v4.1.6; CMake v3.31.6
+ - Ubuntu v24.04.2 (x86_64), GNU GCC v13.3.0; OpenMPI v4.1.6; CMake v3.31.6
+ - Ubuntu v24.04.2 (x86_64), GNU GCC v14.2.0; OpenMPI v4.1.6; CMake v3.31.6
+ - Ubuntu v24.04.2 (x86_64), GNU GCC v14.2.0; MPICH v4.2.0; CMake v3.31.6
+ - Ubuntu v24.04.2 (x86_64), Clang v17.0.6; OpenMPI v4.1.6; CMake v3.31.6
+ - Ubuntu v24.04.2 (x86_64), Clang v18.1.3; OpenMPI v4.1.6; CMake v3.31.6
+ - Ubuntu v24.04.2 (x86_64), Intel oneAPI v2024.2.1; Intel MPI (CCL) v2021.14; CMake v3.31.6
+ - Ubuntu v24.04.2 (x86_64), Intel oneAPI v2025.0.1; Intel MPI (CCL) v2021.14; CMake v3.31.6
+ - Ubuntu v24.04.2 (x86_64), NVIDIA HPC SDK v25.1 (PGI); OpenMPI v4.1.7rc1; CMake v3.31.6
+ - Ubuntu v24.04.2 (ARM), GNU GCC v14.2.0; OpenMPI v4.1.6; CMake v3.31.6
+ - Ubuntu v24.04.2 (ARM), GNU GCC v14.2.0; MPICH v4.2.0; CMake v3.31.6
+ - MacOS 13 (x86_64), GNU GCC v14.2.0_1; OpenMPI v; CMake v3.31.6 (Homebrew)
+ - MacOS 13 (x86_64), GNU GCC v15.0.7; OpenMPI v; CMake v3.31.6 (Homebrew)
+ - MacOS 14 (ARM), GNU GCC v14.2.0_1; OpenMPI v; CMake v3.31.6 (Homebrew)
+ - MacOS 14 (ARM), GNU GCC v15.0.7; OpenMPI v; CMake v3.31.6 (Homebrew)
 
- 1. GNU GCC v7.3.0; OpenMPI v3.1.1; CUDA v9.2.88; CMake v3.11.4
- 2. GNU GCC v8.3.0; OpenMPI v3.1.4; CUDA v10.2.89; CMake v3.15.1
- 3. GNU GCC v11.3.0; OpenMPI v4.1.4; CUDA v11.8; CMake v3.23.1
- 4. GNU GCC v12.3.0; OpenMPI v5.0.0; CUDA v12.3; CMake v3.26.3
- 5. Clang v14.0 / GNU GCC v11.3.0 (Fortran); OpenMPI v3.1.4; CUDA v10.2.89; CMake v3.15.3
- 6. Intel v2021b; Intel MPI v2021b; CUDA v11.8; CMake v3.23.1
- 7. Intel OneAPI/LLVM v2022.2.1; Intel MPI v2022.2.1; CMake v3.18.4
+**NOTE:** QUICK GPU builds require CUDA >= v7.x or ROCm <= v5.4.2, >= v6.2.1
+for CUDA and HIP versions, respectively. Please consult the Release Notes for
+the respective GPU SDKs on supported GPU devices and compatible software
+dependencies (compilers, etc.).
 
-**NOTE:** QUICK GPU builds require at least CUDA v7.x and ROCm v5.1.x for CUDA
-and HIP versions, respectively. Please consult the Release Notes for the
-respective GPU SDKs on supported GPU devices.
+|QUICK_VERSION| CUDA version has been tested on the following GPUs: H200, H100,
+A100, RTX3080TI, RTX2080TI, RTX8000, RTX6000, RTX2080, T4, V100, Titan V, P100,
+M40, GTX1080, K80, and K40.
 
-|QUICK_VERSION| CUDA version has been tested on the following GPU cards: A100,
-RTX3080Ti, RTX2080Ti, RTX8000, RTX6000, RTX2080, T4, V100, Titan V, P100, M40,
-GTX1080, K80, and K40.
-
-|QUICK_VERSION| HIP version is currently disabled. Please use QUICK-23.08b if you want to use AMD GPUs.
-
-.. |QUICK_VERSION| HIP version has been tested on the following GPU cards: MI100,
-   MI210, and MI250. As of QUICK-23.03, the performance on MI210 and MI250 cards is
-   not optimized but the code runs properly. 
+|QUICK_VERSION| HIP version has been tested on the following GPUs: MI100,
+MI210, MI250, and MI300A.
 
 **NOTE:** We recommend that the CUDA/MPI+CUDA and HIP/MPI+HIP versions be
 executed only on dedicated GPU cards where no other tasks are being run.
-Performance is better on datacenter GPUs than on consumer GPUs.  For MPI+CUDA
-and MPI+HIP versions, we also recommend that only one CPU core (MPI task) is
-used per GPU; this can be done by setting the number of processes (*e.g.*, in
-the *mpirun* command) equal to the number of GPUs.
-
-**Intel-based Macbooks:**
-
-Software stack (compiler installed via Macports):
-
- 1. macOS 11.7.3; GNU/10.4.0, 11.3.0, 12.2.0; OpenMPI 4.1.4
- 2. macOS 13.2; GNU 12.2.0, OpenMPI 4.1.4
-
-**ARM-based Macbooks (M3 Pro CPU):**
-
-Software stack (compiler installed via Macports):
-
- 1. macOS Sonoma 14.4.1; GNU GCC 12.3.0; OpenMPI 4.1.6
- 2. macOS Sonoma 14.4.1; GNU GCC (Fortran); Clang 17.0.6; OpenMPI 4.1.6
+Performance is better on datacenter GPUs than on consumer GPUs.  For the
+MPI+CUDA and MPI+HIP versions, we also recommend that only one CPU core (MPI
+process) is used per GPU; this can be done by setting the number of processes
+(*e.g.*, in the *mpirun* command) equal to the number of GPUs.
     
 
 Installation
 ------------
 
-Installation of QUICK requires that at least CMake/3.9.0 be installed in the
+Installation of QUICK requires that at least CMake v3.12.0 be installed in the
 target machine. To install QUICK using CMake, one must first create a build
 directory (separate from the source directory). After installation you can
 safely delete this build directory if you want to save disk space. Assuming the
@@ -89,7 +78,7 @@ CUDA version
 
 Assuming you have created a directory named *builddir* in the ``QUICK_HOME``
 directory and you want to install QUICK into directory ``QUICK_INSTALL``, use
-GNU compiler tool chain, and want to compile for the Nvidia Volta
+GNU compiler tool chain, and want to compile for the NVIDIA Volta
 microarchitecture, all QUICK versions can be configured and built as follows:
 
 .. code-block:: none
@@ -138,8 +127,9 @@ Path to ROCm installation can be specified using ``-DHIP_TOOLKIT_ROOT_DIR`` but
 this is optional. Flags ``-DMAGMA`` and ``-DMAGMA_ROOT`` are used to enable
 MAGMA library support for matrix diagonalization and specify the MAGMA
 installation directory, respectively. The use of MAGMA is optional but highly
-recommended since the diagonalization is performed on host (CPU) by default
-(which can be very slow). 
+recommended for older ROCm versions (< v5.3.0) since matrix diagonalization is
+performed on host (CPU) in QUICK by default due to poor performance in the ROCm
+math libraries (rocSOLVER). 
 
 If the microarchitecture is not specified (i.e. absence of the
 ``-DQUICK_USER_ARCH`` flag), QUICK will be compiled for gfx908 architecture. As of
@@ -194,7 +184,6 @@ here: `hands-on tutorials <hands-on-tutorials.html>`_.
 Uninstallation and Cleaning
 ---------------------------
 
-Simply delete contents inside build and install directories and/or delete the
-build and install directories.
+Delete the build and install directories and their contents.
 
 *Last updated by Andreas Goetz on 04/25/2024.*
