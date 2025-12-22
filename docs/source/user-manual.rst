@@ -174,6 +174,45 @@ Grimme type dispersion corrections are requested by adding one of the following 
 
    **ALLOW_BAD_SCF**  : Allow unconverged SCF in geometry optimization. By default, the optimization will not proceed if the SCF fails to converge. 
 
+Constrained Optimization
+------------------------
+
+QUICK provides native support for constrained geometry optimization through the **CONSTRAIN** keyword combined with **DLFIND** (default). Constraints allow users to freeze atomic positions or fix internal coordinates (bond lengths, angles, dihedrals) during optimization.
+
+**Constraint Keywords:**
+
+   **FREEZE atom_no**
+  Freeze the full XYZ position of the specified atom and is compatible with Cartesian optimizations (ICOORD=0).
+
+   **FREEZEX atom_no, FREEZEY atom_no, FREEZEXY atom_no, FREEZEXZ atom_no, FREEZEYZ atom_no**
+  Freeze selected Cartesian components of an atom and are compatible with Cartesian optimizations (ICOORD=0).
+
+   **DISTANCE atom1 atom2**
+  Constrains the distance between two atoms to remain fixed during optimization and is compatible with internal optimizations (ICOORD=3, default).
+
+   **ANGLE atom1 atom2 atom3**
+  Constrains a bond angle defined by three atoms and is compatible with internal optimizations (ICOORD=3, default).
+
+   **DIHEDRAL atom1 atom2 atom3 atom4**
+  Constrains a torsional angle (dihedral) involving four atoms and is compatible with internal optimizations (ICOORD=3, default).
+
+Constraint keywords such as FREEZE, DISTANCE, ANGLE, and DIHEDRAL must be placed after the geometry block.
+
+*Example Input for DL-FIND Optimization with Constraints*::
+
+  HF BASIS=3-21G CONSTRAIN OPTIMIZE
+  
+  C         -4.13498124  0.70342204  0.00000000
+  H         -3.53650966 -0.16516720 -0.17967886
+  H         -4.07172084  1.36057017 -0.84205371
+  H         -5.15338585  0.41046458  0.14808100
+  C         -3.62163902  1.42937832  1.25740497
+  H         -3.68306794  2.48719615  1.10858318
+  H         -4.22133413  1.15219316  2.09909028
+  H         -2.60384227  1.15314360  1.43819258
+  
+  DIHEDRAL 2 1 5 6
+
 If you are using the DL-FIND optimizer in your work, please make sure to cite the following paper:
 
    `Johannes Kästner, Joanne M. Carr, Thomas W. Keal, Walter Thiel, Adrian Wander, and Paul Sherwood, DL-FIND: An Open-Source Geometry Optimizer for Atomistic Simulations, J. Phys. Chem. A, 2009, 113 (43), 11856-11865. <https://pubs.acs.org/doi/10.1021/jp9028968>`_.
