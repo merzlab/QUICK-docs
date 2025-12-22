@@ -73,6 +73,44 @@ directory like this:
 	cd ${QUICK_HOME}
 	mkdir builddir
 
+check CMake version
+^^^^^^^^^^^^^^^^^^^^^^
+Ensure CMake (version 3.12.0 or higher) is installed::
+
+	cmake --version
+
+
+CPU version
+^^^^^^^^^^^
+
+Assuming you have created a directory named *builddir* in the ``QUICK_HOME``
+directory and you want to install QUICK into directory ``QUICK_INSTALL``, use CPU compiler toolchain in Macbook or Linux. All
+QUICK CPU versions can be configured and built as follows:
+
+1. Configure with CMake. For a basic MPI-enabled build using Clang compiler::
+	
+	cmake .. \
+		-DCOMPILER=CLANG \
+		-DMPI=TRUE \
+		-DCMAKE_INSTALL_PREFIX=$HOME/quick_install
+
+   where ``-DMPI`` flag enables compiling the MPI parallel version. 
+   The serial version is compiled by default. 
+   Multiple compiler toolchains are supported through the ``-DCOMPILER`` flag:
+
+   * GNU compiler (default): ``-DCOMPILER=GNU``
+   * Intel compiler: ``-DCOMPILER=INTEL``
+   * Clang compiler: ``-DCOMPILER=CLANG``
+   Note that requesting the Clang compiler requires the GNU Fortran compiler (`gfortran`) to be installed. C/C++ code will be compiled by Clang, 
+   while Fortran code will be compiled by gfortran.
+
+2. Build and install::
+
+	make -j
+	make install
+
+   Note that the flag -j enables parallel builds that use all available CPU cores for compilation.
+
 CUDA version
 ^^^^^^^^^^^^
 
