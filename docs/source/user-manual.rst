@@ -227,21 +227,17 @@ If you are using the DL-FIND optimizer in your work, please make sure to cite th
 
 QUICK 26.03 has the capability to restart both SCF energy calculation and geometry optimization from old density and/or coordinates.
 
-**CHK_WRITE_DEN** : 
-Writes density (optionally beta density for unrestricted calculations) to the data file.
+   **CHK_WRITE_DEN** : Writes density (optionally beta density for unrestricted calculations) to the data file.
 
-**CHK_WRITE_XYZ** : 
-Writes coordinates to the data file.
+   **CHK_WRITE_XYZ** : Writes coordinates to the data file.
 
-**CHK_READ_DEN** : 
-Reads density (optionally beta density for unrestricted calculations) from the data file.
+   **CHK_READ_DEN** : Reads density (optionally beta density for unrestricted calculations) from the data file.
 
-**CHK_READ_COORD** : 
-Reads coordinates from the data file.
+   **CHK_READ_COORD** :  Reads coordinates from the data file.
 
-Restart information utilizes a data file.
-    - <filename_prefix>.dat in absence of user input (*default*)
-    - $DATA = <datafile_name> (*user input*)
+   Restart information utilizes a data file.
+        - <filename_prefix>.dat in absence of user input (*default*)
+        - $DATA = <datafile_name> (*user input*)
 
 HDF5 file format can be used if compiled with -DHDF5=TRUE flag.
 
