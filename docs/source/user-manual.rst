@@ -222,9 +222,23 @@ If you are using the DL-FIND optimizer in your work, please make sure to cite th
 
    **EXPORT=MOLDEN** : Generates a molden file that contains orbitals, charges, geometries, etc. 
 
-10. Restarting Calculations
+10. Restart Capability
 *****************
 
-QUICK 26.03 has the capability to restart both SCF energy calculations and geometry optimization. By default the restart information is written or extracted from the data file <filename>.dat
+QUICK 26.03 has the capability to restart both SCF energy calculations and geometry optimization from old density or/and coordinates.
+
+**CHK_WRITE_DEN**
+Writes density (optionally beta density for unrestricted calculations) to the data file.
+
+**CHK_WRITE_XYZ**
+Writes coordinates to the data file.
+
+**CHK_READ_DEN**
+Reads density (optionally beta density for unrestricted calculations) from the data file.
+
+**CHK_READ_COORD**
+Reads coordinates from the data file.
+
+By default the restart information is written or extracted from the data file <filename>.dat
 
 *Last updated by Andy Goetz on 04/25/2024.*
