@@ -241,4 +241,6 @@ QUICK 26.03 has the capability to restart both SCF energy calculation and geomet
 
 HDF5 file format can be used if compiled with -DHDF5=TRUE flag.
 
+NOTE: Currently the density and coordinates are saved to restart file if the energy computation (single point job) or the optimization is completed.
+
 *Last updated by Vikrant Tripathy on 04/06/2026.*
