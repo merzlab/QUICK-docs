@@ -227,7 +227,7 @@ If you are using the DL-FIND optimizer in your work, please make sure to cite th
 
 QUICK 26.03 has the capability to restart both SCF energy calculations and geometry optimization from old density or/and coordinates.
 
-**CHK_WRITE_DEN**
+**CHK_WRITE_DEN** : 
 Writes density (optionally beta density for unrestricted calculations) to the data file.
 
 **CHK_WRITE_XYZ**
