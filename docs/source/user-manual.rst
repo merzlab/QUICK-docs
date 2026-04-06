@@ -225,7 +225,7 @@ If you are using the DL-FIND optimizer in your work, please make sure to cite th
 10. Restart Capability
 *****************
 
-QUICK 26.03 has the capability to restart both SCF energy calculations and geometry optimization from old density or/and coordinates.
+QUICK 26.03 has the capability to restart both SCF energy calculation and geometry optimization from old density and/or coordinates.
 
 **CHK_WRITE_DEN** : 
 Writes density (optionally beta density for unrestricted calculations) to the data file.
@@ -239,6 +239,10 @@ Reads density (optionally beta density for unrestricted calculations) from the d
 **CHK_READ_COORD** : 
 Reads coordinates from the data file.
 
-By default the restart information is written or extracted from the data file <filename>.dat
+Restart information utilizes a data file.
+    - <filename_prefix>.dat in absence of user input (*default*)
+    - $DATA = <datafile_name> (*user input*)
 
-*Last updated by Andy Goetz on 04/25/2024.*
+HDF5 file format can be used if compiled with -DHDF5=TRUE flag.
+
+*Last updated by Vikrant Tripathy on 04/06/2026.*
