@@ -222,4 +222,9 @@ If you are using the DL-FIND optimizer in your work, please make sure to cite th
 
    **EXPORT=MOLDEN** : Generates a molden file that contains orbitals, charges, geometries, etc. 
 
+10. Restarting Calculations
+*****************
+
+QUICK 26.03 has the capability to restart both SCF energy calculations and geometry optimization. By default the restart information is written or extracted from the data file <filename>.dat
+
 *Last updated by Andy Goetz on 04/25/2024.*
