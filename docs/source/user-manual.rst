@@ -230,13 +230,13 @@ QUICK 26.03 has the capability to restart both SCF energy calculations and geome
 **CHK_WRITE_DEN** : 
 Writes density (optionally beta density for unrestricted calculations) to the data file.
 
-**CHK_WRITE_XYZ**
+**CHK_WRITE_XYZ** : 
 Writes coordinates to the data file.
 
-**CHK_READ_DEN**
+**CHK_READ_DEN** : 
 Reads density (optionally beta density for unrestricted calculations) from the data file.
 
-**CHK_READ_COORD**
+**CHK_READ_COORD** : 
 Reads coordinates from the data file.
 
 By default the restart information is written or extracted from the data file <filename>.dat
