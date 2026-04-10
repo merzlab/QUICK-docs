@@ -380,4 +380,51 @@ Amber manual). Output file should contain the following line:
 
  *** Printing Electrostatic Potential (ESP) at points on vdw surface to <filename_prefix>.vdw with coordinates in angstroms***
 
+Saving/Restarting calculations
+******************************
+
+Following is an example of how to save you electronic dansity at the end your
+calculation using the keyword **CHK_WRITE_DEN**.
+
+.. code-block:: none
+
+ DFT B3LYP BASIS=cc-pvDZ CHK_WRITE_DEN
+
+ O         -0.741530        1.752130        2.896280
+ H         -1.111151        0.979769        3.352290
+ H         -0.920500        2.036450        1.984040
+
+The density is written to your **DATA FILE**. As your **JOB CARD** in your output
+file states, the default DATA FILE is <filename_prefix>.dat. However, you can (I suggest you do)
+specify a DATA FILE as per the following input file.
+
+.. code-block:: none
+
+ $DATA=data_file_name.dat
+ DFT B3LYP BASIS=cc-pvDZ CHK_WRITE_DEN
+
+ O         -0.741530        1.752130        2.896280
+ H         -1.111151        0.979769        3.352290
+ H         -0.920500        2.036450        1.984040
+
+A new calculation can be restarted from the data file. Following is a new SCF
+calculation using the density from the previous calculation.
+
+.. code-block:: none
+
+ $DATA=data_file_name.dat
+ DFT BLYP BASIS=cc-pvDZ CHK_READ_DEN
+
+ O         -0.741530        1.752130        2.896280
+ H         -1.111151        0.979769        3.352290
+ H         -0.920500        2.036450        1.984040
+
+Note: we do not have basis set projection in QUICK. So, the basis set being
+read has to match the basis set in the new calculation. Further, the DATA FILE will
+be over written if your checkpointing the data in the new calculation. In such case,
+please copy the old calculation DATA FILE.
+
+I gave the examples of how to restart calculations using density. Calculations
+can also be restarted from coordinates read from DATA FILE.
+
 *Last updated by Vikrant Tripathy on 04/10/2026.*
