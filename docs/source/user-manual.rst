@@ -144,9 +144,19 @@ Grimme type dispersion corrections are requested by adding one of the following 
 6. Atomic Charges
 *****************
 
-   **EXTCHARGES**     : External charges are included in the system. The point charges must be listed after the molecular Cartesian coordinates in the input file. See the corresponding section in the Hands-on Tutorials of this manual.
+   **EXTCHARGES**            : External charges are included in the system. The point charges must be listed after the molecular Cartesian coordinates in the input file. See the corresponding section in the Hands-on Tutorials of this manual.
 
-   **DIPOLE**       : Write dipole moments, Mulliken and Löwdin charges into the output file.
+   **DIPOLE**                : Write dipole moments, Mulliken and Löwdin charges into the output file.
+
+   **ESP_CHARGE**            : Compute electrostatic potential derived (ESP) charges
+
+   **ESPGRID_SPACING=Float** : Spacing between grid points on scaled Van der Waals surfaces used to obtain ESP charges. ESP_CHARGE keyword must be present to use this keyword. Default : 0.25
+
+   **ESP_GRID**              : User provided grid points at which ESP needs to evaluated. example: test/esp_grid_acetone_b3lyp_def2svp.in
+
+If you are computing the ESP and/or ESP derived charges, please cite the following paper:
+
+   `Tripathy, V.; Palos, E.; Merz, K. M.; Paesani, F.; Götz, A. W. QUICK and Robust ESP and RESP Charges for Computational Biochemistry: Open-Source GPU Implementation. J. Chem. Inf. Model. 2026, 66, 6, 3173-3187. <https://doi.org/10.1021/acs.jcim.5c03200>`_.
 
 7. Gradient Calculation
 ***********************

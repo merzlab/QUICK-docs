@@ -342,4 +342,42 @@ point charge gradient is the force exerted on the point charges due to the
 electric field of the molecular charge density (electron density plus nuclear
 charges).
 
-*Last updated by Madu Manathunga on 03/23/2021.*
+HF/DFT ESP charge computation
+*****************************
+
+In order to compute ESP charges using grids on scaled Van der Waals surfaces, we
+need the coordinates, level of theory, basis set, **ESP_CHARGE** keyword. You
+can specify the spacing between grid points using **ESPGRID_SPACING** keyword.
+The grid spacing defaults to 0.25 Å. Below is an example input file to compute
+ESP derived charges for water using 0.5 Å grid spacing.
+
+.. code-block:: none
+
+ DFT B3LYP BASIS=cc-pvDZ cutoff=1.0e-9 denserms=1.0e-6 ESP_CHARGE ESPGRID_SPACING=0.5
+
+  O         -0.741530        1.752130        2.896280
+  H         -1.111151        0.979769        3.352290
+  H         -0.920500        2.036450        1.984040
+
+The ESP charges are printed in the output file.
+
+.. code-block:: none
+
+ ESP charges:
+ ----------------
+    1   O     -0.793776
+    2   H      0.397756
+    3   H      0.396021
+ ----------------
+ Net charge =   0.000000
+
+Additionally, the electrostatic potential (ESP) on all the grid points used to
+determine the ESP charges is printed in the file <filename_prefix>.vdw. This file
+and the output file can be used to obtain RESP charges via Ambertools (refer
+Amber manual). Output file should contain the following line:
+
+.. code-block:: none
+
+ *** Printing Electrostatic Potential (ESP) at points on vdw surface to <filename_prefix>.vdw with coordinates in angstroms***
+
+*Last updated by Vikrant Tripathy on 04/10/2026.*
