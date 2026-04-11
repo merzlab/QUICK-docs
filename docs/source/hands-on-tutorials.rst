@@ -345,7 +345,7 @@ charges).
 HF/DFT ESP charge computation
 *****************************
 
-In order to compute ESP charge using grids on scaled Van der Waals surfaces, we
+In order to compute ESP charges using grids on scaled Van der Waals surfaces, we
 need the coordinates, level of theory, basis set, **ESP_CHARGE** keyword. You
 can specify the spacing between grid points using **ESPGRID_SPACING** keyword.
 The grid spacing defaults to 0.25 Å. Below is an example input file to compute
@@ -371,9 +371,9 @@ The ESP charges are printed in the output file.
  ----------------
  Net charge =   0.000000
 
-Additionally the electrostatic potential (ESP) on all the grid points used to
-determine the ESP charges is printed on the <filename_prefix>.vdw file. This file
-and the output file can be used to obtine RESP charges via Ambertools (refer
+Additionally, the electrostatic potential (ESP) on all the grid points used to
+determine the ESP charges is printed in the file <filename_prefix>.vdw. This file
+and the output file can be used to obtain RESP charges via Ambertools (refer
 Amber manual). Output file should contain the following line:
 
 .. code-block:: none
