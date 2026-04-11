@@ -154,7 +154,7 @@ Grimme type dispersion corrections are requested by adding one of the following 
 
    **ESP_GRID**              : User provided grid points at which ESP needs to evaluated. example: test/esp_grid_acetone_b3lyp_def2svp.in
 
-If you are computing ESP, please cite
+If you are computing the ESP and/or ESP derived charges, please cite the following paper:
 
    `Tripathy, V.; Palos, E.; Merz, K. M.; Paesani, F.; Götz, A. W. QUICK and Robust ESP and RESP Charges for Computational Biochemistry: Open-Source GPU Implementation. J. Chem. Inf. Model. 2026, 66, 6, 3173-3187. <https://doi.org/10.1021/acs.jcim.5c03200>`_.
 
