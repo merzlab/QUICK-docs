@@ -134,6 +134,12 @@ Grimme type dispersion corrections are requested by adding one of the following 
 
    **TIGHTINT**       : use tight cutoffs.  (i.e. DENSERMS=1.0E-7, CUTOFF=1.0E-8, BASISCUTOFF=1.0E-7, XCCUTOFF=1.0E-8)
 
+   **LSHIFT_CYCLE=Integer**   : After which cycle level shifting is turned on (given other level shifting criteria are satisfied). Default: 3
+
+   **LSHIFT_ERR=Float**     : Minimum DIIS error for allowing Level shifting. Default: 0.1
+
+   **LSHIFT_GAP=Float**     : Maximum HOMO-LUMO gap (in au) to allow Level shifting. Default: 0.2
+
 5. Charge and Spin Multiplicity
 *******************************
 
