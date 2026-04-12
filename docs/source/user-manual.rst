@@ -130,6 +130,8 @@ Grimme type dispersion corrections are requested by adding one of the following 
 
    **BASISCUTOFF=Float**   : user defined cutoff for neglecting insignificant basis functions. Default : 1.0E-6.
 
+   **OVCUT=Float**   : user defined cutoff for determining near-linear dependency among basis functions. The low eigenvalue (below threshold) components of the overlap matrix are removed. Default : 1.0E-5.
+
    **COARSEINT**      : use coarse cutoffs. (i.e. DENSERMS=1.0E-5, CUTOFF=1.0E-6, BASISCUTOFF=1.0E-5, XCCUTOFF=1.0E-6)
 
    **TIGHTINT**       : use tight cutoffs.  (i.e. DENSERMS=1.0E-7, CUTOFF=1.0E-8, BASISCUTOFF=1.0E-7, XCCUTOFF=1.0E-8)
