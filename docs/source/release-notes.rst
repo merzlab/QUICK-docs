@@ -3,6 +3,17 @@ Release notes
 
 The new features released with each QUICK version are as follows. 
 
+QUICK-26.03
+***********
+• Improved handling of Dunning basis set formats
+• Improved SCF convergence algorithms and added option to project out for near linear dependencies
+• CUDA <= v12.4.1 recommended for CUDA codes due to known performance regressions (Hopper or older GPUs),
+  CUDA >= v13.0.0 recommended for Blackwell GPU support
+• Electrostatic potential (ESP) supported added (CPU, GPU codes)
+• Constrained geometry optimization support (DL-FIND) added (CPU code) 
+• Various other bug fixes, optimizations, and test updates (expanded automated CI testing on Github)
+• QUICK-26.03 available with AmberTools 2026
+
 QUICK-25.03
 ***********
 • AMD GPU support restored for HIP/MPI+HIP codes (requires ROCm <= v5.4.2, >= v6.2.1 due to known ROCm bugs)
