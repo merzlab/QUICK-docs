@@ -21,7 +21,7 @@ and GPU SDK versions (CUDA, ROCm/HIP). |QUICK_VERSION| is automatically tested
 on Github with various combinations of OS versions, compilers, libraries, and
 tools (see details for
 `serial <https://github.com/merzlab/QUICK/blob/master/.github/workflows/build_test_serial.yml>`_
-and `MPI https://github.com/merzlab/QUICK/blob/master/.github/workflows/build_test_mpi.yml>`_
+and `MPI <https://github.com/merzlab/QUICK/blob/master/.github/workflows/build_test_mpi.yml>`_
 CPU tests, respectively).
 
 **NOTE:** QUICK GPU builds require CUDA >= v7.x or ROCm <= v5.4.2, >= v6.2.1
