@@ -232,10 +232,12 @@ If you are using the DL-FIND optimizer in your work, please make sure to cite th
 
    **EXPORT=MOLDEN** : Generates a molden file that contains orbitals, charges, geometries, etc. 
 
-10. Restart Capability
-*****************
+10. Checkpoint Functionality
+****************************
 
-QUICK 26.03 has the capability to restart both SCF energy calculation and geometry optimization from old density and/or coordinates.
+|QUICK_VERSION| has the capability to restart simulations using checkpoint
+files for both SCF energy calculation and geometry optimization containing
+density and/or coordinates.
 
    **CHK_WRITE_DEN** : Writes density (optionally beta density for unrestricted calculations) to the data file.
 
@@ -245,12 +247,13 @@ QUICK 26.03 has the capability to restart both SCF energy calculation and geomet
 
    **CHK_READ_COORD** :  Reads coordinates from the data file.
 
-   Restart information utilizes a data file.
+   Checkpoint information utilizes a data file.
         - <filename_prefix>.dat in absence of user input (*default*)
         - $DATA = <datafile_name> (*user input*)
 
 HDF5 file format can be used if compiled with -DHDF5=TRUE flag.
 
-NOTE: Currently the density and coordinates are saved to restart file if the energy computation (single point job) or the optimization is completed.
+NOTE: Currently the density and coordinates are saved to a checkpoint file if
+the energy computation (single point job) or the optimization is completed.
 
 *Last updated by Vikrant Tripathy on 04/06/2026.*

@@ -14,7 +14,8 @@ Features
 • Restricted closed-shell and unrestricted open-shell wavefunctions
 • Gradient and geometry optimization calculations
 • Mulliken charge analysis
-• Exports Molden format for visualization of geometry and orbital data
+• Electrostatic potential (ESP) calculations
+• Molden format exports for visualization of geometry and orbital data
 • Wide range of popular Gaussian basis sets included
 • Supports QM/MM calculations with Amber22 and later
 • Fortran API to use QUICK as QM energy and force engine
