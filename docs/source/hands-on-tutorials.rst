@@ -384,25 +384,24 @@ Amber manual). Output file should contain the following line:
 Saving/Restarting calculations
 ******************************
 
-Following is an example of how to save you electronic dansity at the end your
+Following is an example of how to save the electron density at the end of a
 calculation using the keyword **CHK_WRITE_DEN**.
 
 .. code-block:: none
 
- DFT B3LYP BASIS=cc-pvDZ CHK_WRITE_DEN
+ DFT B3LYP BASIS=cc-pVDZ CHK_WRITE_DEN
 
  O         -0.741530        1.752130        2.896280
  H         -1.111151        0.979769        3.352290
  H         -0.920500        2.036450        1.984040
 
 The density is written to your **DATA FILE**. As your **JOB CARD** in your output
-file states, the default DATA FILE is <filename_prefix>.dat. However, you can (I suggest you do)
-specify a DATA FILE as per the following input file.
+file states, the default DATA FILE is <filename_prefix>.dat. However, we recommend to specify a DATA FILE as per the following input file.
 
 .. code-block:: none
 
  $DATA=data_file_name.dat
- DFT B3LYP BASIS=cc-pvDZ CHK_WRITE_DEN
+ DFT B3LYP BASIS=cc-pVDZ CHK_WRITE_DEN
 
  O         -0.741530        1.752130        2.896280
  H         -1.111151        0.979769        3.352290
@@ -414,7 +413,7 @@ calculation using the density from the previous calculation.
 .. code-block:: none
 
  $DATA=data_file_name.dat
- DFT BLYP BASIS=cc-pvDZ CHK_READ_DEN
+ DFT BLYP BASIS=cc-pVDZ CHK_READ_DEN
 
  O         -0.741530        1.752130        2.896280
  H         -1.111151        0.979769        3.352290
@@ -422,10 +421,9 @@ calculation using the density from the previous calculation.
 
 Note: we do not have basis set projection in QUICK. So, the basis set being
 read has to match the basis set in the new calculation. Further, the DATA FILE will
-be over written if your checkpointing the data in the new calculation. In such case,
-please copy the old calculation DATA FILE.
+be overwritten if checkpointing the data in the new calculation. In such case,
+please make a copy the old calculation DATA FILE.
 
-I gave the examples of how to restart calculations using density. Calculations
-can also be restarted from coordinates read from DATA FILE.
+The above examples demonstrate how to restart calculations using the electron density. Calculations can also be restarted from coordinates read from the DATA FILE.
 
 *Last updated by Vikrant Tripathy on 04/10/2026.*
