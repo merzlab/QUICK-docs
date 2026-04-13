@@ -152,9 +152,19 @@ Grimme type dispersion corrections are requested by adding one of the following 
 6. Atomic Charges
 *****************
 
-   **EXTCHARGES**     : External charges are included in the system. The point charges must be listed after the molecular Cartesian coordinates in the input file. See the corresponding section in the Hands-on Tutorials of this manual.
+   **EXTCHARGES**            : External charges are included in the system. The point charges must be listed after the molecular Cartesian coordinates in the input file. See the corresponding section in the Hands-on Tutorials of this manual.
 
-   **DIPOLE**       : Write dipole moments, Mulliken and Löwdin charges into the output file.
+   **DIPOLE**                : Write dipole moments, Mulliken and Löwdin charges into the output file.
+
+   **ESP_CHARGE**            : Compute electrostatic potential derived (ESP) charges
+
+   **ESPGRID_SPACING=Float** : Spacing between grid points on scaled Van der Waals surfaces used to obtain ESP charges. ESP_CHARGE keyword must be present to use this keyword. Default : 0.25
+
+   **ESP_GRID**              : User provided grid points at which ESP needs to evaluated. example: test/esp_grid_acetone_b3lyp_def2svp.in
+
+If you are computing the ESP and/or ESP derived charges, please cite the following paper:
+
+   `Tripathy, V.; Palos, E.; Merz, K. M.; Paesani, F.; Götz, A. W. QUICK and Robust ESP and RESP Charges for Computational Biochemistry: Open-Source GPU Implementation. J. Chem. Inf. Model. 2026, 66, 6, 3173-3187. <https://doi.org/10.1021/acs.jcim.5c03200>`_.
 
 7. Gradient Calculation
 ***********************
@@ -230,10 +240,12 @@ If you are using the DL-FIND optimizer in your work, please make sure to cite th
 
    **EXPORT=MOLDEN** : Generates a molden file that contains orbitals, charges, geometries, etc. 
 
-10. Restart Capability
-*****************
+10. Checkpoint Functionality
+****************************
 
-QUICK 26.03 has the capability to restart both SCF energy calculation and geometry optimization from old density and/or coordinates.
+|QUICK_VERSION| has the capability to restart simulations using checkpoint
+files for both SCF energy calculation and geometry optimization containing
+density and/or coordinates.
 
    **CHK_WRITE_DEN** : Writes density (optionally beta density for unrestricted calculations) to the data file.
 
@@ -243,12 +255,13 @@ QUICK 26.03 has the capability to restart both SCF energy calculation and geomet
 
    **CHK_READ_COORD** :  Reads coordinates from the data file.
 
-   Restart information utilizes a data file.
+   Checkpoint information utilizes a data file.
         - <filename_prefix>.dat in absence of user input (*default*)
         - $DATA = <datafile_name> (*user input*)
 
 HDF5 file format can be used if compiled with -DHDF5=TRUE flag.
 
-NOTE: Currently the density and coordinates are saved to restart file if the energy computation (single point job) or the optimization is completed.
+NOTE: Currently the density and coordinates are saved to a checkpoint file if
+the energy computation (single point job) or the optimization is completed.
 
 *Last updated by Vikrant Tripathy on 04/06/2026.*
