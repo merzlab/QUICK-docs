@@ -42,4 +42,4 @@ Environment variables
 • **PARALLEL_TEST_COUNT**: Number of tests to run in parallel using GNU parallel; can be combined with the above 3 variables for parallel testing with applicable QUICK versions
                            Example: PARALLEL_TEST_COUNT="2"
 
-*Last updated by Madu Manathunga on 11/21/2022.*
+*Last updated by Kurt O'Hearn on 04/13/2026.*
