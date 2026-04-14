@@ -9,8 +9,9 @@ QUICK-26.03
 • Improved SCF convergence algorithms and added option to project out for near linear dependencies
 • CUDA <= v12.4.1 recommended for CUDA codes due to known performance regressions (Hopper or older GPUs),
   CUDA >= v13.0.0 recommended for Blackwell GPU support
-• Electrostatic potential (ESP) supported added (CPU, GPU codes)
-• Constrained geometry optimization support (DL-FIND) added (CPU code) 
+• Electrostatic potential (ESP) support added (CPU, GPU codes)
+• Constrained geometry optimization support (DL-FIND) added
+• Restart capability via checkpoint DATA FILE added (density, geometry) (HDF5 and native formats)
 • Various other bug fixes, optimizations, and test updates (expanded automated CI testing on Github)
 • QUICK-26.03 available with AmberTools 2026
 
@@ -58,4 +59,4 @@ QUICK-20.03
 • Support for GPU capable DFT calculations
 • QM/MM capability with AmberTools v20 through file based interface
 
-*Last updated by Madu Manathunga on 11/21/2022.*
+*Last updated by Kurt O'Hearn on 04/13/2026.*
