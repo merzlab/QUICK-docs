@@ -34,4 +34,4 @@ Limitations
 • DFT calculations are performed exclusively using the SG1 grid system
 • No meta-GGA nor range-separated hybrid functionals are supported at present
 
-*Last updated by Andreas Goetz on 04/25/2024.*
+*Last updated by Kurt O'Hearn on 04/13/2026.*
