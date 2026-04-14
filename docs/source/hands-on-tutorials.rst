@@ -408,7 +408,8 @@ file states, the default DATA FILE is <filename_prefix>.dat. However, we recomme
  H         -0.920500        2.036450        1.984040
 
 A new calculation can be restarted from the data file. Following is a new SCF
-calculation using the density from the previous calculation.
+calculation using the density from the previous calculation with the keyword
+**CHK_READ_DEN**.
 
 .. code-block:: none
 
@@ -422,8 +423,8 @@ calculation using the density from the previous calculation.
 Note: we do not have basis set projection in QUICK. So, the basis set being
 read has to match the basis set in the new calculation. Further, the DATA FILE will
 be overwritten if checkpointing the data in the new calculation. In such case,
-please make a copy the old calculation DATA FILE.
+please make a copy of the old calculation DATA FILE.
 
-The above examples demonstrate how to restart calculations using the electron density. Calculations can also be restarted from coordinates read from the DATA FILE.
+The above examples demonstrate how to restart calculations using the electron density that has been written to a DATA FILE in a previous job. Calculations can also be restarted from coordinates read from the DATA FILE. In this case you do not have to specify the coordinates in the input file.
 
 *Last updated by Vikrant Tripathy on 04/10/2026.*
