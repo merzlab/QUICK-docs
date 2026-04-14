@@ -44,4 +44,4 @@ these options:
 
 Note that the CUDA and HIP versions cannot be built at the same time.
 
-*Last updated by Madu Manathunga on 11/21/2022.*
+*Last updated by Kurt O'Hearn on 04/13/2026.*
