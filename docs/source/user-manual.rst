@@ -247,7 +247,7 @@ If you are using the DL-FIND optimizer in your work, please make sure to cite th
 files for both SCF energy calculation and geometry optimization containing
 density and/or coordinates.
 
-   **CHK_WRITE** : Writes coordinates and density (optionally beta density for unrestricted calculations) to the data file.
+   **CHK_WRITE** : Writes coordinates and density (optionally beta density for unrestricted calculations) to the data file. Only the last density is kept in the data file. In case of optimization calculations, all the coordinates are available.
 
    **CHK_READ_DEN** : Reads density (optionally beta density for unrestricted calculations) from the data file as guess instead of SAD guess.
 
