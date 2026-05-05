@@ -263,4 +263,4 @@ NOTE: If not compiled with HDF5, the density and coordinates are saved to a chec
 the energy computation (single point job) or the optimization is completed. For full functionality
 please compile with HDF5.
 
-*Last updated by Vikrant Tripathy on 04/23/2026.*
+*Last updated by Vikrant Tripathy on 05/04/2026.*
