@@ -243,7 +243,7 @@ If you are using the DL-FIND optimizer in your work, please make sure to cite th
 10. Checkpoint Functionality
 ****************************
 
-**QUICK 26.03** has the capability to restart simulations using checkpoint
+|QUICK_VERSION| has the capability to restart simulations using checkpoint
 files for both SCF energy calculation and geometry optimization containing
 density and/or coordinates.
 
