@@ -124,8 +124,8 @@ serial versions. Specifying both flags simultaneously will trigger compilation
 of the MPI+CUDA multi-GPU version. The serial version is compiled by default.
 
 If you want to compile CUDA code for different microarchitectures, you can
-specify these as a string with space separation, e.g.
-``-DQUICK_USER_ARCH='volta turing'`` to compile for Volta and Turing
+specify these as a string with space or semicolon separation, e.g.
+``-DQUICK_USER_ARCH='volta turing'`` or ``-DQUICK_USER_ARCH='volta;turing'`` to compile for Volta and Turing
 architectures.
 
 If the microarchitecture is not specified, then QUICK will be compiled for
