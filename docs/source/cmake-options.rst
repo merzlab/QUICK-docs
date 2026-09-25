@@ -28,6 +28,7 @@ External library control
 • *-DMKL_MULTI_THREADED=<TRUE|FALSE>*: Specify whether the Intel MKL library should be used as single or multi-threaded.
 • *-DMAGMA=TRUE*: Enable matrix diagonalization using Magma library in HIP/HIP-MPI version. 
 • *-DMAGMA_PATH=<path>*: Look for Magma library in the given directory. 
+• *-DHDF5=TRUE*: Sets up quick restart capabilities using HDF5 data file. Please compile with HDF5 for full restart capability.
 
 Parallel versions
 *****************
