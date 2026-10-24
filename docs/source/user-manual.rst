@@ -247,13 +247,11 @@ If you are using the DL-FIND optimizer in your work, please make sure to cite th
 files for both SCF energy calculation and geometry optimization containing
 density and/or coordinates.
 
-   **CHK_WRITE_DEN** : Writes density (optionally beta density for unrestricted calculations) to the data file.
+   **CHK_WRITE** : Writes coordinates and density (optionally beta density for unrestricted calculations) to the data file. Only the last density is kept in the data file. In case of optimization calculations, all the coordinates are available.
 
-   **CHK_WRITE_XYZ** : Writes coordinates to the data file.
+   **CHK_READ_DEN** : Reads density (optionally beta density for unrestricted calculations) from the data file as guess instead of SAD guess.
 
-   **CHK_READ_DEN** : Reads density (optionally beta density for unrestricted calculations) from the data file.
-
-   **CHK_READ_COORD** :  Reads coordinates from the data file.
+   **CHK_READ_XYZ=Integer(optional)** :  Restarts calculation from coordinates from the data file. If no value provided, reads the last coordinate of an optimization calculation. Otherwise, reads <CHK_READ_XYZ>th coordinate.
 
    Checkpoint information utilizes a data file.
         - <filename_prefix>.dat in absence of user input (*default*)
@@ -261,7 +259,8 @@ density and/or coordinates.
 
 HDF5 file format can be used if compiled with -DHDF5=TRUE flag.
 
-NOTE: Currently the density and coordinates are saved to a checkpoint file if
-the energy computation (single point job) or the optimization is completed.
+NOTE: If not compiled with HDF5, the density and coordinates are saved to a checkpoint file if
+the energy computation (single point job) or the optimization is completed. For full functionality
+please compile with HDF5.
 
-*Last updated by Vikrant Tripathy on 04/06/2026.*
+*Last updated by Vikrant Tripathy on 05/04/2026.*

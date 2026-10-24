@@ -40,4 +40,14 @@ available global memory of the device is insufficient.
 Solution: Use a device with more global memory. Also make sure not to execute
 other codes on the GPU while running QUICK.
 
+3. SAD guess producing wrong results
+************************************
+
+The SAD guess refactored after QUICK-21.03 release produces wrong results.
+The old SAD guess routines were replaced after release of QUICK-21.03.
+This was done because the old SAD guess is extremely inefficient.
+However, the new SAD guess produces wrong results. Thus, the users should only
+use the basis sets provided in the User Manual. For those basis sets we have
+precomputed the guess.
+
 *Last updated by Vikrant Tripathy on 23/10/2026.*
