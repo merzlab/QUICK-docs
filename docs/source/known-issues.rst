@@ -9,28 +9,19 @@ feel free to report any bugs or issues through our GitHub page:
 Feel free to ask questions or start a discussion on the Discussions section of
 our GitHub page: `https://github.com/merzlab/QUICK/discussions <https://github.com/merzlab/QUICK/discussions>`_.
 
-Compile time
-^^^^^^^^^^^^
-
-1. Compiling CUDA/MPI+CUDA versions for Kepler GPUs using CUDA v11.0 or higher
-******************************************************************************
-
-NVIDIA has dropped support for sm_30 microarchitecture starting from CUDA
-v11.1, and support for sm_35 and sm_37 starting from CUDA v12.0.  However,
-QUICK build systems still use sm_30/sm_35/sm_37 flags in NVCC compiler flag
-list for CUDA v11 or higher toolkits if the user specifies Kepler as target
-microarchitecture (i.e. --arch kepler, -DQUICK_USER_ARCH=kepler in legacy and
-CMake builds respectively). This will lead to a compile time error.
-
-Solution: Manually ensure that the installed CUDA version supports the correct
-Kepler targeted microarchitectures (<= v11.0 for sm_30, <= v11.8 for
-sm_35/sm_37).  Please consult the Release Notes for your installed CUDA SDK
-version for further details on supported GPU microarchitectures.
-
 Runtime
 ^^^^^^^
 
-1. Out of memory error in CUDA code
+1. Incorrect results or runtime failure
+***************************************
+
+QUICK built with CUDA 12.8.1 shows incorrect results or runtime failures on RTX 5090.
+
+Recommended CUDA versions
+        • Hopper or older GPUs: CUDA <= v12.4.1 due to known performance regressions
+        • Blackwell GPU: CUDA >= v13.0.0
+
+2. Out of memory error in CUDA code
 ***********************************
 
 .. code-block:: none
@@ -49,25 +40,4 @@ available global memory of the device is insufficient.
 Solution: Use a device with more global memory. Also make sure not to execute
 other codes on the GPU while running QUICK.
 
-2. Accuracy of gradients on old gaming cards
-********************************************
-
-When computing gradients using CUDA/MPI+CUDA versions on old gaming cards
-(e.g., from Kepler and Maxwell microarchitectures), the resulting gradients may
-be less accurate if the default density matrix cutoff (1.0E-6) is used. 
-
-Solution: Tighten the cutoff value to 1.0E-7 or 1.0E-8.
-
-3. Wrong gradients in MPI+CUDA version
-**************************************
-
-If one launches MPI+CUDA version with a number of processes greater than the
-available GPUs on the system, it is possible to result in wrong gradients on
-some hardware. 
-
-Solution: Always launch the MPI+CUDA version with a number of processes less
-than or equal to the available number of GPUs (i.e. mpirun -np N ; where N <= #
-of GPUs)  
-  
-
-*Last updated by Madu Manathunga on 03/03/2022.*
+*Last updated by Vikrant Tripathy on 23/10/2026.*
