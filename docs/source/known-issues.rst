@@ -12,8 +12,8 @@ our GitHub page: `https://github.com/merzlab/QUICK/discussions <https://github.c
 Runtime
 ^^^^^^^
 
-1. Incorrect results or runtime failure
-***************************************
+1. Incorrect results, runtime failure, performance issues
+*********************************************************
 
 QUICK built with CUDA 12.8.1 shows incorrect results or runtime failures on RTX 5090.
 
