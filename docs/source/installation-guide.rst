@@ -29,6 +29,10 @@ for CUDA and HIP versions, respectively. Please consult the Release Notes for
 the respective GPU SDKs on supported GPU devices and compatible software
 dependencies (compilers, etc.).
 
+Recommended CUDA versions
+        • Hopper or older GPUs: CUDA <= v12.4.1 due to known performance regressions
+        • Blackwell GPU: CUDA >= v13.0.0
+
 |QUICK_VERSION| CUDA version has been tested on the following NVIDIA GPUs:
 H200, H100, A100, RTX3080TI, RTX2080TI, RTX8000, RTX6000, RTX2080, T4, V100,
 Titan V, P100, M40, GTX1080, K80, and K40.
